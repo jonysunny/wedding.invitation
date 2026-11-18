@@ -86,6 +86,141 @@ export function initScratchCard() {
         formatted: "Tuesday, 29 December 2026"
       }
     }));
+
+    // Trigger one-time elegant paper-confetti celebration around the heart
+    if (!immediate) {
+      triggerPaperConfetti();
+    }
+  }
+
+  function triggerPaperConfetti() {
+    if (typeof window === "undefined") return;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+      return;
+    }
+
+    const confettiCanvas = document.getElementById("scratch-confetti-canvas") as HTMLCanvasElement | null;
+    if (!confettiCanvas) return;
+
+    const ctx = confettiCanvas.getContext("2d");
+    if (!ctx) return;
+
+    const rect = confettiCanvas.getBoundingClientRect();
+    const dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const w = rect.width || 600;
+    const h = rect.height || 480;
+    confettiCanvas.width = w * dpr;
+    confettiCanvas.height = h * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+    const cx = w / 2;
+    const cy = h / 2 - 12;
+    const radiusX = Math.min(w * 0.28, 165);
+    const radiusY = radiusX * 0.9;
+
+    // Small paper pieces in champagne gold, blush pink, and ivory matching website theme
+    const colors = [
+      "#D4AF37", // Bright Champagne Gold
+      "#C7A77B", // Warm Champagne Gold
+      "#E5C896", // Soft Gold
+      "#E9C7C3", // Blush Pink
+      "#F4D7D4", // Soft Petal Pink
+      "#DEB3AD", // Warm Blush
+      "#FFFDF8", // Pure Ivory
+      "#FDF7EC"  // Warm Ivory Paper
+    ];
+
+    interface PaperParticle {
+      x: number;
+      y: number;
+      vx: number;
+      vy: number;
+      w: number;
+      h: number;
+      color: string;
+      rotation: number;
+      rotationSpeed: number;
+      tilt: number;
+      tiltSpeed: number;
+    }
+
+    const particleCount = 70;
+    const particles: PaperParticle[] = [];
+
+    for (let i = 0; i < particleCount; i++) {
+      // Distribute evenly along heart perimeter so confetti bursts outward around the heart
+      const t = (i / particleCount) * Math.PI * 2;
+      const hx = 16 * Math.pow(Math.sin(t), 3);
+      const hy = -(13 * Math.cos(t) - 5 * Math.cos(2 * t) - 2 * Math.cos(3 * t) - Math.cos(4 * t));
+
+      const startX = cx + (hx / 16) * radiusX;
+      const startY = cy + (hy / 16) * radiusY;
+
+      // Radial burst outwards away from heart center
+      const angle = Math.atan2(startY - cy, startX - cx);
+      const speed = Math.random() * 3.6 + 2.2;
+      const vx = Math.cos(angle) * speed + (Math.random() - 0.5) * 1.2;
+      const vy = Math.sin(angle) * speed - (Math.random() * 1.6 + 0.6); // slight upward lift
+
+      particles.push({
+        x: startX,
+        y: startY,
+        vx,
+        vy,
+        w: Math.random() * 3.5 + 4.5, // 4.5px - 8px width
+        h: Math.random() * 5 + 6,     // 6px - 11px length
+        color: colors[Math.floor(Math.random() * colors.length)],
+        rotation: Math.random() * Math.PI * 2,
+        rotationSpeed: (Math.random() - 0.5) * 0.12,
+        tilt: Math.random() * Math.PI * 2,
+        tiltSpeed: Math.random() * 0.08 + 0.04
+      });
+    }
+
+    const startTime = performance.now();
+    const duration = 2000; // 2.0s duration
+
+    function render(now: number) {
+      const elapsed = now - startTime;
+      const progress = Math.min(elapsed / duration, 1);
+
+      ctx.clearRect(0, 0, w, h);
+
+      // Fade out smoothly during final 600ms
+      const alpha = progress > 0.7 ? Math.max(0, 1 - (progress - 0.7) / 0.3) : 1;
+
+      for (let i = 0; i < particles.length; i++) {
+        const p = particles[i];
+
+        // Air drag + gentle floating gravity
+        p.vx *= 0.965;
+        p.vy = p.vy * 0.975 + 0.10;
+        p.x += p.vx;
+        p.y += p.vy;
+
+        p.rotation += p.rotationSpeed;
+        p.tilt += p.tiltSpeed;
+
+        if (alpha <= 0) continue;
+
+        ctx.save();
+        ctx.translate(p.x, p.y);
+        ctx.rotate(p.rotation);
+        ctx.scale(1, Math.cos(p.tilt)); // 3D paper flutter flipping
+        ctx.globalAlpha = alpha;
+        ctx.fillStyle = p.color;
+        ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+        ctx.restore();
+      }
+
+      if (progress < 1) {
+        requestAnimationFrame(render);
+      } else {
+        ctx.clearRect(0, 0, w, h);
+      }
+    }
+
+    requestAnimationFrame(render);
   }
 
   if (isAlreadyRevealed) {

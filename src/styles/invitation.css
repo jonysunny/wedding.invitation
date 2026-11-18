@@ -156,8 +156,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(90px, 14vw, 135px);
-  height: clamp(90px, 14vw, 135px);
+  width: clamp(118px, 18.2vw, 175px);
+  height: clamp(118px, 18.2vw, 175px);
   margin: 0 auto clamp(4px, 1vh, 10px);
 }
 
@@ -1066,6 +1066,17 @@
   position: relative;
   width: 100%;
   z-index: 5;
+}
+
+.scratch-confetti-canvas {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: min(96vw, 680px);
+  height: 480px;
+  pointer-events: none;
+  z-index: 25;
 }
 
 .scratch-card-container {

@@ -34,6 +34,9 @@ const { weddingDate, formattedDate, venue, address } = Astro.props;
   </div>
 
   <div class="scratch-card-wrapper">
+    <!-- Paper Confetti Celebration Canvas (One-time burst upon reveal) -->
+    <canvas id="scratch-confetti-canvas" class="scratch-confetti-canvas" aria-hidden="true"></canvas>
+
     <!-- Responsive Heart-shaped Card Container -->
     <div id="scratch-card-container" class="scratch-card-container" data-revealed="false">
       
