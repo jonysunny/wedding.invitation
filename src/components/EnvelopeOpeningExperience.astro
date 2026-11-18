@@ -7,6 +7,12 @@
   <!-- Ambient Warm Ivory Paper Backdrop with Subtle Vignette -->
   <div class="envelope-backdrop" aria-hidden="true"></div>
 
+  <!-- Discreet Skip Option in Top-Right -->
+  <button id="envelope-skip-btn" type="button" class="envelope-skip-btn" aria-label="Skip envelope opening">
+    <span class="skip-text">Skip Intro</span>
+    <span class="skip-arrow" aria-hidden="true">→</span>
+  </button>
+
   <div class="envelope-stage">
     <!-- End-to-End Screen 3D Perspective Wrapper -->
     <div id="envelope-interactive-card" class="envelope-card-wrapper" role="button" tabindex="0" aria-label="Click or tap anywhere to open wedding invitation envelope">
@@ -27,7 +33,10 @@
           </div>
         </div>
 
-        <!-- 2. SIDE FLAPS (Left & Right - End to End) -->
+        <!-- 2. WARM INNER LIGHT (Physically situated inside the envelope pocket) -->
+        <div class="envelope-inner-glow" id="envelope-inner-glow" aria-hidden="true"></div>
+
+        <!-- 3. SIDE FLAPS (Left & Right - End to End) -->
         <svg class="envelope-side-flaps" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
           <defs>
             <linearGradient id="leftFlapGrad" x1="0%" y1="0%" x2="100%" y2="50%">
@@ -52,7 +61,7 @@
           <line x1="480" y1="500" x2="1000" y2="1000" stroke="rgba(199, 167, 123, 0.35)" stroke-width="1.5" />
         </svg>
 
-        <!-- 3. BOTTOM FLAP (End to End) -->
+        <!-- 4. BOTTOM FLAP (End to End) -->
         <svg class="envelope-bottom-flap" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
           <defs>
             <linearGradient id="bottomFlapGrad" x1="50%" y1="100%" x2="50%" y2="0%">
@@ -69,7 +78,7 @@
           <line x1="500" y1="440" x2="1000" y2="1000" stroke="rgba(199, 167, 123, 0.55)" stroke-width="1.5" />
         </svg>
 
-        <!-- 4. TOP FOLDING FLAP (End to End 3D Animated) -->
+        <!-- 5. TOP FOLDING FLAP (End to End 3D Animated) -->
         <div class="envelope-top-flap-hinge" id="envelope-top-flap-hinge">
           <div class="envelope-top-flap-3d">
             
@@ -131,6 +140,9 @@
 
       </div>
 
+      <!-- 6. AMBIENT EXPANDING LIGHT BLOOM (Illuminates screen to transition smoothly into invitation) -->
+      <div class="envelope-light-bloom" id="envelope-light-bloom" aria-hidden="true"></div>
+
       <!-- INVITATION INTERACTIVE PROMPT (At bottom of screen) -->
       <div class="envelope-prompt-container">
         <div class="envelope-tap-pill">
@@ -149,6 +161,7 @@
   function initEnvelopeExperience() {
     const overlay = document.getElementById("envelope-experience-overlay");
     const envelopeCard = document.getElementById("envelope-interactive-card");
+    const skipBtn = document.getElementById("envelope-skip-btn");
 
     if (!overlay || !envelopeCard) return;
 
@@ -169,21 +182,22 @@
         return;
       }
 
-      // Step 1: Trigger 3D top flap flip and inner card emergence
+      // Step 1: Trigger gradual 3D top flap flip, warm inner light emergence, and expansion
       overlay.classList.add("envelope-is-opening");
 
-      // Step 2: Fade out overlay smoothly after realistic unfold duration
+      // Step 2: Fade out overlay smoothly after realistic ~4.5s cinematic unfold
+      // The expanding light reaches soft peak at ~3.6s, then gently transitions into the invitation
       setTimeout(() => {
         overlay.classList.add("envelope-fade-out");
         document.body.style.overflow = "";
-      }, 1300);
+      }, 3600);
 
-      // Step 3: Remove from DOM view after full transition
+      // Step 3: Remove from DOM view after full ~4.9s transition
       setTimeout(() => {
         hasDismissed = true;
         overlay.style.display = "none";
         window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
-      }, 2300);
+      }, 4900);
     }
 
     function dismissImmediately() {
@@ -197,21 +211,35 @@
       }, 400);
     }
 
-    // Click/tap handler on envelope card or anywhere on overlay
+    // Skip button click handler
+    if (skipBtn) {
+      skipBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        e.preventDefault();
+        dismissImmediately();
+      });
+    }
+
+    // Click/tap handler on overlay or envelope
     overlay.addEventListener("click", (e) => {
+      if (skipBtn && skipBtn.contains(e.target as Node)) return;
       e.preventDefault();
       openEnvelope();
     });
 
     overlay.addEventListener("touchend", (e) => {
+      if (skipBtn && skipBtn.contains(e.target as Node)) return;
       e.preventDefault();
       openEnvelope();
     }, { passive: false });
 
-    // Keyboard accessibility (Enter or Space)
+    // Keyboard accessibility (Escape for skip, Enter or Space to open)
     window.addEventListener("keydown", (e) => {
-      if (hasDismissed || isOpening) return;
-      if (e.key === "Enter" || e.key === " ") {
+      if (hasDismissed) return;
+      if (e.key === "Escape") {
+        e.preventDefault();
+        dismissImmediately();
+      } else if (!isOpening && (e.key === "Enter" || e.key === " ")) {
         e.preventDefault();
         openEnvelope();
       }
