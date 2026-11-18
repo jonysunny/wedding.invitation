@@ -15,8 +15,8 @@ export function getStaticPaths() {
   return Array.from(slugs).map(slug => ({ params: { slug } }));
 }
 
-const pageTitle = `${weddingData.couple.bride.firstName} & ${weddingData.couple.groom.firstName} — Luxury Wedding Invitation`;
-const pageDescription = `Join us in celebrating the wedding of ${weddingData.couple.bride.fullName} and ${weddingData.couple.groom.fullName} on ${weddingData.formattedDate}.`;
+const pageTitle = `${weddingData.couple.bride.firstName} & ${weddingData.couple.groom.firstName} Wedding Invitation`;
+const pageDescription = `Join us in celebrating the wedding of ${weddingData.couple.bride.fullName} and ${weddingData.couple.groom.fullName}.`;
 ---
 
 <InvitationLayout title={pageTitle} description={pageDescription}>
