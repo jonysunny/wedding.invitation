@@ -7,6 +7,7 @@ import EventSchedule from '../../components/EventSchedule.astro';
 import PhotoGallery from '../../components/PhotoGallery.astro';
 import ClosingSection from '../../components/ClosingSection.astro';
 import MusicPlayer from '../../components/MusicPlayer.astro';
+import EnvelopeOpeningExperience from '../../components/EnvelopeOpeningExperience.astro';
 import weddingData from '../../data/wedding.json';
 
 export function getStaticPaths() {
@@ -19,6 +20,9 @@ const pageDescription = `Join us in celebrating the wedding of ${weddingData.cou
 ---
 
 <InvitationLayout title={pageTitle} description={pageDescription}>
+  <!-- Interactive Luxury Paper-Envelope Opening Experience -->
+  <EnvelopeOpeningExperience />
+
   <!-- MAIN CONTINUOUS WEDDING INVITATION WEBSITE -->
   <main id="wedding-site" class="wedding-site">
     <div class="invitation-shell">

@@ -98,25 +98,22 @@ export function setupCountdownListener(defaultIsoDate: string = "2026-12-29T16:0
     countdownInterval = setInterval(update, 1000);
   }
 
+  // Ensure storage is clear and countdown always starts dormant on page load/refresh
+  try {
+    sessionStorage.removeItem("wedding_scratch_revealed");
+    localStorage.removeItem("wedding_scratch_revealed");
+  } catch {}
+
+  section.classList.add("countdown-dormant");
+  section.classList.remove("countdown-active");
+  section.setAttribute("aria-hidden", "true");
+
   const targetDate = section.getAttribute("data-target-date") || defaultIsoDate;
-
-  // Session check: only start immediately on page load if scratch was already completed in this session
-  const isAlreadyRevealed = (() => {
-    try {
-      return sessionStorage.getItem("wedding_scratch_revealed") === "true";
-    } catch {
-      return false;
-    }
-  })();
-
-  if (isAlreadyRevealed) {
-    startCountdown(targetDate);
-  }
 
   // Listener for scratch-completion event: reveals countdown smoothly
   window.addEventListener("wedding-date-revealed", (e: Event) => {
     const customEvent = e as CustomEvent<{ date?: string }>;
     const date = customEvent.detail?.date || targetDate;
     startCountdown(date);
-  });
+  }, { once: true });
 }

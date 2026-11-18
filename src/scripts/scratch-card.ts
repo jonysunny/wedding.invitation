@@ -24,23 +24,39 @@ export function initScratchCard() {
   let displayWidth = 340;
   let displayHeight = 320;
 
-  // Session check: ensure countdown and reveal persist within session if completed
-  const isAlreadyRevealed = (() => {
-    try {
-      return sessionStorage.getItem("wedding_scratch_revealed") === "true";
-    } catch {
-      return false;
-    }
-  })();
+  // Always ensure clean reset on page refresh / load: do not persist scratch state
+  try {
+    sessionStorage.removeItem("wedding_scratch_revealed");
+    localStorage.removeItem("wedding_scratch_revealed");
+  } catch {}
+
+  // Explicitly ensure DOM elements start in the pristine unrevealed state
+  container.setAttribute("data-revealed", "false");
+  canvas.style.display = "block";
+  canvas.style.opacity = "1";
+  canvas.style.transform = "none";
+  canvas.style.pointerEvents = "auto";
+  canvas.style.transition = "none";
+
+  if (saveDateContainer) {
+    saveDateContainer.style.display = "none";
+    saveDateContainer.style.opacity = "0";
+  }
+
+  if (instructionPill) {
+    instructionPill.style.display = "";
+    instructionPill.style.opacity = "";
+    instructionPill.style.pointerEvents = "";
+  }
+
+  if (accessibleBtn) {
+    accessibleBtn.style.display = "";
+  }
 
   function completeReveal(immediate: boolean = false) {
     if (isRevealed) return;
     isRevealed = true;
     container.setAttribute("data-revealed", "true");
-
-    try {
-      sessionStorage.setItem("wedding_scratch_revealed", "true");
-    } catch {}
 
     if (canvas) {
       if (immediate) {
@@ -223,11 +239,6 @@ export function initScratchCard() {
     requestAnimationFrame(render);
   }
 
-  if (isAlreadyRevealed) {
-    completeReveal(true);
-    return;
-  }
-
   function resizeCanvas() {
     if (!canvas || !container) return;
     const rect = container.getBoundingClientRect();
@@ -345,6 +356,28 @@ export function initScratchCard() {
     }
   }
 
+  let lastX = 0;
+  let lastY = 0;
+
+  function erasePath(x1: number, y1: number, x2: number, y2: number) {
+    if (!ctx) return;
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-out";
+    
+    // Smooth scratch brush scaled with display width
+    const brushRadius = Math.max(26, Math.round(displayWidth * 0.085));
+
+    ctx.lineWidth = brushRadius * 2;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+
+    ctx.restore();
+  }
+
   function eraseCircle(x: number, y: number) {
     if (!ctx) return;
     ctx.save();
@@ -379,15 +412,20 @@ export function initScratchCard() {
       instructionPill.style.pointerEvents = "none";
     }
     const coords = getCanvasCoords(e);
+    lastX = coords.x;
+    lastY = coords.y;
     eraseCircle(coords.x, coords.y);
   }
 
   function onPointerMove(e: PointerEvent) {
     if (!isDrawing || isRevealed) return;
     const coords = getCanvasCoords(e);
+    erasePath(lastX, lastY, coords.x, coords.y);
     eraseCircle(coords.x, coords.y);
+    lastX = coords.x;
+    lastY = coords.y;
     moveCounter++;
-    if (moveCounter % 6 === 0) {
+    if (moveCounter % 4 === 0) {
       checkScratchPercentage();
     }
   }
@@ -401,11 +439,11 @@ export function initScratchCard() {
     checkScratchPercentage();
   }
 
-  // Pointer Events Registration
-  canvas.addEventListener("pointerdown", onPointerDown);
-  canvas.addEventListener("pointermove", onPointerMove);
-  canvas.addEventListener("pointerup", onPointerUp);
-  canvas.addEventListener("pointercancel", onPointerUp);
+  // Pointer Events Registration (clean up previous if any)
+  canvas.onpointerdown = onPointerDown;
+  canvas.onpointermove = onPointerMove;
+  canvas.onpointerup = onPointerUp;
+  canvas.onpointercancel = onPointerUp;
 
   // Accessible Fallback Button (if present in DOM)
   if (accessibleBtn) {

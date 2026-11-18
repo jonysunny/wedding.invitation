@@ -1352,3 +1352,392 @@
   font-weight: 700;
   margin-bottom: 12px;
 }
+
+/* ========================================================
+   PART 5: INTERACTIVE REALISTIC LUXURY PAPER ENVELOPE OPENING
+   ======================================================== */
+.envelope-overlay {
+  position: fixed;
+  inset: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 99999;
+  background-color: #F8F3EA;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 1.0s cubic-bezier(0.2, 0.8, 0.2, 1), visibility 1.0s;
+  overflow: hidden;
+  perspective: 1200px;
+}
+
+.envelope-overlay.envelope-fade-out {
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden;
+}
+
+.envelope-backdrop {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 45%, #FFFDF8 0%, #FAF4EA 60%, #EFE5D5 100%);
+  pointer-events: none;
+}
+
+.envelope-stage {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  perspective: 1400px;
+  width: 100%;
+  padding: 20px;
+}
+
+.envelope-card-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  outline: none;
+}
+
+.envelope-card-wrapper:hover,
+.envelope-card-wrapper:focus-visible {
+  transform: translateY(-4px) scale(1.01);
+}
+
+.envelope-packet {
+  position: relative;
+  width: clamp(310px, 86vw, 480px);
+  height: clamp(210px, 58vw, 326px);
+  background: #FAF4EA;
+  border-radius: 6px;
+  box-shadow: 
+    0 24px 60px rgba(81, 70, 63, 0.18),
+    0 8px 24px rgba(81, 70, 63, 0.08);
+  transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.envelope-is-opening .envelope-packet {
+  transform: translateY(70px) scale(0.96);
+}
+
+/* 1. Inside Back Lining */
+.envelope-inside-back {
+  position: absolute;
+  inset: 0;
+  background: #FAF5EC;
+  border-radius: 6px;
+  overflow: hidden;
+  border: 1px solid rgba(199, 167, 123, 0.3);
+}
+
+.envelope-inside-pattern {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 50% 50%, rgba(212, 175, 55, 0.06) 0%, rgba(212, 175, 55, 0) 70%);
+}
+
+.envelope-inner-card {
+  position: absolute;
+  width: 90%;
+  height: 88%;
+  left: 5%;
+  bottom: 5%;
+  background: #FFFDF8;
+  border-radius: 4px;
+  box-shadow: 0 4px 16px rgba(81, 70, 63, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 1.1s cubic-bezier(0.2, 0.8, 0.2, 1);
+  z-index: 1;
+}
+
+.envelope-is-opening .envelope-inner-card {
+  transform: translateY(-46px);
+}
+
+.inner-card-border {
+  width: 92%;
+  height: 90%;
+  border: 1px solid rgba(199, 167, 123, 0.4);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 12px;
+}
+
+.inner-card-monogram {
+  font-family: var(--font-serif-primary);
+  font-size: clamp(1.4rem, 3.5vw, 1.8rem);
+  font-weight: 600;
+  color: var(--color-champagne);
+  letter-spacing: 0.1em;
+}
+
+.inner-card-lead {
+  font-family: var(--font-sans);
+  font-size: clamp(0.6rem, 1.3vw, 0.7rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-text-muted);
+}
+
+/* 2. Side & Bottom Flaps */
+.envelope-side-flaps {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 3;
+  pointer-events: none;
+  filter: drop-shadow(0 2px 8px rgba(81, 70, 63, 0.08));
+}
+
+.envelope-bottom-flap {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 4;
+  pointer-events: none;
+  filter: drop-shadow(0 -3px 10px rgba(81, 70, 63, 0.1));
+}
+
+/* 3. Top Folding Flap (3D Hinge) */
+.envelope-top-flap-hinge {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 58%;
+  z-index: 10;
+  transform-origin: top center;
+  transform-style: preserve-3d;
+  transition: transform 0.95s cubic-bezier(0.4, 0, 0.2, 1), z-index 0.01s 0.47s;
+}
+
+.envelope-is-opening .envelope-top-flap-hinge {
+  transform: rotateX(180deg);
+  z-index: 2; /* Cleanly tucks behind the open envelope pocket after 90deg */
+}
+
+.envelope-top-flap-3d {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transform-style: preserve-3d;
+}
+
+.flap-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.flap-face-front {
+  z-index: 2;
+}
+
+.top-flap-svg {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.flap-face-back {
+  transform: rotateX(180deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.top-flap-svg-back {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.top-flap-back-ornament {
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-family: var(--font-serif-secondary);
+  font-size: 1.5rem;
+  color: var(--color-champagne);
+  opacity: 0.7;
+}
+
+/* 4. Royal J&S Wax Seal Emblem */
+.envelope-wax-seal {
+  position: absolute;
+  bottom: -32px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: clamp(62px, 14vw, 76px);
+  height: clamp(62px, 14vw, 76px);
+  border-radius: 50%;
+  z-index: 15;
+  transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.wax-seal-outer-rim {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 32%, #F6DFB6 0%, #D4AF37 55%, #A68026 100%);
+  box-shadow: 
+    0 8px 24px rgba(81, 70, 63, 0.28),
+    0 2px 6px rgba(212, 175, 55, 0.4),
+    inset 0 2px 5px rgba(255, 255, 255, 0.7),
+    inset 0 -2px 5px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 3px;
+  box-sizing: border-box;
+}
+
+.wax-seal-inner-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 35%, #FFFDF8 0%, #F8EFE0 70%, #EBDDC6 100%);
+  border: 1px solid rgba(166, 128, 38, 0.4);
+  box-shadow: inset 0 1px 4px rgba(81, 70, 63, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.seal-crest-img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+  filter: drop-shadow(0 1px 2px rgba(81, 70, 63, 0.25));
+}
+
+/* 5. Interactive Prompt */
+.envelope-prompt-container {
+  margin-top: clamp(28px, 6vw, 44px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.envelope-is-opening .envelope-prompt-container {
+  opacity: 0;
+  transform: translateY(16px);
+  pointer-events: none;
+}
+
+.envelope-tap-pill {
+  background: rgba(255, 253, 248, 0.94);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid var(--color-champagne);
+  border-radius: 30px;
+  padding: 10px 24px;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 
+    0 6px 20px rgba(199, 167, 123, 0.32),
+    0 2px 8px rgba(81, 70, 63, 0.08);
+  animation: envelopePromptPulse 2.4s ease-in-out infinite;
+}
+
+@keyframes envelopePromptPulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow: 0 6px 20px rgba(199, 167, 123, 0.32);
+  }
+  50% {
+    transform: scale(1.03);
+    box-shadow: 0 8px 28px rgba(199, 167, 123, 0.52);
+  }
+}
+
+.envelope-prompt-text {
+  font-family: var(--font-sans);
+  font-size: clamp(0.76rem, 1.4vw, 0.84rem);
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: var(--color-text);
+  text-transform: uppercase;
+}
+
+.envelope-sparkle {
+  color: var(--color-champagne);
+  font-size: 0.9rem;
+}
+
+.envelope-caption {
+  font-family: var(--font-serif-secondary);
+  font-size: clamp(0.9rem, 1.8vw, 1.05rem);
+  font-style: italic;
+  color: var(--color-text-muted);
+  letter-spacing: 0.04em;
+  margin: 0;
+}
+
+/* 6. Skip Button */
+.envelope-skip-btn {
+  position: absolute;
+  top: clamp(16px, 3.5vw, 32px);
+  right: clamp(16px, 3.5vw, 36px);
+  z-index: 100001;
+  background: rgba(255, 253, 248, 0.88);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border: 1px solid rgba(199, 167, 123, 0.55);
+  border-radius: 30px;
+  padding: 8px 18px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-sans);
+  font-size: clamp(0.72rem, 1.4vw, 0.82rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text);
+  box-shadow: 0 4px 18px rgba(81, 70, 63, 0.12);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.envelope-skip-btn:hover,
+.envelope-skip-btn:focus-visible {
+  background: #FFFDF8;
+  border-color: var(--color-champagne);
+  color: var(--color-forest);
+  box-shadow: 0 6px 24px rgba(199, 167, 123, 0.35);
+  transform: translateY(-1px);
+}
+
+.envelope-skip-btn .skip-arrow {
+  color: var(--color-champagne);
+  font-size: 1rem;
+  transition: transform 0.25s ease;
+}
+
+.envelope-skip-btn:hover .skip-arrow {
+  transform: translateX(3px);
+}
+
