@@ -3,6 +3,7 @@ interface PhotoItem {
   url: string;
   title: string;
   caption: string;
+  alt?: string;
 }
 
 interface Props {
@@ -31,10 +32,11 @@ const { gallery } = Astro.props;
         data-src={photo.url} 
         data-title={photo.title} 
         data-caption={photo.caption}
+        data-alt={photo.alt || photo.title}
       >
         <img 
           src={photo.url} 
-          alt={photo.title} 
+          alt={photo.alt || photo.title} 
           loading="lazy" 
         />
         <div class="gallery-caption-bar">

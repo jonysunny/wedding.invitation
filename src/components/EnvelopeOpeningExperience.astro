@@ -3,28 +3,22 @@
 // Interactive Realistic Luxury Paper-Envelope Opening Experience
 ---
 
-<div id="envelope-experience-overlay" class="envelope-overlay" role="dialog" aria-modal="true" aria-label="Interactive Wedding Invitation Envelope">
+<div id="envelope-experience-overlay" class="envelope-overlay envelope-end-to-end" role="dialog" aria-modal="true" aria-label="Interactive Wedding Invitation Envelope">
   <!-- Ambient Warm Ivory Paper Backdrop with Subtle Vignette -->
   <div class="envelope-backdrop" aria-hidden="true"></div>
 
-  <!-- Discreet Top-Right Skip Button -->
-  <button id="envelope-skip-btn" type="button" class="envelope-skip-btn" aria-label="Skip envelope opening">
-    <span class="skip-text">Skip</span>
-    <span class="skip-arrow" aria-hidden="true">→</span>
-  </button>
-
   <div class="envelope-stage">
-    <!-- 3D Perspective Wrapper -->
-    <div id="envelope-interactive-card" class="envelope-card-wrapper" role="button" tabindex="0" aria-label="Click or tap to open wedding invitation envelope">
+    <!-- End-to-End Screen 3D Perspective Wrapper -->
+    <div id="envelope-interactive-card" class="envelope-card-wrapper" role="button" tabindex="0" aria-label="Click or tap anywhere to open wedding invitation envelope">
       
-      <!-- ENVELOPE PACKET -->
+      <!-- ENVELOPE PACKET (End-to-End Full Screen) -->
       <div class="envelope-packet">
         
         <!-- 1. INSIDE BACK PANEL (Lining) -->
         <div class="envelope-inside-back">
           <div class="envelope-inside-pattern"></div>
           
-          <!-- Inner Invitation Card Peak (Peek out upon opening) -->
+          <!-- Inner Invitation Card (Smoothly emerges upon opening) -->
           <div class="envelope-inner-card" id="envelope-inner-card">
             <div class="inner-card-border">
               <span class="inner-card-monogram">J&S</span>
@@ -33,55 +27,55 @@
           </div>
         </div>
 
-        <!-- 2. SIDE FLAPS (Left & Right) -->
-        <svg class="envelope-side-flaps" viewBox="0 0 500 340" preserveAspectRatio="none" aria-hidden="true">
+        <!-- 2. SIDE FLAPS (Left & Right - End to End) -->
+        <svg class="envelope-side-flaps" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
           <defs>
             <linearGradient id="leftFlapGrad" x1="0%" y1="0%" x2="100%" y2="50%">
               <stop offset="0%" stop-color="#FAF4EA" />
               <stop offset="80%" stop-color="#F2E9DC" />
-              <stop offset="100%" stop-color="#E8DCB" />
+              <stop offset="100%" stop-color="#E8DCB9" />
             </linearGradient>
             <linearGradient id="rightFlapGrad" x1="100%" y1="0%" x2="0%" y2="50%">
               <stop offset="0%" stop-color="#FAF4EA" />
               <stop offset="80%" stop-color="#F2E9DC" />
-              <stop offset="100%" stop-color="#E8DCB" />
+              <stop offset="100%" stop-color="#E8DCB9" />
             </linearGradient>
-            <filter id="flapShadow" x="-10%" y="-10%" width="120%" height="120%">
-              <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="rgba(81, 70, 63, 0.16)" />
-            </filter>
           </defs>
           <!-- Left Flap -->
-          <polygon points="0,0 248,170 0,340" fill="url(#leftFlapGrad)" />
-          <line x1="0" y1="0" x2="248" y2="170" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.2" />
-          <line x1="248" y1="170" x2="0" y2="340" stroke="rgba(199, 167, 123, 0.35)" stroke-width="1.2" />
+          <polygon points="0,0 520,500 0,1000" fill="url(#leftFlapGrad)" />
+          <line x1="0" y1="0" x2="520" y2="500" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.5" />
+          <line x1="520" y1="500" x2="0" y2="1000" stroke="rgba(199, 167, 123, 0.35)" stroke-width="1.5" />
 
           <!-- Right Flap -->
-          <polygon points="500,0 252,170 500,340" fill="url(#rightFlapGrad)" />
-          <line x1="500" y1="0" x2="252" y2="170" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.2" />
-          <line x1="252" y1="170" x2="500" y2="340" stroke="rgba(199, 167, 123, 0.35)" stroke-width="1.2" />
+          <polygon points="1000,0 480,500 1000,1000" fill="url(#rightFlapGrad)" />
+          <line x1="1000" y1="0" x2="480" y2="500" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.5" />
+          <line x1="480" y1="500" x2="1000" y2="1000" stroke="rgba(199, 167, 123, 0.35)" stroke-width="1.5" />
         </svg>
 
-        <!-- 3. BOTTOM FLAP -->
-        <svg class="envelope-bottom-flap" viewBox="0 0 500 340" preserveAspectRatio="none" aria-hidden="true">
+        <!-- 3. BOTTOM FLAP (End to End) -->
+        <svg class="envelope-bottom-flap" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
           <defs>
             <linearGradient id="bottomFlapGrad" x1="50%" y1="100%" x2="50%" y2="0%">
               <stop offset="0%" stop-color="#FAF4EA" />
-              <stop offset="60%" stop-color="#F3EADC" />
+              <stop offset="65%" stop-color="#F3EADC" />
               <stop offset="100%" stop-color="#E9DDCF" />
             </linearGradient>
+            <filter id="bottomFlapShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="-4" stdDeviation="8" flood-color="rgba(81, 70, 63, 0.12)" />
+            </filter>
           </defs>
-          <polygon points="0,340 250,148 500,340" fill="url(#bottomFlapGrad)" />
-          <line x1="0" y1="340" x2="250" y2="148" stroke="rgba(199, 167, 123, 0.55)" stroke-width="1.4" />
-          <line x1="250" y1="148" x2="500" y2="340" stroke="rgba(199, 167, 123, 0.55)" stroke-width="1.4" />
+          <polygon points="0,1000 500,440 1000,1000" fill="url(#bottomFlapGrad)" filter="url(#bottomFlapShadow)" />
+          <line x1="0" y1="1000" x2="500" y2="440" stroke="rgba(199, 167, 123, 0.55)" stroke-width="1.5" />
+          <line x1="500" y1="440" x2="1000" y2="1000" stroke="rgba(199, 167, 123, 0.55)" stroke-width="1.5" />
         </svg>
 
-        <!-- 4. TOP FOLDING FLAP (3D Animated) -->
+        <!-- 4. TOP FOLDING FLAP (End to End 3D Animated) -->
         <div class="envelope-top-flap-hinge" id="envelope-top-flap-hinge">
           <div class="envelope-top-flap-3d">
             
             <!-- FRONT FACE OF TOP FLAP (Closed State) -->
             <div class="flap-face flap-face-front">
-              <svg class="top-flap-svg" viewBox="0 0 500 196" preserveAspectRatio="none" aria-hidden="true">
+              <svg class="top-flap-svg" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
                 <defs>
                   <linearGradient id="topFlapFrontGrad" x1="50%" y1="0%" x2="50%" y2="100%">
                     <stop offset="0%" stop-color="#FFFDF8" />
@@ -89,12 +83,12 @@
                     <stop offset="100%" stop-color="#EDE2D1" />
                   </linearGradient>
                   <filter id="topFlapShadow" x="-10%" y="0%" width="120%" height="140%">
-                    <feDropShadow dx="0" dy="12" stdDeviation="12" flood-color="rgba(81, 70, 63, 0.22)" />
+                    <feDropShadow dx="0" dy="12" stdDeviation="14" flood-color="rgba(81, 70, 63, 0.2)" />
                   </filter>
                 </defs>
-                <polygon points="0,0 250,192 500,0" fill="url(#topFlapFrontGrad)" filter="url(#topFlapShadow)" />
-                <line x1="0" y1="0" x2="250" y2="192" stroke="rgba(212, 175, 55, 0.65)" stroke-width="1.5" />
-                <line x1="250" y1="192" x2="500" y2="0" stroke="rgba(212, 175, 55, 0.65)" stroke-width="1.5" />
+                <polygon points="0,0 500,556 1000,0" fill="url(#topFlapFrontGrad)" filter="url(#topFlapShadow)" />
+                <line x1="0" y1="0" x2="500" y2="556" stroke="rgba(212, 175, 55, 0.7)" stroke-width="2" />
+                <line x1="500" y1="556" x2="1000" y2="0" stroke="rgba(212, 175, 55, 0.7)" stroke-width="2" />
               </svg>
 
               <!-- ROYAL J&S EMBOSSED CREST SEAL ON FLAP TIP -->
@@ -105,27 +99,29 @@
                       src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
                       alt="J&S Royal Monogram Wax Seal" 
                       class="seal-crest-img"
-                      width="68"
-                      height="68"
+                      width="68" 
+                      height="68" 
+                      loading="eager"
+                      decoding="sync"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <!-- BACK FACE OF TOP FLAP (Revealed when open) -->
+            <!-- BACK FACE OF TOP FLAP (Revealed upon 3D flip) -->
             <div class="flap-face flap-face-back" aria-hidden="true">
-              <svg class="top-flap-svg-back" viewBox="0 0 500 196" preserveAspectRatio="none">
+              <svg class="top-flap-svg-back" viewBox="0 0 1000 560" preserveAspectRatio="none">
                 <defs>
                   <linearGradient id="topFlapBackGrad" x1="50%" y1="100%" x2="50%" y2="0%">
-                    <stop offset="0%" stop-color="#F9F2E6" />
-                    <stop offset="60%" stop-color="#F0E5D4" />
-                    <stop offset="100%" stop-color="#E6D7C2" />
+                    <stop offset="0%" stop-color="#EDE2D1" />
+                    <stop offset="60%" stop-color="#F7EFE2" />
+                    <stop offset="100%" stop-color="#FFFDF8" />
                   </linearGradient>
                 </defs>
-                <polygon points="0,196 250,4 500,196" fill="url(#topFlapBackGrad)" />
-                <line x1="0" y1="196" x2="250" y2="4" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.2" />
-                <line x1="250" y1="4" x2="500" y2="196" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.2" />
+                <polygon points="0,560 500,4 1000,560" fill="url(#topFlapBackGrad)" />
+                <line x1="0" y1="560" x2="500" y2="4" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.5" />
+                <line x1="500" y1="4" x2="1000" y2="560" stroke="rgba(199, 167, 123, 0.45)" stroke-width="1.5" />
               </svg>
               <div class="top-flap-back-ornament">❦</div>
             </div>
@@ -135,7 +131,7 @@
 
       </div>
 
-      <!-- INVITATION INTERACTIVE PROMPT (Below or centered on envelope) -->
+      <!-- INVITATION INTERACTIVE PROMPT (At bottom of screen) -->
       <div class="envelope-prompt-container">
         <div class="envelope-tap-pill">
           <span class="envelope-sparkle">✦</span>
@@ -153,7 +149,6 @@
   function initEnvelopeExperience() {
     const overlay = document.getElementById("envelope-experience-overlay");
     const envelopeCard = document.getElementById("envelope-interactive-card");
-    const skipBtn = document.getElementById("envelope-skip-btn");
 
     if (!overlay || !envelopeCard) return;
 
@@ -202,26 +197,25 @@
       }, 400);
     }
 
-    // Click/tap handlers on envelope, seal, or prompt
-    envelopeCard.addEventListener("click", (e) => {
+    // Click/tap handler on envelope card or anywhere on overlay
+    overlay.addEventListener("click", (e) => {
       e.preventDefault();
       openEnvelope();
     });
 
+    overlay.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      openEnvelope();
+    }, { passive: false });
+
     // Keyboard accessibility (Enter or Space)
-    envelopeCard.addEventListener("keydown", (e) => {
+    window.addEventListener("keydown", (e) => {
+      if (hasDismissed || isOpening) return;
       if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         openEnvelope();
       }
     });
-
-    if (skipBtn) {
-      skipBtn.addEventListener("click", (e) => {
-        e.preventDefault();
-        dismissImmediately();
-      });
-    }
   }
 
   if (document.readyState === "loading") {

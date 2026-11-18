@@ -1,19 +1,19 @@
 {
   "slug": "jony-and-sunny",
   "couple": {
-    "bride": {
+    "groom": {
       "firstName": "Jony",
       "fullName": "Jony",
-      "title": "The Bride",
-      "bio": "Daughter of their loving families",
-      "photo": "/jony-wedding/assets/couple/couple-1.jpg"
-    },
-    "groom": {
-      "firstName": "Sunny",
-      "fullName": "Sunny",
       "title": "The Groom",
       "bio": "Son of their loving families",
-      "photo": "/jony-wedding/assets/couple/couple-2.jpg"
+      "photo": "/jony-wedding/assets/couple/groom-cream-suit.png"
+    },
+    "bride": {
+      "firstName": "Sunny",
+      "fullName": "Sunny",
+      "title": "The Bride",
+      "bio": "Daughter of their loving families",
+      "photo": "/jony-wedding/assets/couple/bride-pink-saree.png"
     }
   },
   "monogram": "J & S",
@@ -55,29 +55,22 @@
   ],
   "gallery": [
     {
-      "url": "/jony-wedding/assets/couple/couple-1.jpg",
-      "title": "Formal Wedding Portrait",
-      "caption": "Together in sacred love and joyous covenant"
+      "url": "/jony-wedding/assets/couple/groom-cream-suit.png",
+      "title": "The Groom — Jony",
+      "caption": "Groom in a tailored cream suit amidst lush garden greenery",
+      "alt": "Groom in cream suit outdoors amidst greenery"
     },
     {
-      "url": "/jony-wedding/assets/couple/couple-2.jpg",
-      "title": "Sunset on the Terrace",
-      "caption": "Hand in hand as the golden evening glows"
+      "url": "/jony-wedding/assets/couple/bride-pink-saree.png",
+      "title": "The Bride — Sunny",
+      "caption": "Bride in an elegant pink embroidered saree surrounded by floral blossoms",
+      "alt": "Bride in pink embroidered saree outdoors with flowers and greenery"
     },
     {
-      "url": "/jony-wedding/assets/couple/couple-3.jpg",
-      "title": "Candlelit Garden Walk",
-      "caption": "Surrounded by warm lanterns, soft lights, and celebration"
-    },
-    {
-      "url": "/jony-wedding/assets/couple/couple-4.jpg",
-      "title": "Beneath the Floral Archway",
-      "caption": "Framed in blooming white florals, united forever"
-    },
-    {
-      "url": "/jony-wedding/assets/couple/couple-5.jpg",
-      "title": "Cherished Smiles",
-      "caption": "Joyful laughter and tender glances in the golden light"
+      "url": "/jony-wedding/assets/couple/golden-chapel-portrait.png",
+      "title": "The Couple — Jony & Sunny",
+      "caption": "Bride in white bridal gown and groom in tuxedo before floral archway with cross",
+      "alt": "Couple in white bridal gown and black tuxedo before floral archway with cross"
     }
   ],
   "music": {

@@ -23,6 +23,7 @@ export function initGallery() {
     const src = card.getAttribute("data-src") || "";
     const title = card.getAttribute("data-title") || "";
     const caption = card.getAttribute("data-caption") || "";
+    const alt = card.getAttribute("data-alt") || title;
 
     // Subtle fade transition on image swap
     previewImg.style.opacity = "0.4";
@@ -30,7 +31,7 @@ export function initGallery() {
     
     setTimeout(() => {
       previewImg.src = src;
-      previewImg.alt = title;
+      previewImg.alt = alt;
       if (previewTitle) previewTitle.textContent = title;
       if (previewCaption) previewCaption.textContent = caption;
       if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${cards.length}`;
