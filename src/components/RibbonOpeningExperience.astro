@@ -43,6 +43,11 @@
       <!-- Decorative Inner Frame -->
       <div class="ribbon-card-frame">
         <div class="ribbon-card-watermark">
+          <div class="ribbon-invited-header">
+            <span class="ribbon-invited-flourish" aria-hidden="true">❦</span>
+            <span class="ribbon-invited-text font-serif">YOU'RE INVITED</span>
+            <span class="ribbon-invited-flourish" aria-hidden="true">❦</span>
+          </div>
           <span class="ribbon-card-monogram font-script">J &amp; S</span>
           <span class="ribbon-card-subtitle font-serif">A CELEBRATION OF LOVE</span>
         </div>
@@ -332,19 +337,46 @@
   flex-direction: column;
   align-items: center;
   gap: 8px;
-  opacity: 0.25;
+  text-align: center;
+  transform: translateY(clamp(-100px, -18vh, -150px));
+}
+
+.ribbon-invited-header {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 2px;
+}
+
+.ribbon-invited-text {
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: clamp(0.95rem, 2.2vw, 1.4rem);
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: #55346E; /* Deep mauve / plum */
+  text-shadow: 0 1px 2px rgba(197, 165, 109, 0.45);
+  opacity: 0.75;
+}
+
+.ribbon-invited-flourish {
+  color: #C5A56D; /* Champagne gold */
+  font-size: 0.9rem;
+  opacity: 0.8;
 }
 
 .ribbon-card-monogram {
   font-size: clamp(3.2rem, 9vw, 5.2rem);
   color: #73558D;
   line-height: 1;
+  opacity: 0.35;
 }
 
 .ribbon-card-subtitle {
   font-size: clamp(0.65rem, 1.4vw, 0.8rem);
   letter-spacing: 0.24em;
   color: #9B7CB8;
+  opacity: 0.45;
 }
 
 /* Decorative Stickers Layer */

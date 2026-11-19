@@ -2500,31 +2500,6 @@ body.theme-lavender #invitation-cover .cover-intro-lead {
   font-weight: 500;
 }
 
-/* Elegant "You're Invited" Header */
-body.theme-lavender #invitation-cover .invitation-you-are-invited {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 12px;
-  margin: 0 auto clamp(6px, 1.2vh, 14px);
-}
-
-body.theme-lavender #invitation-cover .invitation-you-are-invited .invited-text {
-  font-family: var(--font-serif-primary, 'Cinzel', serif);
-  font-size: clamp(0.92rem, 1.8vw, 1.25rem);
-  font-weight: 600;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: #55346E; /* Deep mauve / plum */
-  text-shadow: 0 1px 2px rgba(197, 165, 109, 0.35);
-}
-
-body.theme-lavender #invitation-cover .invitation-you-are-invited .invited-flourish {
-  color: #C5A56D; /* Champagne gold */
-  font-size: 0.85rem;
-  line-height: 1;
-  opacity: 0.85;
-}
 
 /* Couple Names Display */
 body.theme-lavender #invitation-cover .cover-couple-names {
@@ -4457,112 +4432,59 @@ body.theme-lavender .gallery-card img {
     display: block !important;
   }
 
-  /* Overlay container for typography & interactive scroll prompt */
+  /* Overlay container for accessibility & interactive scroll prompt */
   body.theme-lavender #invitation-cover .invitation-full-container {
-    position: relative !important;
-    z-index: 10 !important;
+    position: absolute !important;
+    inset: 0 !important;
     width: 100% !important;
-    max-width: 360px !important;
+    max-width: 100% !important;
     height: 100% !important;
-    max-height: 100dvh !important;
+    z-index: 10 !important;
     background: transparent !important;
     border: none !important;
     border-radius: 0 !important;
     box-shadow: none !important;
     aspect-ratio: auto !important;
-    margin: 0 auto !important;
-    padding: clamp(28px, 5vh, 48px) clamp(16px, 4vw, 24px) clamp(20px, 3vh, 32px) !important;
+    margin: 0 !important;
+    padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: space-between !important;
-    text-align: center !important;
-    box-sizing: border-box !important;
+    justify-content: flex-end !important;
+    pointer-events: none !important;
+  }
+
+  /* Text is already baked into the exact supplied image */
+  body.theme-lavender #invitation-cover .invitation-crest-emblem,
+  body.theme-lavender #invitation-cover .cover-intro-lead,
+  body.theme-lavender #invitation-cover .cover-couple-names,
+  body.theme-lavender #invitation-cover .hero-divider,
+  body.theme-lavender #invitation-cover .invitation-sub-lead {
+    display: none !important;
+  }
+
+  /* Interactive Scroll Button Hotspot over the printed 'SCROLL TO EXPLORE' */
+  body.theme-lavender #invitation-cover .invitation-scroll-prompt {
     pointer-events: auto !important;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-crest-emblem {
-    display: flex !important;
-    width: clamp(72px, 16vw, 92px) !important;
-    height: clamp(72px, 16vw, 92px) !important;
-    margin: 0 auto clamp(4px, 1vh, 8px) !important;
-  }
-
-  body.theme-lavender #invitation-cover .cover-intro-lead {
-    display: block !important;
-    font-size: clamp(0.64rem, 2.4vw, 0.74rem) !important;
-    line-height: 1.4 !important;
-    letter-spacing: 0.16em !important;
-    margin: 0 auto clamp(4px, 0.8vh, 8px) !important;
-    color: #3C2B42 !important;
-    max-width: 290px !important;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-you-are-invited {
+    position: absolute !important;
+    bottom: 3.5% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 220px !important;
+    height: 68px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    gap: 8px !important;
-    margin: 0 auto clamp(4px, 0.8vh, 8px) !important;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-you-are-invited .invited-text {
-    font-size: clamp(0.85rem, 3.2vw, 1.05rem) !important;
-    letter-spacing: 0.22em !important;
-    color: #55346E !important;
-  }
-
-  body.theme-lavender #invitation-cover .cover-couple-names {
-    display: flex !important;
-    margin: 0 auto clamp(2px, 0.6vh, 6px) !important;
-  }
-
-  body.theme-lavender #invitation-cover .cover-groom-name,
-  body.theme-lavender #invitation-cover .cover-bride-name {
-    font-size: clamp(2.1rem, 7.8vw, 2.7rem) !important;
-    line-height: 1.05 !important;
-    color: #2F2133 !important;
-  }
-
-  body.theme-lavender #invitation-cover .cover-ampersand {
-    font-size: clamp(1.3rem, 4.8vw, 1.6rem) !important;
-    margin: 2px 0 !important;
-    color: #C5A56D !important;
-  }
-
-  body.theme-lavender #invitation-cover .hero-divider {
-    display: flex !important;
-    width: 140px !important;
-    margin: clamp(4px, 0.8vh, 8px) auto !important;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-sub-lead {
-    display: block !important;
-    font-size: clamp(0.70rem, 2.6vw, 0.80rem) !important;
-    line-height: 1.4 !important;
-    max-width: 280px !important;
-    margin: 0 auto clamp(8px, 1.5vh, 14px) !important;
-    color: #4A3E4E !important;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-scroll-prompt {
-    pointer-events: auto !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    gap: 4px !important;
-    margin: 0 auto !important;
-    padding: 6px 16px !important;
-    background: transparent !important;
     text-decoration: none !important;
     cursor: pointer !important;
+    background: transparent !important;
+    z-index: 20 !important;
   }
 
   body.theme-lavender #invitation-cover .invitation-scroll-sparkle,
   body.theme-lavender #invitation-cover .invitation-scroll-label,
   body.theme-lavender #invitation-cover .invitation-scroll-line {
-    opacity: 1 !important;
-    visibility: visible !important;
+    opacity: 0 !important; /* invisible hotspot over the printed button */
   }
 }
 
