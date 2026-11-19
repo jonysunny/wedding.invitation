@@ -1,12 +1,10 @@
-// Scratch to Reveal & Save-the-Date Calendar Generator
+// Scratch to Reveal Date Handler
 
 export function initScratchCard() {
   const container = document.getElementById("scratch-card-container");
   const canvas = document.getElementById("scratch-canvas") as HTMLCanvasElement | null;
   const instructionPill = document.getElementById("scratch-instruction-pill");
   const accessibleBtn = document.getElementById("reveal-date-accessible-btn");
-  const saveDateContainer = document.getElementById("save-date-action-container");
-  const saveDateBtn = document.getElementById("save-the-date-btn");
 
   if (!canvas || !container) return;
 
@@ -75,23 +73,6 @@ export function initScratchCard() {
 
     if (accessibleBtn) {
       accessibleBtn.style.display = "none";
-    }
-
-    // Display Save the Date action button with smooth entrance
-    if (saveDateContainer) {
-      saveDateContainer.style.display = "block";
-      if (immediate) {
-        saveDateContainer.style.opacity = "1";
-        saveDateContainer.style.transform = "translateY(0)";
-      } else {
-        saveDateContainer.style.opacity = "0";
-        saveDateContainer.style.transition = "opacity 0.8s ease, transform 0.8s ease";
-        saveDateContainer.style.transform = "translateY(12px)";
-        setTimeout(() => {
-          saveDateContainer.style.opacity = "1";
-          saveDateContainer.style.transform = "translateY(0)";
-        }, 50);
-      }
     }
 
     // DISPATCH CRITICAL EVENT TO WAKE UP LIVE WEDDING COUNTDOWN (4:00 PM IST)
@@ -452,53 +433,6 @@ export function initScratchCard() {
     accessibleBtn.addEventListener("click", () => {
       completeReveal(false);
     });
-  }
-
-  // PART 4: SAVE THE DATE CALENDAR (.ICS) FILE GENERATION
-  if (saveDateBtn) {
-    saveDateBtn.addEventListener("click", () => {
-      downloadCalendarIcs();
-    });
-  }
-
-  function downloadCalendarIcs() {
-    const venueName = saveDateBtn?.getAttribute("data-venue") || "Baptist Church Sanathnagar";
-    const venueAddress = saveDateBtn?.getAttribute("data-address") || "Bungalow No. 17, Street No. 3, Czech Colony, Sanathnagar, Hyderabad, Telangana 500018, India";
-    
-    // Construct valid RFC 5545 iCalendar content
-    // Confirmed wedding ceremony start time: 4:00 PM IST (Asia/Kolkata)
-    const icsContent = [
-      "BEGIN:VCALENDAR",
-      "VERSION:2.0",
-      "PRODID:-//Jony & Sunny Wedding//EN",
-      "CALSCALE:GREGORIAN",
-      "METHOD:PUBLISH",
-      "BEGIN:VEVENT",
-      "UID:wedding-ceremony-jony-sunny-20261229@jony-wedding",
-      "DTSTAMP:20261111T120000Z",
-      "DTSTART;TZID=Asia/Kolkata:20261229T160000",
-      "SUMMARY:Wedding Ceremony: Jony & Sunny",
-      `DESCRIPTION:The Holy Wedding Ceremony of Jony and Sunny.\\n\\nTime: 4:00 PM onwards (Asia/Kolkata)\\nVenue: ${venueName}\\nAddress: ${venueAddress}\\n\\nNote: Reception & dinner will take place at 9 CONVENTION HALL immediately after ceremony.`,
-      `LOCATION:${venueName}, ${venueAddress}`,
-      "STATUS:CONFIRMED",
-      "SEQUENCE:0",
-      "BEGIN:VALARM",
-      "TRIGGER:-P1D",
-      "ACTION:DISPLAY",
-      "DESCRIPTION:Reminder: Wedding Ceremony of Jony & Sunny tomorrow at 4:00 PM!",
-      "END:VALARM",
-      "END:VEVENT",
-      "END:VCALENDAR"
-    ].join("\r\n");
-
-    const blob = new Blob([icsContent], { type: "text/calendar;charset=utf-8" });
-    const link = document.createElement("a");
-    link.href = URL.createObjectURL(blob);
-    link.setAttribute("download", "wedding-jony-and-sunny.ics");
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
-    URL.revokeObjectURL(link.href);
   }
 
   // Paint the initial coating

@@ -80,22 +80,5 @@ const { weddingDate, formattedDate, venue, address } = Astro.props;
       ></canvas>
     </div>
 
-    <!-- PART 4: SAVE THE DATE ACTION BUTTON (Appears upon reveal) -->
-    <div id="save-date-action-container" class="save-date-container" style="display: none;">
-      <button 
-        id="save-the-date-btn" 
-        type="button" 
-        class="save-the-date-button"
-        data-date={weddingDate}
-        data-venue={venue}
-        data-address={address}
-        aria-label="Save wedding date to your calendar"
-      >
-        <span class="cal-icon">📅</span>
-        <span class="cal-text">Save the Date (Calendar .ics)</span>
-        <span class="cal-sparkle">✦</span>
-      </button>
-      <p class="save-date-hint">Downloads a standard calendar event for Apple, Google & Outlook</p>
-    </div>
   </div>
 </section>
