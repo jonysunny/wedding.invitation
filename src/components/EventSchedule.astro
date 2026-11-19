@@ -22,34 +22,36 @@ const ceremonyEvent = events.find((e) => e.id === "wedding-ceremony") || events[
 const receptionEvent = events.find((e) => e.id === "reception-dinner") || events[1];
 ---
 
-<section id="event-schedule" class="invite-section reveal-on-scroll">
-  <!-- Dedicated Lavender 4-Corner Artwork Layer -->
-  <div class="lavender-section-decor" aria-hidden="true">
-    <div class="lavender-corner-item lavender-corner-tl"></div>
-    <div class="lavender-corner-item lavender-corner-tr"></div>
-    <div class="lavender-corner-item lavender-corner-bl"></div>
-    <div class="lavender-corner-item lavender-corner-br"></div>
-  </div>
+<div id="event-schedule" class="events-schedule-wrapper">
+  <!-- SECTION 5: DEDICATED WEDDING CEREMONY INVITATION PAGE -->
+  {ceremonyEvent && (
+    <section id="ceremony-section" class="invite-section ceremony-invitation-page reveal-on-scroll">
+      <!-- Unique Floral Corner Layer: Ceremony Composition (Left-Garland Floral Arrangement) -->
+      <div class="lavender-section-decor decor-comp-ceremony" aria-hidden="true">
+        <div class="lavender-corner-item lavender-corner-tl"></div>
+        <div class="lavender-corner-item lavender-corner-tr"></div>
+        <div class="lavender-corner-item lavender-corner-bl"></div>
+        <div class="lavender-corner-item lavender-corner-br"></div>
+      </div>
 
-  <div class="section-heading-block">
-    <span class="section-label">THE CELEBRATION</span>
-    <h2 class="section-title">Wedding Itinerary</h2>
-    <div class="botanical-divider" style="margin: 8px auto 14px;">
-      <span class="botanical-divider-icon">❦</span>
-    </div>
-    <p class="section-desc">Join us in honouring our sacred vows and celebrating our wedding union</p>
-  </div>
+      <!-- Perimeter Luxury Double Border Inset -->
+      <div class="invitation-page-border" aria-hidden="true">
+        <div class="invitation-page-inner-border"></div>
+      </div>
+      <div class="invitation-corner-ornaments" aria-hidden="true">
+        <span class="corner-ornament corner-top-left">❦</span>
+        <span class="corner-ornament corner-top-right">❦</span>
+        <span class="corner-ornament corner-bottom-left">❦</span>
+        <span class="corner-ornament corner-bottom-right">❦</span>
+      </div>
 
-  <div class="events-container two-event-layout">
-    <!-- 1. DEDICATED WEDDING CEREMONY BLOCK -->
-    {ceremonyEvent && (
-      <article id="wedding-ceremony" class="event-card ceremony-card stationery-panel">
+      <div class="page-invitation-card ceremony-card stationery-panel">
         <div class="event-card-inner">
           <div class="event-card-header">
             {ceremonyEvent.badge && (
               <span class="event-badge badge-ceremony">{ceremonyEvent.badge}</span>
             )}
-            <h3 class="event-title">{ceremonyEvent.title || ceremonyEvent.name}</h3>
+            <h2 class="section-title event-title">{ceremonyEvent.title || ceremonyEvent.name}</h2>
             <div class="botanical-divider event-mini-divider">
               <span class="botanical-divider-icon">❦</span>
             </div>
@@ -103,18 +105,39 @@ const receptionEvent = events.find((e) => e.id === "reception-dinner") || events
             </div>
           )}
         </div>
-      </article>
-    )}
+      </div>
+    </section>
+  )}
 
-    <!-- 2. DEDICATED RECEPTION & DINNER BLOCK -->
-    {receptionEvent && (
-      <article id="reception-dinner" class="event-card reception-card stationery-panel">
+  <!-- SECTION 6: DEDICATED RECEPTION & DINNER INVITATION PAGE -->
+  {receptionEvent && (
+    <section id="reception-section" class="invite-section reception-invitation-page reveal-on-scroll">
+      <!-- Unique Floral Corner Layer: Reception Composition (Right-Garland Floral Arrangement) -->
+      <div class="lavender-section-decor decor-comp-reception" aria-hidden="true">
+        <div class="lavender-corner-item lavender-corner-tl"></div>
+        <div class="lavender-corner-item lavender-corner-tr"></div>
+        <div class="lavender-corner-item lavender-corner-bl"></div>
+        <div class="lavender-corner-item lavender-corner-br"></div>
+      </div>
+
+      <!-- Perimeter Luxury Double Border Inset -->
+      <div class="invitation-page-border" aria-hidden="true">
+        <div class="invitation-page-inner-border"></div>
+      </div>
+      <div class="invitation-corner-ornaments" aria-hidden="true">
+        <span class="corner-ornament corner-top-left">❦</span>
+        <span class="corner-ornament corner-top-right">❦</span>
+        <span class="corner-ornament corner-bottom-left">❦</span>
+        <span class="corner-ornament corner-bottom-right">❦</span>
+      </div>
+
+      <div class="page-invitation-card reception-card stationery-panel">
         <div class="event-card-inner">
           <div class="event-card-header">
             {receptionEvent.badge && (
               <span class="event-badge badge-reception">{receptionEvent.badge}</span>
             )}
-            <h3 class="event-title">{receptionEvent.title || receptionEvent.name}</h3>
+            <h2 class="section-title event-title">{receptionEvent.title || receptionEvent.name}</h2>
             <div class="botanical-divider event-mini-divider">
               <span class="botanical-divider-icon">❦</span>
             </div>
@@ -175,7 +198,7 @@ const receptionEvent = events.find((e) => e.id === "reception-dinner") || events
             </div>
           )}
         </div>
-      </article>
-    )}
-  </div>
-</section>
+      </div>
+    </section>
+  )}
+</div>

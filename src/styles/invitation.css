@@ -3714,3 +3714,647 @@ body.theme-lavender .closing-card-overlay {
     padding-bottom: clamp(80px, 18vw, 130px) !important;
   }
 }
+
+
+/* ==========================================================================
+   MOBILE-FIRST INVITATION ARCHITECTURE & UNIQUE FLORAL COMPOSITIONS
+   ========================================================================== */
+
+/* Universal Double Border Inset for Every Page */
+body.theme-lavender .invitation-page-border {
+  display: block !important;
+  position: absolute;
+  inset: clamp(10px, 2.5vw, 16px);
+  border: 1.5px solid rgba(197, 165, 109, 0.45);
+  border-radius: 14px;
+  pointer-events: none;
+  z-index: 2;
+}
+
+body.theme-lavender .invitation-page-inner-border {
+  position: absolute;
+  inset: 4px;
+  border: 1px dashed rgba(197, 165, 109, 0.32);
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+body.theme-lavender .invitation-corner-ornaments {
+  display: block !important;
+  position: absolute;
+  inset: clamp(10px, 2.5vw, 16px);
+  pointer-events: none;
+  z-index: 3;
+}
+
+body.theme-lavender .corner-ornament {
+  position: absolute;
+  color: #C5A56D;
+  font-size: 0.72rem;
+  opacity: 0.85;
+  line-height: 1;
+}
+
+body.theme-lavender .corner-top-left { top: 8px; left: 8px; }
+body.theme-lavender .corner-top-right { top: 8px; right: 8px; }
+body.theme-lavender .corner-bottom-left { bottom: 8px; left: 8px; }
+body.theme-lavender .corner-bottom-right { bottom: 8px; right: 8px; }
+
+/* Universal Floral Decor Container */
+body.theme-lavender .lavender-section-decor,
+body.theme-lavender .lavender-floral-corners {
+  display: block !important;
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  overflow: hidden;
+}
+
+body.theme-lavender .lavender-corner-item {
+  display: block !important;
+  position: absolute;
+  pointer-events: none;
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 1: MAIN INVITATION COVER (Lush Diagonal Framing)
+   -------------------------------------------------------------------------- */
+.decor-comp-cover .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(130px, 34vw, 210px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: top right;
+  opacity: 0.95;
+}
+
+.decor-comp-cover .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(130px, 34vw, 210px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: bottom left;
+  opacity: 0.95;
+}
+
+.decor-comp-cover .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 320 / 380;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-position: top left;
+  opacity: 0.9;
+}
+
+.decor-comp-cover .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom right;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 2: SCRATCH TO REVEAL (Inverted Diagonal Bouquet)
+   -------------------------------------------------------------------------- */
+.decor-comp-scratch .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(135px, 34vw, 210px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: top left;
+  transform: scale(1, -1);
+  opacity: 0.95;
+}
+
+.decor-comp-scratch .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(135px, 34vw, 210px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: bottom right;
+  transform: scale(-1, -1);
+  opacity: 0.95;
+}
+
+.decor-comp-scratch .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 320 / 380;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-position: top right;
+  transform: scaleX(-1);
+  opacity: 0.9;
+}
+
+.decor-comp-scratch .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom left;
+  transform: scaleX(-1);
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 3: COUNTDOWN (Symmetrical Top Canopy)
+   -------------------------------------------------------------------------- */
+.decor-comp-countdown .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(135px, 34vw, 210px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: top left;
+  transform: scaleX(-1);
+  opacity: 0.95;
+}
+
+.decor-comp-countdown .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(135px, 34vw, 210px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: top right;
+  opacity: 0.95;
+}
+
+.decor-comp-countdown .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom left;
+  transform: scaleX(-1);
+  opacity: 0.9;
+}
+
+.decor-comp-countdown .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom right;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 4: CEREMONY PAGE (Left-Heavy Sacred Garland)
+   -------------------------------------------------------------------------- */
+.decor-comp-ceremony .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(135px, 35vw, 215px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: top left;
+  transform: scale(1, -1);
+  opacity: 0.95;
+}
+
+.decor-comp-ceremony .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(135px, 35vw, 215px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: bottom left;
+  opacity: 0.95;
+}
+
+.decor-comp-ceremony .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 320 / 380;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-position: top right;
+  transform: scaleX(-1);
+  opacity: 0.9;
+}
+
+.decor-comp-ceremony .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom right;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 5: RECEPTION PAGE (Right-Heavy Celebration Garland)
+   -------------------------------------------------------------------------- */
+.decor-comp-reception .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(135px, 35vw, 215px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: top right;
+  opacity: 0.95;
+}
+
+.decor-comp-reception .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(135px, 35vw, 215px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: bottom right;
+  transform: scaleX(-1);
+  opacity: 0.95;
+}
+
+.decor-comp-reception .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 320 / 380;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-position: top left;
+  opacity: 0.9;
+}
+
+.decor-comp-reception .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom left;
+  transform: scaleX(-1);
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 6: PHOTO GALLERY (Balanced Frame)
+   -------------------------------------------------------------------------- */
+.decor-comp-gallery .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(125px, 32vw, 195px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: top right;
+  opacity: 0.95;
+}
+
+.decor-comp-gallery .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(125px, 32vw, 195px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: bottom left;
+  opacity: 0.95;
+}
+
+.decor-comp-gallery .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(105px, 26vw, 160px);
+  aspect-ratio: 320 / 380;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-position: top left;
+  opacity: 0.9;
+}
+
+.decor-comp-gallery .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(105px, 26vw, 160px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom right;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   UNIQUE COMPOSITION 7: CLOSING SECTION (Grand Finale)
+   -------------------------------------------------------------------------- */
+.decor-comp-closing .lavender-corner-tr {
+  top: 0;
+  right: 0;
+  width: clamp(130px, 34vw, 210px);
+  aspect-ratio: 448 / 460;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-position: top right;
+  opacity: 0.95;
+}
+
+.decor-comp-closing .lavender-corner-bl {
+  bottom: 0;
+  left: 0;
+  width: clamp(130px, 34vw, 210px);
+  aspect-ratio: 440 / 454;
+  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-position: bottom left;
+  opacity: 0.95;
+}
+
+.decor-comp-closing .lavender-corner-tl {
+  top: 0;
+  left: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 320 / 380;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-position: top left;
+  opacity: 0.9;
+}
+
+.decor-comp-closing .lavender-corner-br {
+  bottom: 0;
+  right: 0;
+  width: clamp(110px, 28vw, 170px);
+  aspect-ratio: 318 / 384;
+  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-position: bottom right;
+  opacity: 0.9;
+}
+
+/* --------------------------------------------------------------------------
+   CEREMONY & RECEPTION SEPARATE INVITATION PAGES
+   -------------------------------------------------------------------------- */
+body.theme-lavender #ceremony-section,
+body.theme-lavender #reception-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EEE5F8 !important;
+  background-image: radial-gradient(circle at 50% 50%, #FAF7FE 0%, #EEE5F8 55%, #D8C4EC 100%) !important;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  padding: clamp(40px, 6vh, 64px) clamp(16px, 4vw, 24px);
+  border-top: 1px solid rgba(197, 165, 109, 0.3);
+}
+
+body.theme-lavender .page-invitation-card {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: clamp(320px, 88vw, 540px);
+  margin: 0 auto;
+  background: rgba(246, 240, 254, 0.94);
+  border: 1.5px solid rgba(197, 165, 109, 0.5);
+  border-radius: 18px;
+  box-shadow: 
+    0 18px 48px rgba(115, 85, 141, 0.18),
+    0 4px 14px rgba(197, 165, 109, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: clamp(28px, 4.5vh, 44px) clamp(18px, 4.5vw, 32px);
+  box-sizing: border-box;
+  text-align: center;
+}
+
+body.theme-lavender .page-invitation-card .event-badge {
+  display: inline-block;
+  padding: 4px 14px;
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  border-radius: 20px;
+  margin-bottom: 8px;
+  background: #D8C4EC;
+  color: #55346E;
+  border: 1px solid rgba(197, 165, 109, 0.4);
+}
+
+body.theme-lavender .page-invitation-card .event-title {
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: clamp(1.6rem, 4.2vw, 2.2rem);
+  font-weight: 500;
+  color: #73558D;
+  margin: 0 0 6px;
+  line-height: 1.2;
+}
+
+body.theme-lavender .page-invitation-card .event-description {
+  font-family: var(--font-serif-secondary, Georgia, serif);
+  font-size: clamp(0.86rem, 2.2vw, 0.98rem);
+  color: #432C56;
+  line-height: 1.55;
+  margin: 0 auto clamp(14px, 2.5vh, 22px);
+  max-width: 440px;
+}
+
+body.theme-lavender .page-invitation-card .event-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(10px, 1.8vh, 16px);
+  margin-bottom: clamp(16px, 2.8vh, 24px);
+  text-align: left;
+}
+
+body.theme-lavender .page-invitation-card .event-detail-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.6);
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(197, 165, 109, 0.25);
+}
+
+body.theme-lavender .page-invitation-card .detail-icon {
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+body.theme-lavender .page-invitation-card .detail-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+body.theme-lavender .page-invitation-card .detail-label {
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #73558D;
+}
+
+body.theme-lavender .page-invitation-card .detail-value {
+  font-family: var(--font-serif-secondary, Georgia, serif);
+  font-size: clamp(0.92rem, 2.2vw, 1.05rem);
+  color: #2D1A38;
+}
+
+body.theme-lavender .page-invitation-card .time-highlight {
+  color: #55346E;
+  font-weight: 600;
+}
+
+body.theme-lavender .page-invitation-card .detail-sub {
+  font-size: 0.8rem;
+  color: #5A4465;
+  line-height: 1.4;
+  margin-top: 2px;
+}
+
+body.theme-lavender .page-invitation-card .event-action-wrap {
+  margin-top: 8px;
+}
+
+body.theme-lavender .page-invitation-card .event-directions-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  min-height: 48px;
+  padding: 12px 20px;
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  border-radius: 26px;
+  background: linear-gradient(135deg, #73558D 0%, #55346E 100%);
+  color: #FFFDF8;
+  border: 1.5px solid rgba(197, 165, 109, 0.6);
+  box-shadow: 0 6px 18px rgba(115, 85, 141, 0.25);
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+body.theme-lavender .page-invitation-card .event-directions-btn:hover {
+  background: linear-gradient(135deg, #C5A56D 0%, #B39155 100%);
+  color: #2D1A38;
+  border-color: #C5A56D;
+  box-shadow: 0 8px 24px rgba(197, 165, 109, 0.35);
+  transform: translateY(-2px);
+}
+
+/* --------------------------------------------------------------------------
+   COUNTDOWN MOBILE-FIRST RING SIZING & SPACING
+   -------------------------------------------------------------------------- */
+body.theme-lavender #countdown-section {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+}
+
+body.theme-lavender .countdown-container {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  max-width: clamp(320px, 90vw, 680px);
+  margin: 0 auto;
+  padding: clamp(20px, 3vh, 36px) clamp(12px, 3vw, 24px);
+  box-sizing: border-box;
+}
+
+body.theme-lavender .countdown-rings-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(8px, 2.5vw, 24px);
+  width: 100%;
+  align-items: center;
+  justify-items: center;
+}
+
+body.theme-lavender .countdown-circle-unit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: clamp(68px, 19vw, 110px);
+}
+
+body.theme-lavender .circle-graphic-box {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.theme-lavender .countdown-circle-num {
+  font-size: clamp(1.2rem, 3.8vw, 2.0rem);
+  font-weight: 600;
+  color: #3C234E;
+}
+
+body.theme-lavender .countdown-circle-label {
+  font-size: clamp(0.55rem, 1.6vw, 0.72rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #73558D;
+  margin-top: 6px;
+}
+
+/* --------------------------------------------------------------------------
+   PHOTO GALLERY MOBILE-FIRST SIZING
+   -------------------------------------------------------------------------- */
+body.theme-lavender #photo-gallery {
+  padding: clamp(48px, 7vh, 80px) clamp(16px, 4vw, 32px);
+}
+
+body.theme-lavender .gallery-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: clamp(20px, 3.5vh, 32px);
+  width: 100%;
+  max-width: clamp(320px, 88vw, 420px);
+  margin: 0 auto;
+}
+
+@media (min-width: 769px) {
+  body.theme-lavender .gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    max-width: 1100px;
+    gap: 24px;
+  }
+}
+
+body.theme-lavender .gallery-card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1.5px solid rgba(197, 165, 109, 0.45);
+  box-shadow: 0 14px 34px rgba(95, 65, 120, 0.18);
+  aspect-ratio: 4 / 5;
+  background: #EFE6FA;
+}
+
+body.theme-lavender .gallery-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
