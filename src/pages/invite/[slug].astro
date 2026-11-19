@@ -69,15 +69,7 @@ const pageDescription = `Join us in celebrating the wedding of ${weddingData.cou
   import weddingData from '../../data/wedding.json';
 
   function initApp() {
-    const musicController = initMusic(weddingData.music.src);
-    const startAudioOnFirstInteraction = () => {
-      musicController.play();
-      document.removeEventListener('click', startAudioOnFirstInteraction);
-      document.removeEventListener('touchstart', startAudioOnFirstInteraction);
-    };
-    document.addEventListener('click', startAudioOnFirstInteraction, { once: true });
-    document.addEventListener('touchstart', startAudioOnFirstInteraction, { once: true });
-
+    initMusic(weddingData.music.src);
     initScratchCard();
     setupCountdownListener(weddingData.weddingDate);
     initGallery();

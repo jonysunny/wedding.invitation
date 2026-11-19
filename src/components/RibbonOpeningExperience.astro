@@ -132,17 +132,14 @@
 
         <!-- Central Royal Gold Crest Medallion Knot -->
         <div class="bow-center-seal" id="bow-center-seal">
-          <div class="seal-gold-outer-ring">
-            <div class="seal-gold-inner-disc">
-              <img 
-                src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
-                alt="J&amp;S Royal Crest ESTD. 2024" 
-                class="seal-crest-img"
-                width="72"
-                height="72"
-              />
-              <span class="seal-estd-caption">ESTD. 2024</span>
-            </div>
+          <div class="seal-gold-inner-disc">
+            <img 
+              src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
+              alt="J&amp;S Royal Crest ESTD. 2024" 
+              class="seal-crest-img"
+              width="80"
+              height="80"
+            />
           </div>
         </div>
       </div>
@@ -282,6 +279,12 @@
   border-color: #C5A56D;
   transform: translateY(-1px);
   box-shadow: 0 6px 18px rgba(115, 85, 141, 0.2);
+}
+
+@media (max-width: 768px) {
+  .ribbon-skip-intro-btn {
+    display: none !important;
+  }
 }
 
 /* Main Ribbon Stage */
@@ -547,7 +550,7 @@
   transform-origin: top center;
 }
 
-/* Center Royal Gold Crest Medallion Knot */
+/* Center Royal Lavender-Compatible Crest Medallion Knot */
 .bow-center-seal {
   position: absolute;
   top: 50%;
@@ -556,45 +559,37 @@
   width: clamp(86px, 15vw, 114px);
   height: clamp(86px, 15vw, 114px);
   border-radius: 50%;
-  background: radial-gradient(circle at 35% 30%, #FFF4D4 0%, #E2CA92 35%, #C5A56D 70%, #8A6832 100%);
+  background: radial-gradient(circle at 35% 30%, #73558D 0%, #55346E 60%, #3C234E 100%);
   box-shadow: 
-    0 12px 30px rgba(67, 44, 86, 0.38),
-    0 2px 6px rgba(255, 255, 255, 0.6),
-    inset 0 3px 5px rgba(255, 255, 255, 0.7);
-  border: 2px solid #EEDB9F;
+    0 12px 32px rgba(50, 25, 70, 0.45),
+    0 2px 8px rgba(197, 165, 109, 0.4),
+    inset 0 2px 4px rgba(255, 255, 255, 0.25);
+  border: 2px solid #C5A56D;
   display: flex;
   align-items: center;
   justify-content: center;
   z-index: 30;
   transition: transform 0.8s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.6s ease;
+  box-sizing: border-box;
 }
 
 .seal-gold-inner-disc {
   width: 86%;
   height: 86%;
   border-radius: 50%;
-  border: 1px dashed rgba(138, 104, 50, 0.5);
+  border: 1px dashed rgba(197, 165, 109, 0.7);
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: radial-gradient(circle at center, rgba(255, 248, 225, 0.6) 0%, rgba(197, 165, 109, 0.35) 100%);
+  background: radial-gradient(circle at center, rgba(115, 85, 141, 0.35) 0%, rgba(85, 52, 110, 0.75) 100%);
+  box-sizing: border-box;
 }
 
 .seal-crest-img {
-  width: clamp(48px, 8.5vw, 64px);
-  height: clamp(48px, 8.5vw, 64px);
+  width: 82%;
+  height: 82%;
   object-fit: contain;
-  filter: drop-shadow(0 2px 3px rgba(67, 44, 86, 0.3));
-}
-
-.seal-estd-caption {
-  font-family: var(--font-serif-primary, 'Cinzel', serif);
-  font-size: clamp(0.48rem, 0.9vw, 0.6rem);
-  font-weight: 700;
-  letter-spacing: 0.16em;
-  color: #4A3515;
-  margin-top: 1px;
+  filter: drop-shadow(0 2px 4px rgba(20, 10, 30, 0.5));
 }
 
 /* Tap to Open Prompt */
@@ -800,6 +795,9 @@
       if (isOpening || hasDismissed) return;
       isOpening = true;
 
+      // Start background music immediately within user gesture
+      window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
+
       // Phase 1 — Ribbon loosens (0.0s - 0.8s)
       overlay.classList.add("phase-1-loosening");
 
@@ -834,6 +832,7 @@
       document.body.style.overflow = "";
       overlay.style.display = "none";
       if (siteMain) siteMain.style.visibility = "visible";
+      window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
       window.dispatchEvent(new CustomEvent("wedding-ribbon-opened"));
       window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
     }
