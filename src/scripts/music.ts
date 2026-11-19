@@ -15,6 +15,7 @@ export function initMusic(audioSrc: string) {
   audio.preload = "auto";
   audio.volume = TARGET_VOLUME;
   globalAudio = audio;
+  (window as any).__weddingAudio = audio;
 
   const toggleBtn = document.getElementById("music-toggle-btn");
   const iconPlaying = document.getElementById("music-icon-playing");
@@ -115,6 +116,7 @@ export function initMusic(audioSrc: string) {
     pause: pauseAudio,
     toggle: toggleAudio
   };
+  (window as any).__weddingMusicController = globalController;
 
   return globalController;
 }

@@ -94,7 +94,7 @@
     </div>
 
     <!-- 4. Satin Lilac Ribbon Wrapping System -->
-    <div id="ribbon-interactive-wrap" class="ribbon-interactive-wrap" role="button" tabindex="0" aria-label="Tap or click to untie the wedding invitation ribbon">
+    <div id="ribbon-interactive-wrap" class="ribbon-interactive-wrap" role="button" tabindex="0" aria-label="Tap or click to open the wedding invitation">
       
       <!-- Horizontal Satin Ribbon Band -->
       <div class="ribbon-band ribbon-band-horizontal">
@@ -148,7 +148,7 @@
       <div class="ribbon-prompt-container">
         <div class="ribbon-tap-pill">
           <span class="ribbon-sparkle-icon">✦</span>
-          <span class="ribbon-prompt-text font-serif">TAP TO UNTIE &amp; OPEN</span>
+          <span class="ribbon-prompt-text font-serif">TAP TO OPEN</span>
           <span class="ribbon-sparkle-icon">✦</span>
         </div>
         <p class="ribbon-sub-caption">An invitation to celebrate the sacred wedding of Jony &amp; Sunny</p>
@@ -795,7 +795,16 @@
       if (isOpening || hasDismissed) return;
       isOpening = true;
 
-      // Start background music immediately within user gesture
+      // Start background music immediately within trusted user gesture
+      try {
+        const w = window as any;
+        if (w.__weddingAudio && w.__weddingAudio.paused) {
+          w.__weddingAudio.play().catch(() => {});
+        }
+        if (w.__weddingMusicController) {
+          w.__weddingMusicController.play();
+        }
+      } catch (err) {}
       window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
 
       // Phase 1 — Ribbon loosens (0.0s - 0.8s)
@@ -832,6 +841,15 @@
       document.body.style.overflow = "";
       overlay.style.display = "none";
       if (siteMain) siteMain.style.visibility = "visible";
+      try {
+        const w = window as any;
+        if (w.__weddingAudio && w.__weddingAudio.paused) {
+          w.__weddingAudio.play().catch(() => {});
+        }
+        if (w.__weddingMusicController) {
+          w.__weddingMusicController.play();
+        }
+      } catch (err) {}
       window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
       window.dispatchEvent(new CustomEvent("wedding-ribbon-opened"));
       window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
