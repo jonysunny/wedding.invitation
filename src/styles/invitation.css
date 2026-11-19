@@ -4358,3 +4358,115 @@ body.theme-lavender .gallery-card img {
   object-position: center top;
   display: block;
 }
+
+/* ==========================================================================
+   MOBILE FIRST PAGE — EXACT SUPPLIED REFERENCE VISUAL (NO EMPTY GAPS)
+   ========================================================================== */
+
+/* Hide mobile-only supplied image on desktop screens */
+.mobile-supplied-cover-wrap {
+  display: none !important;
+}
+
+@media (max-width: 768px) {
+  /* Hide desktop corners, dashed borders and corner ornaments on mobile cover */
+  body.theme-lavender #invitation-cover .lavender-floral-corners,
+  body.theme-lavender #invitation-cover .invitation-floral-art-layer,
+  body.theme-lavender #invitation-cover .invitation-page-border,
+  body.theme-lavender #invitation-cover .invitation-corner-ornaments {
+    display: none !important;
+  }
+
+  /* Full-bleed edge-to-edge mobile cover container */
+  body.theme-lavender #invitation-cover {
+    width: 100vw !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    position: relative !important;
+    overflow: hidden !important;
+    background-color: #FAF7FE !important;
+    background-image: none !important;
+    border: none !important;
+    box-shadow: none !important;
+  }
+
+  /* Display the exact supplied reference image full-bleed */
+  body.theme-lavender #invitation-cover .mobile-supplied-cover-wrap {
+    display: block !important;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 1 !important;
+    pointer-events: none !important;
+  }
+
+  body.theme-lavender #invitation-cover .mobile-supplied-cover-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: fill !important;
+    display: block !important;
+  }
+
+  /* Overlay container for accessibility & interactive scroll prompt */
+  body.theme-lavender #invitation-cover .invitation-full-container {
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    z-index: 10 !important;
+    background: transparent !important;
+    border: none !important;
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    aspect-ratio: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    pointer-events: none !important;
+  }
+
+  /* Text is already baked into the exact supplied image */
+  body.theme-lavender #invitation-cover .invitation-crest-emblem,
+  body.theme-lavender #invitation-cover .cover-intro-lead,
+  body.theme-lavender #invitation-cover .cover-couple-names,
+  body.theme-lavender #invitation-cover .hero-divider,
+  body.theme-lavender #invitation-cover .invitation-sub-lead {
+    display: none !important;
+  }
+
+  /* Interactive Scroll Button Hotspot over the printed 'SCROLL TO EXPLORE' */
+  body.theme-lavender #invitation-cover .invitation-scroll-prompt {
+    pointer-events: auto !important;
+    position: absolute !important;
+    bottom: 3.5% !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    width: 220px !important;
+    height: 68px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    background: transparent !important;
+    z-index: 20 !important;
+  }
+
+  body.theme-lavender #invitation-cover .invitation-scroll-sparkle,
+  body.theme-lavender #invitation-cover .invitation-scroll-label,
+  body.theme-lavender #invitation-cover .invitation-scroll-line {
+    opacity: 0 !important; /* invisible hotspot over the printed button */
+  }
+}
+
