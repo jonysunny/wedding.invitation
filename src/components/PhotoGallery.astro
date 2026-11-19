@@ -14,9 +14,12 @@ const { gallery } = Astro.props;
 ---
 
 <section id="photo-gallery" class="invite-section reveal-on-scroll">
-  <!-- Dedicated Lavender Subtle Accent Layer -->
+  <!-- Dedicated Lavender 4-Corner Artwork Layer -->
   <div class="lavender-section-decor" aria-hidden="true">
     <div class="lavender-corner-item lavender-corner-tl"></div>
+    <div class="lavender-corner-item lavender-corner-tr"></div>
+    <div class="lavender-corner-item lavender-corner-bl"></div>
+    <div class="lavender-corner-item lavender-corner-br"></div>
   </div>
 
   <div class="section-heading-block">
@@ -42,7 +45,6 @@ const { gallery } = Astro.props;
         <img 
           src={photo.url} 
           alt={photo.alt || photo.title} 
-          loading="lazy" 
         />
         <div class="gallery-caption-bar">
           <p>{photo.title}</p>

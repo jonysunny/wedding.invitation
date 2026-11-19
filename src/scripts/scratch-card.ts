@@ -134,16 +134,16 @@ export function initScratchCard() {
     const radiusX = Math.min(w * 0.28, 165);
     const radiusY = radiusX * 0.9;
 
-    // Small paper pieces in champagne gold, blush pink, and ivory matching website theme
+    // Small paper pieces in champagne gold, lavender, dusty lilac, mauve, and pure ivory
     const colors = [
-      "#D4AF37", // Bright Champagne Gold
-      "#C7A77B", // Warm Champagne Gold
-      "#E5C896", // Soft Gold
-      "#E9C7C3", // Blush Pink
-      "#F4D7D4", // Soft Petal Pink
-      "#DEB3AD", // Warm Blush
+      "#C5A56D", // Champagne Gold
+      "#E2CA92", // Warm Soft Gold
+      "#D8C4EC", // Soft Lavender
+      "#BEA6D6", // Dusty Lilac
+      "#9B7CB8", // Mauve
+      "#73558D", // Deep Lavender
       "#FFFDF8", // Pure Ivory
-      "#FDF7EC"  // Warm Ivory Paper
+      "#F7F2FD"  // Light Lavender Paper
     ];
 
     interface PaperParticle {
@@ -284,40 +284,42 @@ export function initScratchCard() {
     drawHeartPath(ctx, displayWidth, displayHeight);
     ctx.clip();
 
-    // Sage green base gradient
+    // Lavender & lilac base gradient
     const grad = ctx.createLinearGradient(0, 0, displayWidth, displayHeight);
-    grad.addColorStop(0, "#6E8B76");
-    grad.addColorStop(0.35, "#526E5A");
-    grad.addColorStop(0.7, "#425C4B");
-    grad.addColorStop(1, "#364E3E");
+    grad.addColorStop(0, "#D8C4EC");   // Soft Lavender
+    grad.addColorStop(0.35, "#BEA6D6"); // Dusty Lilac
+    grad.addColorStop(0.7, "#9B7CB8");  // Mauve
+    grad.addColorStop(1, "#73558D");    // Deep Lavender
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, displayWidth, displayHeight);
 
     // Subtle metallic sheen diagonal bands
-    ctx.fillStyle = "rgba(235, 214, 168, 0.22)";
-    for (let x = -displayWidth; x < displayWidth * 2; x += 40) {
+    ctx.fillStyle = "rgba(226, 202, 146, 0.28)";
+    for (let x = -displayWidth; x < displayWidth * 2; x += 36) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.lineTo(x + 25, 0);
-      ctx.lineTo(x + displayHeight + 25, displayHeight);
+      ctx.lineTo(x + 22, 0);
+      ctx.lineTo(x + displayHeight + 22, displayHeight);
       ctx.lineTo(x + displayHeight, displayHeight);
       ctx.fill();
     }
 
-    // Gold glitter speckles
+    // Gold and lilac glitter speckles
     for (let i = 0; i < 450; i++) {
       const sx = Math.random() * displayWidth;
       const sy = Math.random() * displayHeight;
       const sr = Math.random() * 1.8 + 0.4;
       const alpha = Math.random() * 0.75 + 0.25;
-      ctx.fillStyle = i % 2 === 0 ? `rgba(255, 223, 128, ${alpha})` : `rgba(255, 255, 255, ${alpha})`;
+      ctx.fillStyle = i % 3 === 0 
+        ? `rgba(226, 202, 146, ${alpha})` 
+        : (i % 3 === 1 ? `rgba(255, 255, 255, ${alpha})` : `rgba(216, 196, 236, ${alpha})`);
       ctx.beginPath();
       ctx.arc(sx, sy, sr, 0, Math.PI * 2);
       ctx.fill();
     }
 
     // Outer heart gold rim border
-    ctx.strokeStyle = "rgba(212, 175, 55, 0.85)";
+    ctx.strokeStyle = "rgba(197, 165, 109, 0.9)";
     ctx.lineWidth = 3.5;
     drawHeartPath(ctx, displayWidth, displayHeight);
     ctx.stroke();

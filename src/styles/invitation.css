@@ -2350,6 +2350,11 @@ body:not(.theme-lavender) .lavender-section-decor {
 }
 
 /* Base styling for all invitation sections in Lavender Theme */
+body.theme-lavender {
+  background-color: #EEE5F8 !important;
+  color: #432C56;
+}
+
 body.theme-lavender .invitation-page-fullbleed,
 body.theme-lavender .scratch-section-fullbleed,
 body.theme-lavender .invite-section,
@@ -2362,97 +2367,223 @@ body.theme-lavender .invite-section:not(.hero-section-fullbleed):not(.scratch-se
   margin-inline: 0 !important;
 }
 
-/* SECTION 1: MAIN INVITATION COVER */
+/* SECTION 1: MAIN INVITATION COVER (Exact Match to Approved Reference) */
 body.theme-lavender #invitation-cover {
   min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: #FAF5ED;
-  background-image: radial-gradient(circle at 50% 38%, #FFFDFB 0%, #FAF5ED 65%, #F4EBF7 100%);
-  padding: clamp(36px, 6vh, 60px) 20px;
+  background-color: #EEE5F8;
+  background-image: radial-gradient(circle at 50% 50%, #FAF7FE 0%, #EFE7F8 55%, #DDCBF1 100%);
+  padding: clamp(24px, 4vh, 48px) 16px;
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
 }
 
+/* Hide standalone corner cutouts because jony-sunny-lavender-floral-bg.webp has complete floral artwork */
+body.theme-lavender #invitation-cover .lavender-floral-corners,
+body.theme-lavender #invitation-cover .invitation-floral-art-layer,
 body.theme-lavender #invitation-cover .invitation-page-border,
 body.theme-lavender #invitation-cover .invitation-corner-ornaments {
   display: none !important;
 }
 
+/* Central Stationery Invitation Card */
 body.theme-lavender #invitation-cover .invitation-full-container {
   position: relative;
   z-index: 10;
-  max-width: clamp(320px, 50vw, 680px);
+  width: 100%;
+  max-width: clamp(380px, 48vw, 660px);
+  aspect-ratio: 3 / 4;
+  background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') center center / cover no-repeat;
+  border-radius: 14px;
+  box-shadow: 
+    0 24px 70px rgba(95, 65, 120, 0.24),
+    0 4px 18px rgba(197, 165, 109, 0.18);
+  border: 1px solid rgba(197, 165, 109, 0.38);
   margin: 0 auto;
   text-align: center;
-  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: clamp(36px, 6vh, 64px) clamp(28px, 4.5vw, 56px);
+  box-sizing: border-box;
 }
 
+/* Royal J&S Monogram Crest */
 body.theme-lavender #invitation-cover .invitation-crest-emblem {
-  width: clamp(100px, 14vw, 150px);
-  height: clamp(100px, 14vw, 150px);
-  margin: 0 auto 6px;
+  width: clamp(92px, 13vw, 132px);
+  height: clamp(92px, 13vw, 132px);
+  margin: 0 auto clamp(10px, 1.8vh, 18px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
+body.theme-lavender #invitation-cover .invitation-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: drop-shadow(0 3px 10px rgba(197, 165, 109, 0.35));
+}
+
+/* Lead Welcome Text */
 body.theme-lavender #invitation-cover .cover-intro-lead {
-  font-size: clamp(0.68rem, 1.2vw, 0.82rem);
-  letter-spacing: 0.16em;
-  color: #6E5384;
-  margin: 0 auto 6px;
-  max-width: 420px;
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: clamp(0.68rem, 1.1vw, 0.82rem);
+  line-height: 1.55;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #3C2B42;
+  margin: 0 auto clamp(14px, 2.4vh, 24px);
+  max-width: 380px;
+  font-weight: 500;
 }
 
+/* Couple Names Display */
 body.theme-lavender #invitation-cover .cover-couple-names {
-  margin: 4px 0 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto clamp(8px, 1.4vh, 16px);
 }
 
 body.theme-lavender #invitation-cover .cover-groom-name,
 body.theme-lavender #invitation-cover .cover-bride-name {
-  font-size: clamp(2.2rem, 5.2vw, 3.8rem);
-  line-height: 1.05;
-  color: #38244B;
-  letter-spacing: 0.02em;
+  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
+  font-size: clamp(2.6rem, 5.4vw, 4.0rem);
+  line-height: 1.06;
+  font-weight: 500;
+  color: #2F2133;
+  letter-spacing: 0.01em;
+  margin: 0;
+  text-transform: capitalize;
 }
 
 body.theme-lavender #invitation-cover .cover-ampersand {
-  font-size: clamp(1.4rem, 3vw, 2.2rem);
-  color: #C5A36A;
-  margin: 0 6px;
+  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  font-style: italic;
+  font-weight: 400;
+  color: #C5A56D;
+  line-height: 1;
+  margin: clamp(3px, 0.6vh, 8px) 0;
+  text-shadow: 0 1px 2px rgba(197, 165, 109, 0.25);
 }
 
+/* Botanical Divider with Thin Gold Lateral Lines */
 body.theme-lavender #invitation-cover .hero-divider {
-  margin: 6px auto 10px;
-}
-
-body.theme-lavender #invitation-cover .invitation-sub-lead {
-  font-size: clamp(0.78rem, 1.3vw, 0.92rem);
-  line-height: 1.6;
-  max-width: 440px;
-  margin: 0 auto 16px;
-  color: #554460;
-}
-
-body.theme-lavender #invitation-cover .invitation-scroll-prompt {
-  display: inline-flex;
+  display: flex;
   align-items: center;
-  gap: 8px;
-  padding: 8px 18px;
-  border-radius: 24px;
-  background: rgba(255, 255, 255, 0.9);
-  border: 1px solid rgba(212, 175, 55, 0.45);
-  box-shadow: 0 4px 14px rgba(110, 80, 130, 0.1);
-  color: #563375;
-  font-family: var(--font-serif-secondary);
-  font-size: clamp(0.72rem, 1.2vw, 0.8rem);
-  letter-spacing: 0.18em;
+  justify-content: center;
+  width: clamp(150px, 30vw, 230px);
+  margin: clamp(8px, 1.4vh, 14px) auto clamp(12px, 2vh, 18px);
+  gap: 12px;
+}
+
+body.theme-lavender #invitation-cover .hero-divider::before,
+body.theme-lavender #invitation-cover .hero-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(197, 165, 109, 0.65), transparent);
+}
+
+body.theme-lavender #invitation-cover .botanical-divider-icon {
+  font-size: 0.85rem;
+  color: #C5A56D;
+  line-height: 1;
+}
+
+/* Sacred Blessing Note */
+body.theme-lavender #invitation-cover .invitation-sub-lead {
+  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
+  font-style: italic;
+  font-size: clamp(0.82rem, 1.35vw, 1.02rem);
+  line-height: 1.55;
+  max-width: 420px;
+  margin: 0 auto clamp(16px, 2.8vh, 28px);
+  color: #4C3C50;
+}
+
+/* Refined Scroll Prompt (Exact Match to Reference Photo) */
+body.theme-lavender #invitation-cover .invitation-scroll-prompt {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   text-decoration: none;
-  transition: all 0.25s ease;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0 !important;
+  cursor: pointer;
+  transition: transform 0.25s ease;
 }
 
 body.theme-lavender #invitation-cover .invitation-scroll-prompt:hover {
-  background: #FFF;
-  border-color: #D4AF37;
   transform: translateY(-2px);
-  box-shadow: 0 8px 20px rgba(110, 80, 130, 0.18);
+}
+
+body.theme-lavender #invitation-cover .invitation-scroll-sparkle {
+  color: #C5A56D;
+  font-size: clamp(0.85rem, 1.2vw, 1rem);
+  line-height: 1;
+  margin-bottom: 5px;
+}
+
+body.theme-lavender #invitation-cover .invitation-scroll-label {
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: clamp(0.66rem, 1.05vw, 0.76rem);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #3C2B42;
+  font-weight: 600;
+}
+
+body.theme-lavender #invitation-cover .invitation-scroll-line {
+  display: block;
+  width: 1.5px;
+  height: clamp(14px, 2.2vh, 20px);
+  background: #C5A56D;
+  margin-top: 7px;
+  border-radius: 1px;
+  animation: heroLinePulse 2s ease-in-out infinite;
+}
+
+@keyframes heroLinePulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scaleY(0.85);
+  }
+  50% {
+    opacity: 1;
+    transform: scaleY(1.15);
+  }
+}
+
+/* Mobile fullbleed immersion */
+@media (max-width: 768px) {
+  body.theme-lavender #invitation-cover {
+    background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') center center / cover no-repeat !important;
+    padding: 0 !important;
+    min-height: 100vh;
+  }
+
+  body.theme-lavender #invitation-cover .invitation-full-container {
+    max-width: 100% !important;
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    aspect-ratio: auto !important;
+    min-height: 100vh;
+    padding: clamp(36px, 6vh, 56px) 20px clamp(28px, 4vh, 40px) !important;
+    justify-content: space-evenly;
+  }
 }
 
 /* SECTION 2: SCRATCH TO REVEAL */
@@ -2462,15 +2593,35 @@ body.theme-lavender #scratch-reveal-section {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: #FAF5ED;
-  background-image: radial-gradient(circle at 50% 48%, #FFFDFB 0%, #FAF4ED 60%, #F3EAF6 100%);
+  background-color: #EEE5F8;
+  background-image: radial-gradient(circle at 50% 48%, #F7F2FE 0%, #EEE5F8 55%, #D8C4EC 100%);
   padding: clamp(48px, 8vh, 88px) 16px;
-  border-top: 1px solid rgba(212, 175, 55, 0.25);
+  border-top: 1px solid rgba(197, 165, 109, 0.3);
 }
 
 body.theme-lavender #scratch-reveal-section .scratch-section-header {
   position: relative;
   z-index: 10;
+  text-align: center;
+}
+
+body.theme-lavender .section-title {
+  color: #73558D !important;
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  letter-spacing: 0.04em;
+}
+
+body.theme-lavender .section-label {
+  color: #9B7CB8 !important;
+  letter-spacing: 0.22em;
+}
+
+body.theme-lavender .section-desc {
+  color: #553A6D !important;
+}
+
+body.theme-lavender .botanical-divider {
+  color: #C5A56D !important;
 }
 
 body.theme-lavender #scratch-reveal-section .scratch-card-wrapper {
@@ -2478,12 +2629,58 @@ body.theme-lavender #scratch-reveal-section .scratch-card-wrapper {
   z-index: 10;
 }
 
+body.theme-lavender .scratch-underneath-card,
+body.theme-lavender .scratch-heart-shape,
+body.theme-lavender .scratch-inner-typography,
+body.theme-lavender .scratch-canvas-overlay {
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+body.theme-lavender .scratch-underneath-card {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+body.theme-lavender .scratch-heart-shape {
+  background: radial-gradient(circle at 50% 35%, #FBF8FE 0%, #F0E6FB 60%, #E3D3F6 100%) !important;
+  clip-path: url(#svg-heart-clip) !important;
+  -webkit-clip-path: url(#svg-heart-clip) !important;
+  filter: drop-shadow(0 14px 28px rgba(95, 65, 120, 0.25)) !important;
+  border: none !important;
+}
+
+body.theme-lavender .scratch-tagline {
+  color: #9B7CB8 !important;
+  letter-spacing: 0.24em;
+}
+
+body.theme-lavender .scratch-day-num,
+body.theme-lavender .scratch-month-year {
+  color: #73558D !important;
+}
+
+body.theme-lavender #save-the-date-btn {
+  background: linear-gradient(135deg, #73558D 0%, #5E4176 100%) !important;
+  color: #FFFDF8 !important;
+  border: 1.5px solid #C5A56D !important;
+  box-shadow: 0 6px 20px rgba(115, 85, 141, 0.28) !important;
+  transition: all 0.25s ease;
+}
+
+body.theme-lavender #save-the-date-btn:hover {
+  background: linear-gradient(135deg, #8665A3 0%, #73558D 100%) !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(115, 85, 141, 0.38) !important;
+}
+
 /* SECTION 3: COUNTDOWN */
 body.theme-lavender #countdown-section {
-  background-color: #FAF6FB;
-  background-image: radial-gradient(circle at 50% 50%, #FFFDFB 0%, #FAF5EE 65%, #F4EBF7 100%);
+  background-color: #EFE6FA;
+  background-image: radial-gradient(circle at 50% 50%, #F8F3FE 0%, #EEE5F8 60%, #D8C4EC 100%);
   padding: clamp(52px, 9vh, 92px) 16px;
-  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  border-top: 1px solid rgba(197, 165, 109, 0.3);
 }
 
 body.theme-lavender #countdown-section .countdown-container {
@@ -2493,12 +2690,47 @@ body.theme-lavender #countdown-section .countdown-container {
   margin: 0 auto;
 }
 
+body.theme-lavender .countdown-circle-unit {
+  background: transparent !important;
+}
+
+body.theme-lavender .progress-ring-svg .ring-bg {
+  stroke: rgba(190, 166, 214, 0.28) !important;
+}
+
+body.theme-lavender .unit-days #ring-days-meter {
+  stroke: #73558D !important; /* Deep Lavender */
+}
+
+body.theme-lavender .unit-hours #ring-hours-meter {
+  stroke: #9B7CB8 !important; /* Mauve */
+}
+
+body.theme-lavender .unit-minutes #ring-minutes-meter {
+  stroke: #BEA6D6 !important; /* Dusty Lilac */
+}
+
+body.theme-lavender .unit-seconds #ring-seconds-meter {
+  stroke: #C5A56D !important; /* Champagne Gold */
+}
+
+body.theme-lavender .countdown-circle-num {
+  color: #73558D !important;
+  font-weight: 600;
+}
+
+body.theme-lavender .countdown-circle-label {
+  color: #9B7CB8 !important;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+}
+
 /* SECTION 4: EVENT SCHEDULE */
 body.theme-lavender #event-schedule {
-  background-color: #FAF5ED;
-  background-image: radial-gradient(circle at 50% 45%, #FFFDFB 0%, #FAF4ED 65%, #F3EAF6 100%);
+  background-color: #EEE5F8;
+  background-image: radial-gradient(circle at 50% 45%, #F7F2FE 0%, #EEE5F8 60%, #DFCEF3 100%);
   padding: clamp(52px, 9vh, 96px) 16px;
-  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  border-top: 1px solid rgba(197, 165, 109, 0.3);
 }
 
 body.theme-lavender #event-schedule .section-heading-block,
@@ -2509,18 +2741,51 @@ body.theme-lavender #event-schedule .events-container {
 
 body.theme-lavender .ceremony-card,
 body.theme-lavender .reception-card {
-  background: #FFFDF9 !important;
-  border: 1px solid rgba(212, 175, 55, 0.45) !important;
-  box-shadow: 0 16px 36px rgba(100, 75, 120, 0.12), 0 2px 6px rgba(212, 175, 55, 0.15) !important;
-  border-radius: 14px;
+  background: rgba(248, 243, 254, 0.88) !important;
+  border: 1.5px solid rgba(197, 165, 109, 0.45) !important;
+  box-shadow: 0 16px 36px rgba(95, 65, 120, 0.12), 0 2px 6px rgba(197, 165, 109, 0.15) !important;
+  border-radius: 16px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+body.theme-lavender .event-badge {
+  background: #D8C4EC !important;
+  color: #55346E !important;
+  border: 1px solid rgba(197, 165, 109, 0.4) !important;
+  font-weight: 600;
+}
+
+body.theme-lavender .event-title {
+  color: #73558D !important;
+}
+
+body.theme-lavender .event-desc {
+  color: #553A6D !important;
+}
+
+body.theme-lavender .event-directions-btn {
+  background: linear-gradient(135deg, #73558D 0%, #5E4176 100%) !important;
+  color: #FFFDF8 !important;
+  border: 1.5px solid rgba(197, 165, 109, 0.6) !important;
+  box-shadow: 0 6px 18px rgba(115, 85, 141, 0.25) !important;
+  transition: all 0.25s ease;
+}
+
+body.theme-lavender .event-directions-btn:hover {
+  background: linear-gradient(135deg, #C5A56D 0%, #B39155 100%) !important;
+  color: #3E2910 !important;
+  border-color: #C5A56D !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 24px rgba(197, 165, 109, 0.35) !important;
 }
 
 /* SECTION 5: PHOTO GALLERY */
 body.theme-lavender #photo-gallery {
-  background-color: #FAF6FB;
-  background-image: radial-gradient(circle at 50% 50%, #FFFDFB 0%, #FAF5EE 65%, #F4EBF7 100%);
+  background-color: #EFE6FA;
+  background-image: radial-gradient(circle at 50% 50%, #F8F3FE 0%, #EEE5F8 60%, #D8C4EC 100%);
   padding: clamp(52px, 9vh, 96px) 16px;
-  border-top: 1px solid rgba(212, 175, 55, 0.22);
+  border-top: 1px solid rgba(197, 165, 109, 0.3);
 }
 
 body.theme-lavender #photo-gallery .section-heading-block,
@@ -2529,21 +2794,103 @@ body.theme-lavender #photo-gallery .gallery-grid {
   z-index: 10;
 }
 
-/* SECTION 6: CLOSING SECTION */
-body.theme-lavender #closing-section {
-  background-color: #FAF5ED;
-  background-image: radial-gradient(circle at 50% 45%, #FFFDFB 0%, #FAF4ED 65%, #F3EAF6 100%);
-  padding: clamp(48px, 8vh, 88px) 16px 48px;
-  border-top: 1px solid rgba(212, 175, 55, 0.22);
+body.theme-lavender .gallery-card {
+  border: 1.5px solid rgba(197, 165, 109, 0.45) !important;
+  box-shadow: 0 12px 28px rgba(95, 65, 120, 0.16) !important;
+  border-radius: 12px;
 }
 
-body.theme-lavender #closing-section .closing-landscape-wrapper {
+/* SECTION 6: CLOSING SECTION (Complete Lavender Redesign - ZERO Green) */
+body.theme-lavender #closing-section {
+  background-color: #EEE5F8 !important;
+  background-image: radial-gradient(circle at 50% 50%, #FAF7FE 0%, #EEE5F8 55%, #D8C4EC 100%) !important;
+  padding: clamp(60px, 9vh, 100px) 16px clamp(60px, 9vh, 100px);
+  border-top: 1px solid rgba(197, 165, 109, 0.3);
+  position: relative;
+  overflow: hidden;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+body.theme-lavender .closing-card-container {
   position: relative;
   z-index: 10;
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 20px 48px rgba(100, 75, 120, 0.18), 0 2px 8px rgba(212, 175, 55, 0.25);
-  border: 1px solid rgba(212, 175, 55, 0.4);
+  width: 100%;
+  max-width: clamp(340px, 86vw, 680px);
+  margin: 0 auto;
+}
+
+body.theme-lavender .closing-stationery-card {
+  background: rgba(246, 240, 254, 0.94);
+  border: 1.5px solid rgba(197, 165, 109, 0.5);
+  border-radius: 18px;
+  box-shadow: 
+    0 20px 54px rgba(115, 85, 141, 0.2),
+    0 4px 16px rgba(197, 165, 109, 0.15);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-align: center;
+  padding: clamp(36px, 6vh, 56px) clamp(24px, 5vw, 52px);
+  box-sizing: border-box;
+}
+
+body.theme-lavender .closing-monogram {
+  display: block;
+  font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+  color: #C5A56D;
+  line-height: 1;
+  margin-bottom: clamp(6px, 1.2vh, 12px);
+  text-shadow: 0 1px 3px rgba(197, 165, 109, 0.3);
+}
+
+body.theme-lavender .closing-heading {
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: clamp(1.8rem, 3.8vw, 2.6rem);
+  font-weight: 500;
+  color: #73558D !important;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  margin: 0 0 4px;
+  text-shadow: none !important;
+}
+
+body.theme-lavender .closing-message-text {
+  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
+  font-size: clamp(0.92rem, 1.5vw, 1.1rem);
+  line-height: 1.7;
+  color: #3C2B42 !important;
+  max-width: 520px;
+  margin: 0 auto clamp(20px, 3vh, 32px);
+  text-shadow: none !important;
+}
+
+body.theme-lavender .closing-signature-text {
+  font-family: var(--font-script, cursive);
+  font-size: clamp(2.0rem, 4vw, 2.8rem);
+  line-height: 1.1;
+  color: #55346E !important;
+  margin: 0 0 clamp(8px, 1.4vh, 14px);
+  text-shadow: none !important;
+}
+
+body.theme-lavender .closing-family-hosts {
+  font-family: var(--font-serif-primary, 'Cinzel', serif);
+  font-size: clamp(0.72rem, 1.2vw, 0.84rem);
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #73558D !important;
+  margin: 0;
+  text-shadow: none !important;
+}
+
+/* Hide legacy green elements in lavender theme */
+body.theme-lavender .closing-landscape-wrapper,
+body.theme-lavender .closing-garden-art,
+body.theme-lavender .closing-card-overlay {
+  display: none !important;
 }
 
 /* ==========================================================================

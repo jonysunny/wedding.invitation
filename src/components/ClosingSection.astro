@@ -14,37 +14,31 @@ interface Props {
 const { closing, monogram } = Astro.props;
 ---
 
-<section id="closing-section" class="invite-section reveal-on-scroll" style="padding-bottom: 30px;">
-  <!-- Dedicated Lavender Closing Accent Layer -->
+<section id="closing-section" class="invite-section reveal-on-scroll">
+  <!-- Dedicated Lavender 4-Corner Accent Layer -->
   <div class="lavender-section-decor" aria-hidden="true">
+    <div class="lavender-corner-item lavender-corner-tl"></div>
     <div class="lavender-corner-item lavender-corner-tr"></div>
     <div class="lavender-corner-item lavender-corner-bl"></div>
+    <div class="lavender-corner-item lavender-corner-br"></div>
   </div>
 
-  <div class="closing-landscape-wrapper">
-    <!-- Scenic Garden Fountain Watercolor Illustration -->
-    <img 
-      src="/jony-wedding/assets/backgrounds/garden-fountain-closing.jpg" 
-      alt="Scenic Garden Fountain" 
-      class="closing-garden-art"
-    />
-
-    <!-- Layered Romantic Forest-Green Gradient Overlay -->
-    <div class="closing-card-overlay">
-      <span class="font-script" style="font-size: 2.8rem; color: var(--color-champagne-light); line-height: 1; margin-bottom: 8px;">
+  <div class="closing-card-container">
+    <div class="closing-stationery-card">
+      <span class="closing-monogram font-script">
         {monogram}
       </span>
 
-      <h2 class="closing-heading">{closing.heading}</h2>
+      <h2 class="closing-heading font-serif">{closing.heading}</h2>
 
-      <div class="botanical-divider" style="max-width: 160px; margin: 4px auto 16px;">
-        <span class="botanical-divider-icon" style="color: var(--color-champagne-light);">❦</span>
+      <div class="botanical-divider" style="max-width: 160px; margin: 6px auto 18px;">
+        <span class="botanical-divider-icon">❦</span>
       </div>
 
       <p class="closing-message-text">{closing.message}</p>
 
-      <p class="closing-signature-text">{closing.signature}</p>
-      <p class="closing-family-hosts">{closing.hosts}</p>
+      <p class="closing-signature-text font-script">{closing.signature}</p>
+      <p class="closing-family-hosts font-serif">{closing.hosts}</p>
     </div>
   </div>
 </section>
