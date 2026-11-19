@@ -7,11 +7,7 @@
   <!-- Ambient Warm Ivory Paper Backdrop with Subtle Vignette -->
   <div class="envelope-backdrop" aria-hidden="true"></div>
 
-  <!-- Discreet Skip Option in Top-Right -->
-  <button id="envelope-skip-btn" type="button" class="envelope-skip-btn" aria-label="Skip envelope opening">
-    <span class="skip-text">Skip Intro</span>
-    <span class="skip-arrow" aria-hidden="true">→</span>
-  </button>
+
 
   <div class="envelope-stage">
     <!-- End-to-End Screen 3D Perspective Wrapper -->
@@ -161,12 +157,22 @@
   function initEnvelopeExperience() {
     const overlay = document.getElementById("envelope-experience-overlay");
     const envelopeCard = document.getElementById("envelope-interactive-card");
-    const skipBtn = document.getElementById("envelope-skip-btn");
 
     if (!overlay || !envelopeCard) return;
 
     let isOpening = false;
     let hasDismissed = false;
+
+    // Check if this opening is enabled via URL param or preview switcher
+    const urlParams = new URLSearchParams(window.location.search);
+    const openingParam = urlParams.get("opening");
+    const sessionOpening = sessionStorage.getItem("wedding-opening-choice");
+    const chosenOpening = openingParam || sessionOpening || "lavender";
+
+    if (chosenOpening !== "original") {
+      overlay.style.display = "none";
+      return;
+    }
 
     // Lock page scrolling while envelope overlay is active
     document.body.style.overflow = "hidden";
@@ -211,38 +217,33 @@
       }, 400);
     }
 
-    // Skip button click handler
-    if (skipBtn) {
-      skipBtn.addEventListener("click", (e) => {
-        e.stopPropagation();
-        e.preventDefault();
-        dismissImmediately();
-      });
-    }
-
     // Click/tap handler on overlay or envelope
     overlay.addEventListener("click", (e) => {
-      if (skipBtn && skipBtn.contains(e.target as Node)) return;
       e.preventDefault();
       openEnvelope();
     });
 
     overlay.addEventListener("touchend", (e) => {
-      if (skipBtn && skipBtn.contains(e.target as Node)) return;
       e.preventDefault();
       openEnvelope();
     }, { passive: false });
 
-    // Keyboard accessibility (Escape for skip, Enter or Space to open)
+    // Keyboard accessibility (Enter or Space to open)
     window.addEventListener("keydown", (e) => {
-      if (hasDismissed) return;
-      if (e.key === "Escape") {
-        e.preventDefault();
-        dismissImmediately();
-      } else if (!isOpening && (e.key === "Enter" || e.key === " ")) {
+      if (hasDismissed || isOpening) return;
+      if (e.key === "Enter" || e.key === " ") {
         e.preventDefault();
         openEnvelope();
       }
+    });
+
+    // Replay handler for the preview switcher
+    window.addEventListener("wedding-replay-original-opening", () => {
+      overlay.classList.remove("envelope-is-opening", "envelope-fade-out");
+      overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      isOpening = false;
+      hasDismissed = false;
     });
   }
 

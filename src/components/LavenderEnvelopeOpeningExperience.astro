@@ -1,0 +1,312 @@
+---
+// LavenderEnvelopeOpeningExperience.astro
+// Premium Animated Lavender Floral Envelope Opening Experience
+---
+
+<div id="lavender-envelope-overlay" class="lavender-envelope-overlay" role="dialog" aria-modal="true" aria-label="Interactive Lavender Floral Wedding Invitation Envelope">
+  <!-- Ambient Backdrop -->
+  <div class="lavender-envelope-backdrop" aria-hidden="true"></div>
+
+  <!-- Discreet Skip Intro Control in Top-Right Corner -->
+  <button 
+    type="button" 
+    id="lavender-skip-intro-btn" 
+    class="lavender-skip-intro-btn" 
+    aria-label="Skip opening animation"
+  >
+    Skip Intro &rarr;
+  </button>
+
+  <div class="lavender-envelope-stage">
+    <!-- 3D Perspective Card Wrapper -->
+    <div 
+      id="lavender-interactive-envelope" 
+      class="lavender-interactive-envelope" 
+      role="button" 
+      tabindex="0" 
+      aria-label="Click or tap to open the lavender floral wedding invitation envelope"
+    >
+      
+      <!-- ENVELOPE PACKET -->
+      <div class="lavender-envelope-packet">
+        
+        <!-- 1. INSIDE LINING (Lavender Botanical Texture) -->
+        <div class="lavender-inside-lining">
+          <div class="lavender-lining-pattern"></div>
+
+          <!-- 2. SLIDING LAVENDER FLORAL INVITATION CARD (Phase 3 Glide-Up) -->
+          <!-- Strictly date-free; preserves wedding date secrecy until heart scratch card -->
+          <div class="lavender-sliding-card" id="lavender-sliding-card">
+            <div class="lavender-card-frame">
+              <img 
+                src="/jony-wedding/assets/decorations/jony-sunny-lavender-floral-card.webp" 
+                alt="Jony & Sunny Wedding Invitation Card" 
+                class="lavender-card-artwork"
+                loading="eager"
+                decoding="sync"
+              />
+              <div class="lavender-card-sheen" aria-hidden="true"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3. INNER WARM LIGHT GLOW (Emerges from inside envelope) -->
+        <div class="lavender-inner-glow" id="lavender-inner-glow" aria-hidden="true"></div>
+
+        <!-- 4. SIDE FLAPS (End-to-End Left & Right with subtle lavender watercolor tint) -->
+        <svg class="lavender-side-flaps" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lavenderLeftGrad" x1="0%" y1="0%" x2="100%" y2="50%">
+              <stop offset="0%" stop-color="#FCFAF7" />
+              <stop offset="70%" stop-color="#F5EEF8" />
+              <stop offset="100%" stop-color="#ECE2F0" />
+            </linearGradient>
+            <linearGradient id="lavenderRightGrad" x1="100%" y1="0%" x2="0%" y2="50%">
+              <stop offset="0%" stop-color="#FCFAF7" />
+              <stop offset="70%" stop-color="#F5EEF8" />
+              <stop offset="100%" stop-color="#ECE2F0" />
+            </linearGradient>
+            <filter id="sideFlapSoftShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="rgba(120, 100, 140, 0.15)" />
+            </filter>
+          </defs>
+          <!-- Left Flap -->
+          <polygon points="0,0 520,500 0,1000" fill="url(#lavenderLeftGrad)" filter="url(#sideFlapSoftShadow)" />
+          <line x1="0" y1="0" x2="520" y2="500" stroke="rgba(180, 150, 195, 0.5)" stroke-width="1.5" />
+          <line x1="520" y1="500" x2="0" y2="1000" stroke="rgba(180, 150, 195, 0.4)" stroke-width="1.5" />
+
+          <!-- Right Flap -->
+          <polygon points="1000,0 480,500 1000,1000" fill="url(#lavenderRightGrad)" filter="url(#sideFlapSoftShadow)" />
+          <line x1="1000" y1="0" x2="480" y2="500" stroke="rgba(180, 150, 195, 0.5)" stroke-width="1.5" />
+          <line x1="480" y1="500" x2="1000" y2="1000" stroke="rgba(180, 150, 195, 0.4)" stroke-width="1.5" />
+        </svg>
+
+        <!-- 5. BOTTOM FLAP -->
+        <svg class="lavender-bottom-flap" viewBox="0 0 1000 1000" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <linearGradient id="lavenderBottomGrad" x1="50%" y1="100%" x2="50%" y2="0%">
+              <stop offset="0%" stop-color="#FAF6FB" />
+              <stop offset="60%" stop-color="#F3EBF7" />
+              <stop offset="100%" stop-color="#E9DCEF" />
+            </linearGradient>
+            <filter id="bottomFlapElevatedShadow" x="-10%" y="-10%" width="120%" height="120%">
+              <feDropShadow dx="0" dy="-6" stdDeviation="10" flood-color="rgba(95, 75, 115, 0.18)" />
+            </filter>
+          </defs>
+          <polygon points="0,1000 500,430 1000,1000" fill="url(#lavenderBottomGrad)" filter="url(#bottomFlapElevatedShadow)" />
+          <!-- Champagne Gold & Lavender Trim Lines -->
+          <line x1="0" y1="1000" x2="500" y2="430" stroke="rgba(212, 175, 55, 0.6)" stroke-width="1.5" />
+          <line x1="500" y1="430" x2="1000" y2="1000" stroke="rgba(212, 175, 55, 0.6)" stroke-width="1.5" />
+        </svg>
+
+        <!-- 6. TOP FOLDING FLAP (3D Animated Unfold) -->
+        <div class="lavender-top-flap-hinge" id="lavender-top-flap-hinge">
+          <div class="lavender-top-flap-3d">
+            
+            <!-- FRONT FACE OF FLAP (Closed State) -->
+            <div class="lavender-flap-face flap-face-front">
+              <svg class="lavender-top-flap-svg" viewBox="0 0 1000 560" preserveAspectRatio="none" aria-hidden="true">
+                <defs>
+                  <linearGradient id="lavenderTopFrontGrad" x1="50%" y1="0%" x2="50%" y2="100%">
+                    <stop offset="0%" stop-color="#FFFFFF" />
+                    <stop offset="55%" stop-color="#F9F4FC" />
+                    <stop offset="100%" stop-color="#EFE4F5" />
+                  </linearGradient>
+                  <filter id="topFlapDramaticShadow" x="-10%" y="0%" width="120%" height="140%">
+                    <feDropShadow dx="0" dy="14" stdDeviation="16" flood-color="rgba(80, 60, 100, 0.24)" />
+                  </filter>
+                </defs>
+                <polygon points="0,0 500,556 1000,0" fill="url(#lavenderTopFrontGrad)" filter="url(#topFlapDramaticShadow)" />
+                <!-- Gold Accent Crease Lines -->
+                <line x1="0" y1="0" x2="500" y2="556" stroke="rgba(212, 175, 55, 0.75)" stroke-width="2" />
+                <line x1="500" y1="556" x2="1000" y2="0" stroke="rgba(212, 175, 55, 0.75)" stroke-width="2" />
+              </svg>
+
+              <!-- ROYAL J&S WAX SEAL (Lifted & Released in Phase 1) -->
+              <div class="lavender-wax-seal" id="lavender-wax-seal">
+                <div class="lavender-seal-aura" aria-hidden="true"></div>
+                <div class="lavender-seal-rim">
+                  <div class="lavender-seal-core">
+                    <img 
+                      src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
+                      alt="J&S Royal Monogram Crest" 
+                      class="lavender-seal-crest-img"
+                      width="72" 
+                      height="72" 
+                      loading="eager"
+                      decoding="sync"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- BACK FACE OF FLAP (Lining revealed upon unfolding) -->
+            <div class="lavender-flap-face flap-face-back" aria-hidden="true">
+              <svg class="lavender-top-flap-svg-back" viewBox="0 0 1000 560" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="lavenderTopBackGrad" x1="50%" y1="100%" x2="50%" y2="0%">
+                    <stop offset="0%" stop-color="#E8DAF0" />
+                    <stop offset="50%" stop-color="#F4EBF7" />
+                    <stop offset="100%" stop-color="#FDFBFD" />
+                  </linearGradient>
+                </defs>
+                <polygon points="0,560 500,4 1000,560" fill="url(#lavenderTopBackGrad)" />
+                <line x1="0" y1="560" x2="500" y2="4" stroke="rgba(190, 160, 205, 0.5)" stroke-width="1.5" />
+                <line x1="500" y1="4" x2="1000" y2="560" stroke="rgba(190, 160, 205, 0.5)" stroke-width="1.5" />
+              </svg>
+              <div class="lavender-flap-back-flourish">❦</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 7. EXPANDING IVORY-GOLD BLOOM (Phase 4 Cinematic Transition) -->
+      <div class="lavender-light-bloom" id="lavender-light-bloom" aria-hidden="true"></div>
+
+      <!-- INTERACTIVE PROMPT -->
+      <div class="lavender-prompt-container" id="lavender-prompt-container">
+        <div class="lavender-tap-pill">
+          <span class="lavender-sparkle">✦</span>
+          <span class="lavender-prompt-text">TAP TO OPEN</span>
+          <span class="lavender-sparkle">✦</span>
+        </div>
+        <p class="lavender-prompt-caption">A Wedding Invitation for Jony &amp; Sunny</p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+  function initLavenderOpeningExperience() {
+    const overlay = document.getElementById("lavender-envelope-overlay");
+    const envelope = document.getElementById("lavender-interactive-envelope");
+    const skipBtn = document.getElementById("lavender-skip-intro-btn");
+
+    if (!overlay || !envelope) return;
+
+    let isOpening = false;
+    let hasDismissed = false;
+
+    // Check if this opening is enabled via URL param or preview switcher
+    const urlParams = new URLSearchParams(window.location.search);
+    const openingParam = urlParams.get("opening");
+    const sessionOpening = sessionStorage.getItem("wedding-opening-choice");
+    const chosenOpening = openingParam || sessionOpening || "lavender";
+
+    if (chosenOpening === "original") {
+      overlay.style.display = "none";
+      return;
+    } else {
+      overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+    }
+
+    function openEnvelope() {
+      if (isOpening || hasDismissed) return;
+      isOpening = true;
+
+      // Check prefers-reduced-motion
+      const prefersReduced = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (prefersReduced) {
+        dismissImmediately();
+        return;
+      }
+
+      // Phase 1 (0.0s – 0.8s): Seal Release
+      overlay.classList.add("lavender-phase-1-seal");
+
+      // Phase 2 (0.8s – 2.5s): Flap Unfolds
+      setTimeout(() => {
+        if (hasDismissed) return;
+        overlay.classList.add("lavender-phase-2-flap");
+      }, 800);
+
+      // Phase 3 (2.5s – 4.0s): Decorative Lavender Card Glides Upward
+      setTimeout(() => {
+        if (hasDismissed) return;
+        overlay.classList.add("lavender-phase-3-card");
+      }, 2500);
+
+      // Phase 4 (4.0s – 5.5s): Warm Light Bloom & Transition
+      setTimeout(() => {
+        if (hasDismissed) return;
+        overlay.classList.add("lavender-phase-4-transition");
+        document.body.style.overflow = "";
+      }, 4000);
+
+      // Complete transition and unmount from view at ~5.3s
+      setTimeout(() => {
+        if (hasDismissed) return;
+        hasDismissed = true;
+        overlay.style.display = "none";
+        window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
+      }, 5300);
+    }
+
+    function dismissImmediately() {
+      if (hasDismissed) return;
+      hasDismissed = true;
+      document.body.style.overflow = "";
+      overlay.classList.add("lavender-fade-out-quick");
+      setTimeout(() => {
+        overlay.style.display = "none";
+        window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
+      }, 350);
+    }
+
+    // Skip intro button
+    if (skipBtn) {
+      skipBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        dismissImmediately();
+      });
+    }
+
+    // Interactive Tap / Click
+    envelope.addEventListener("click", (e) => {
+      e.preventDefault();
+      openEnvelope();
+    });
+
+    envelope.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      openEnvelope();
+    }, { passive: false });
+
+    // Keyboard support: Enter, Space to open, Escape to skip
+    window.addEventListener("keydown", (e) => {
+      if (hasDismissed) return;
+      if (e.key === "Escape") {
+        dismissImmediately();
+      } else if (!isOpening && (e.key === "Enter" || e.key === " ")) {
+        e.preventDefault();
+        openEnvelope();
+      }
+    });
+
+    // Replay handler for the preview switcher
+    window.addEventListener("wedding-replay-lavender-opening", () => {
+      overlay.classList.remove(
+        "lavender-phase-1-seal",
+        "lavender-phase-2-flap",
+        "lavender-phase-3-card",
+        "lavender-phase-4-transition",
+        "lavender-fade-out-quick"
+      );
+      overlay.style.display = "flex";
+      document.body.style.overflow = "hidden";
+      isOpening = false;
+      hasDismissed = false;
+    });
+  }
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initLavenderOpeningExperience);
+  } else {
+    initLavenderOpeningExperience();
+  }
+</script>

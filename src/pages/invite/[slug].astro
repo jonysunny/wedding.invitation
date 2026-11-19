@@ -8,6 +8,8 @@ import PhotoGallery from '../../components/PhotoGallery.astro';
 import ClosingSection from '../../components/ClosingSection.astro';
 import MusicPlayer from '../../components/MusicPlayer.astro';
 import EnvelopeOpeningExperience from '../../components/EnvelopeOpeningExperience.astro';
+import LavenderEnvelopeOpeningExperience from '../../components/LavenderEnvelopeOpeningExperience.astro';
+import DesignPreviewSwitcher from '../../components/DesignPreviewSwitcher.astro';
 import weddingData from '../../data/wedding.json';
 
 export function getStaticPaths() {
@@ -20,7 +22,11 @@ const pageDescription = `Join us in celebrating the wedding of ${weddingData.cou
 ---
 
 <InvitationLayout title={pageTitle} description={pageDescription}>
-  <!-- Interactive Luxury Paper-Envelope Opening Experience -->
+  <!-- Temporary Local-Only Design Comparison Switcher -->
+  <DesignPreviewSwitcher />
+
+  <!-- Interactive Luxury Paper-Envelope Opening Experiences (Switchable) -->
+  <LavenderEnvelopeOpeningExperience />
   <EnvelopeOpeningExperience />
 
   <!-- MAIN CONTINUOUS WEDDING INVITATION WEBSITE -->

@@ -1,0 +1,374 @@
+---
+// DesignPreviewSwitcher.astro
+// Temporary Local-Only Design Comparison Switcher for Floral Themes & Opening Animations
+---
+
+<div id="design-preview-switcher" class="design-preview-toolbar" role="region" aria-label="Design Preview & Opening Switcher">
+  <div class="preview-toolbar-inner">
+    
+    <!-- Section A: Floral Background Themes -->
+    <div class="toolbar-section">
+      <div class="preview-toolbar-badge">
+        <span class="preview-pulse"></span>
+        <span class="preview-badge-text">THEME</span>
+      </div>
+
+      <div class="preview-buttons" role="tablist" aria-label="Floral Background Themes">
+        <button 
+          type="button" 
+          id="btn-preview-lavender" 
+          class="preview-tab-btn" 
+          data-theme="lavender"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">💜</span>
+          <span class="tab-label">Lavender Floral</span>
+        </button>
+
+        <button 
+          type="button" 
+          id="btn-preview-option-1" 
+          class="preview-tab-btn" 
+          data-theme="option-1"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">🌸</span>
+          <span class="tab-label">Option 1 <small>(Watercolor)</small></span>
+        </button>
+
+        <button 
+          type="button" 
+          id="btn-preview-option-2" 
+          class="preview-tab-btn" 
+          data-theme="option-2"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">🌿</span>
+          <span class="tab-label">Option 2 <small>(Geometric)</small></span>
+        </button>
+
+        <button 
+          type="button" 
+          id="btn-preview-compare" 
+          class="preview-tab-btn" 
+          data-theme="compare"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">⚖️</span>
+          <span class="tab-label">Side-by-Side</span>
+        </button>
+
+        <button 
+          type="button" 
+          id="btn-preview-original" 
+          class="preview-tab-btn" 
+          data-theme="original"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">📜</span>
+          <span class="tab-label">Original Paper</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Divider -->
+    <div class="toolbar-divider" aria-hidden="true"></div>
+
+    <!-- Section B: Opening Animation Selector & Replay -->
+    <div class="toolbar-section">
+      <div class="preview-toolbar-badge">
+        <span class="preview-badge-text">OPENING</span>
+      </div>
+
+      <div class="preview-buttons opening-buttons" role="tablist" aria-label="Opening Animation Selector">
+        <button 
+          type="button" 
+          id="btn-opening-lavender" 
+          class="preview-tab-btn opening-tab-btn" 
+          data-opening="lavender"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">✨</span>
+          <span class="tab-label">Lavender Opening</span>
+        </button>
+
+        <button 
+          type="button" 
+          id="btn-opening-original" 
+          class="preview-tab-btn opening-tab-btn" 
+          data-opening="original"
+          role="tab"
+          aria-selected="false"
+        >
+          <span class="tab-icon">✉️</span>
+          <span class="tab-label">Original Opening</span>
+        </button>
+
+        <button 
+          type="button" 
+          id="btn-replay-opening" 
+          class="preview-tab-btn replay-btn" 
+          title="Replay currently selected opening animation"
+        >
+          <span class="tab-icon">🔄</span>
+          <span class="tab-label">Replay</span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- SIDE-BY-SIDE COMPARISON MODAL / OVERLAY -->
+<div id="side-by-side-modal" class="side-by-side-overlay" style="display: none;" role="dialog" aria-modal="true" aria-label="Side by Side Floral Background Comparison">
+  <div class="comparison-header">
+    <div class="comparison-title-wrap">
+      <h2 class="comparison-title">Background Design Comparison — Jony &amp; Sunny</h2>
+      <p class="comparison-subtitle">Compare Option 1 (Classic Watercolor) vs Option 2 (Geometric Anemone) with identical live content</p>
+    </div>
+    <div class="comparison-controls">
+      <button type="button" id="close-comparison-btn" class="comparison-close-btn" aria-label="Close comparison view">✕ Close</button>
+    </div>
+  </div>
+
+  <div class="comparison-grid">
+    <!-- COLUMN 1: OPTION 1 -->
+    <div class="comparison-column comparison-col-1">
+      <div class="comparison-badge option-1-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-name">OPTION 1</span>
+        <span class="badge-desc">Classic Watercolor &amp; Gold Dust</span>
+      </div>
+
+      <div class="comparison-invitation-card comparison-card-opt1">
+        <div class="invitation-crest-emblem">
+          <img 
+            src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
+            alt="J&amp;S Royal Crest" 
+            class="invitation-logo-img"
+            width="170"
+            height="170"
+          />
+        </div>
+
+        <p class="invitation-lead-text cover-intro-lead">Together with their families, cordially invite you to celebrate their wedding</p>
+
+        <div class="invitation-couple-block cover-couple-names">
+          <h2 class="invitation-groom-name cover-groom-name">Jony</h2>
+          <span class="invitation-ampersand cover-ampersand">&amp;</span>
+          <h2 class="invitation-bride-name cover-bride-name">Sunny</h2>
+        </div>
+
+        <div class="botanical-divider hero-divider">
+          <span class="botanical-divider-icon">❦</span>
+        </div>
+
+        <p class="invitation-sub-lead">
+          We joyfully request the honour of your presence to witness our sacred vows and celebrate our love
+        </p>
+
+        <div class="invitation-scroll-prompt static-prompt">
+          <span class="invitation-scroll-sparkle">✦</span>
+          <span class="invitation-scroll-label">SCROLL TO EXPLORE</span>
+          <span class="invitation-scroll-arrow" aria-hidden="true">↓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- COLUMN 2: OPTION 2 -->
+    <div class="comparison-column comparison-col-2">
+      <div class="comparison-badge option-2-badge">
+        <span class="badge-dot"></span>
+        <span class="badge-name">OPTION 2</span>
+        <span class="badge-desc">Geometric Gold &amp; White Anemones</span>
+      </div>
+
+      <div class="comparison-invitation-card comparison-card-opt2">
+        <div class="invitation-crest-emblem">
+          <img 
+            src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
+            alt="J&amp;S Royal Crest" 
+            class="invitation-logo-img"
+            width="170"
+            height="170"
+          />
+        </div>
+
+        <p class="invitation-lead-text cover-intro-lead">Together with their families, cordially invite you to celebrate their wedding</p>
+
+        <div class="invitation-couple-block cover-couple-names">
+          <h2 class="invitation-groom-name cover-groom-name">Jony</h2>
+          <span class="invitation-ampersand cover-ampersand">&amp;</span>
+          <h2 class="invitation-bride-name cover-bride-name">Sunny</h2>
+        </div>
+
+        <div class="botanical-divider hero-divider">
+          <span class="botanical-divider-icon">❦</span>
+        </div>
+
+        <p class="invitation-sub-lead">
+          We joyfully request the honour of your presence to witness our sacred vows and celebrate our love
+        </p>
+
+        <div class="invitation-scroll-prompt static-prompt">
+          <span class="invitation-scroll-sparkle">✦</span>
+          <span class="invitation-scroll-label">SCROLL TO EXPLORE</span>
+          <span class="invitation-scroll-arrow" aria-hidden="true">↓</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function initPreviewSwitcher() {
+    const isLocal = window.location.hostname === 'localhost' || 
+                    window.location.hostname === '127.0.0.1' ||
+                    window.location.search.includes('preview');
+    
+    const toolbar = document.getElementById('design-preview-switcher');
+    const modal = document.getElementById('side-by-side-modal');
+    const coverSection = document.getElementById('invitation-cover');
+    const closeBtn = document.getElementById('close-comparison-btn');
+
+    if (!toolbar) return;
+
+    if (!isLocal) {
+      toolbar.style.display = 'none';
+      if (modal) modal.style.display = 'none';
+      return;
+    }
+
+    const themeButtons = toolbar.querySelectorAll('.preview-tab-btn[data-theme]');
+    const openingButtons = toolbar.querySelectorAll('.preview-tab-btn[data-opening]');
+    const replayBtn = document.getElementById('btn-replay-opening');
+
+    const lavenderOverlay = document.getElementById('lavender-envelope-overlay');
+    const originalOverlay = document.getElementById('envelope-experience-overlay');
+
+    // 1. THEME APPLICATION
+    function applyTheme(theme, updateUrl = true) {
+      if (!coverSection) return;
+
+      themeButtons.forEach(btn => {
+        const isActive = btn.getAttribute('data-theme') === theme;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      if (theme === 'compare') {
+        if (modal) modal.style.display = 'flex';
+        document.body.classList.add('modal-open');
+      } else {
+        if (modal) modal.style.display = 'none';
+        document.body.classList.remove('modal-open');
+
+        document.body.classList.remove('theme-lavender', 'theme-option-1', 'theme-option-2', 'theme-original');
+        coverSection.classList.remove('theme-lavender', 'theme-option-1', 'theme-option-2', 'theme-original');
+
+        if (theme === 'lavender') {
+          document.body.classList.add('theme-lavender');
+          coverSection.classList.add('theme-lavender');
+        } else if (theme === 'option-1') {
+          document.body.classList.add('theme-option-1');
+          coverSection.classList.add('theme-option-1');
+        } else if (theme === 'option-2') {
+          document.body.classList.add('theme-option-2');
+          coverSection.classList.add('theme-option-2');
+        } else {
+          document.body.classList.add('theme-original');
+          coverSection.classList.add('theme-original');
+        }
+      }
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('bg', theme);
+        window.history.replaceState({}, '', url.toString());
+      }
+      try {
+        sessionStorage.setItem('wedding-bg-choice', theme);
+      } catch (e) {}
+    }
+
+    // 2. OPENING APPLICATION
+    function applyOpening(opening, shouldTriggerReplay = false, updateUrl = true) {
+      openingButtons.forEach(btn => {
+        const isActive = btn.getAttribute('data-opening') === opening;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        url.searchParams.set('opening', opening);
+        window.history.replaceState({}, '', url.toString());
+      }
+      try {
+        sessionStorage.setItem('wedding-opening-choice', opening);
+      } catch (e) {}
+
+      if (shouldTriggerReplay) {
+        if (opening === 'lavender') {
+          if (originalOverlay) originalOverlay.style.display = 'none';
+          window.dispatchEvent(new CustomEvent('wedding-replay-lavender-opening'));
+        } else {
+          if (lavenderOverlay) lavenderOverlay.style.display = 'none';
+          window.dispatchEvent(new CustomEvent('wedding-replay-original-opening'));
+        }
+      }
+    }
+
+    // Attach theme button listeners
+    themeButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const theme = btn.getAttribute('data-theme') || 'lavender';
+        applyTheme(theme);
+      });
+    });
+
+    // Attach opening button listeners
+    openingButtons.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const opening = btn.getAttribute('data-opening') || 'lavender';
+        applyOpening(opening, true);
+      });
+    });
+
+    // Replay button
+    if (replayBtn) {
+      replayBtn.addEventListener('click', () => {
+        const urlParams = new URLSearchParams(window.location.search);
+        const currentOpening = urlParams.get('opening') || sessionStorage.getItem('wedding-opening-choice') || 'lavender';
+        applyOpening(currentOpening, true);
+      });
+    }
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => {
+        const saved = sessionStorage.getItem('wedding-bg-choice') || 'lavender';
+        applyTheme(saved === 'compare' ? 'lavender' : saved);
+      });
+    }
+
+    // Initialize initial choices
+    const urlParams = new URLSearchParams(window.location.search);
+    const initialTheme = urlParams.get('bg') || sessionStorage.getItem('wedding-bg-choice') || 'lavender';
+    applyTheme(initialTheme, false);
+
+    const initialOpening = urlParams.get('opening') || sessionStorage.getItem('wedding-opening-choice') || 'lavender';
+    applyOpening(initialOpening, false, false);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPreviewSwitcher);
+  } else {
+    initPreviewSwitcher();
+  }
+</script>
