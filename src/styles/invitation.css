@@ -497,6 +497,9 @@
 .section-heading-block {
   text-align: center;
   margin-bottom: 24px;
+  max-width: 680px;
+  margin-inline: auto;
+  padding-inline: 16px;
 }
 
 .section-label {
@@ -537,8 +540,9 @@
   flex-direction: column;
   gap: 28px;
   width: 100%;
-  max-width: 1040px;
+  max-width: 900px;
   margin: 0 auto;
+  padding: 0 16px;
 }
 
 @media (min-width: 820px) {
@@ -750,22 +754,26 @@
    ======================================================== */
 .gallery-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
   width: 100%;
-  max-width: 700px;
+  max-width: 980px;
   margin: 0 auto;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 860px) {
   .gallery-grid {
-    gap: 12px;
+    grid-template-columns: repeat(2, 1fr);
+    max-width: 680px;
+    gap: 16px;
   }
 }
 
-@media (min-width: 601px) {
+@media (max-width: 580px) {
   .gallery-grid {
-    gap: 24px;
+    grid-template-columns: 1fr;
+    max-width: 340px;
+    gap: 16px;
   }
 }
 
@@ -1059,6 +1067,9 @@
 }
 
 .scratch-card-wrapper {
+  max-width: 600px;
+  margin: 0 auto;
+
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -2341,11 +2352,14 @@ body:not(.theme-lavender) .lavender-section-decor {
 /* Base styling for all invitation sections in Lavender Theme */
 body.theme-lavender .invitation-page-fullbleed,
 body.theme-lavender .scratch-section-fullbleed,
-body.theme-lavender .invite-section {
+body.theme-lavender .invite-section,
+body.theme-lavender .invite-section:not(.hero-section-fullbleed):not(.scratch-section-fullbleed) {
   position: relative;
   overflow: hidden;
   box-sizing: border-box;
-  width: 100%;
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-inline: 0 !important;
 }
 
 /* SECTION 1: MAIN INVITATION COVER */
@@ -2559,7 +2573,7 @@ body.theme-lavender #closing-section .closing-landscape-wrapper {
 .lavender-corner-tr {
   top: 0;
   right: 0;
-  width: clamp(200px, 25vw, 440px);
+  width: clamp(140px, 14vw, 230px);
   aspect-ratio: 448 / 460;
   background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
@@ -2569,7 +2583,7 @@ body.theme-lavender #closing-section .closing-landscape-wrapper {
 .lavender-corner-bl {
   bottom: 0;
   left: 0;
-  width: clamp(200px, 25vw, 440px);
+  width: clamp(140px, 14vw, 230px);
   aspect-ratio: 440 / 454;
   background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
@@ -2579,7 +2593,7 @@ body.theme-lavender #closing-section .closing-landscape-wrapper {
 .lavender-corner-tl {
   top: 0;
   left: 0;
-  width: clamp(160px, 18vw, 320px);
+  width: clamp(110px, 11vw, 180px);
   aspect-ratio: 320 / 380;
   background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
   background-position: top left;
@@ -2590,7 +2604,7 @@ body.theme-lavender #closing-section .closing-landscape-wrapper {
 .lavender-corner-br {
   bottom: 0;
   right: 0;
-  width: clamp(160px, 18vw, 320px);
+  width: clamp(110px, 11vw, 180px);
   aspect-ratio: 318 / 384;
   background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom right;
@@ -2600,16 +2614,16 @@ body.theme-lavender #closing-section .closing-landscape-wrapper {
 /* Mobile responsive corner scaling */
 @media (max-width: 768px) {
   .lavender-corner-tr {
-    width: clamp(140px, 36vw, 220px);
+    width: clamp(120px, 30vw, 190px);
   }
   .lavender-corner-bl {
-    width: clamp(140px, 36vw, 220px);
+    width: clamp(120px, 30vw, 190px);
   }
   .lavender-corner-tl {
-    width: clamp(120px, 30vw, 180px);
+    width: clamp(100px, 25vw, 150px);
   }
   .lavender-corner-br {
-    width: clamp(120px, 30vw, 180px);
+    width: clamp(100px, 25vw, 150px);
   }
   
   body.theme-lavender #invitation-cover .invitation-full-container {
@@ -3073,5 +3087,29 @@ body.theme-lavender #closing-section .closing-landscape-wrapper {
   }
   .lavender-tap-pill {
     animation: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .lavender-corner-tr {
+    width: clamp(90px, 20vw, 140px);
+  }
+  .lavender-corner-bl {
+    width: clamp(90px, 20vw, 140px);
+  }
+  .lavender-corner-tl {
+    width: clamp(80px, 18vw, 120px);
+  }
+  .lavender-corner-br {
+    width: clamp(80px, 18vw, 120px);
+  }
+  body.theme-lavender #event-schedule {
+    padding-bottom: clamp(100px, 22vw, 150px) !important;
+  }
+  body.theme-lavender #closing-section {
+    padding-bottom: clamp(80px, 18vw, 130px) !important;
+  }
+  body.theme-lavender #invitation-cover {
+    padding-bottom: clamp(80px, 18vw, 130px) !important;
   }
 }
