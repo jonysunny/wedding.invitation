@@ -1170,57 +1170,13 @@ body.theme-lavender #music-icon-muted {
   aspect-ratio: 340 / 320;
   height: auto;
   margin: 0 auto;
+  /* Luxurious plush royal velvet ambient glow and deep drop-shadow */
+  filter: drop-shadow(0 20px 42px rgba(52, 22, 75, 0.38)) drop-shadow(0 6px 18px rgba(115, 85, 141, 0.24));
+  transition: filter 0.4s ease;
 }
 
-/* Outer Lavender Floral Wreath Framing the Scratch Heart */
-.scratch-outer-wreath {
-  position: absolute;
-  inset: -14px;
-  pointer-events: none !important;
-  z-index: 4;
-}
-
-.scratch-outer-floret {
-  position: absolute;
-  pointer-events: none !important;
-  filter: drop-shadow(0 4px 10px rgba(115, 85, 141, 0.18));
-  transition: opacity 0.4s ease;
-}
-
-.scratch-outer-floret.floret-tl {
-  top: -10px;
-  left: 6%;
-  transform: rotate(-10deg);
-}
-
-.scratch-outer-floret.floret-tr {
-  top: -10px;
-  right: 6%;
-  transform: rotate(10deg);
-}
-
-.scratch-outer-floret.floret-bl {
-  bottom: 22%;
-  left: -6px;
-  transform: rotate(-18deg);
-}
-
-.scratch-outer-floret.floret-br {
-  bottom: 22%;
-  right: -6px;
-  transform: rotate(18deg);
-}
-
-.scratch-outer-floret.floret-tip {
-  bottom: -18px;
-  left: 50%;
-  transform: translateX(-50%);
-  color: #C5A56D;
-  font-size: 1.15rem;
-  opacity: 0.85;
-}
-
-/* Subtle Shimmer across the unopened metallic foil heart */
+/* Subtle Velvet Nap Sheen (Soft Minimal Fabric Light Shift) */
+.scratch-velvet-sheen,
 .scratch-foil-shimmer {
   position: absolute;
   inset: 0;
@@ -1229,38 +1185,39 @@ body.theme-lavender #music-icon-muted {
   clip-path: url(#svg-heart-clip);
   -webkit-clip-path: url(#svg-heart-clip);
   background: linear-gradient(
-    108deg,
-    transparent 20%,
-    rgba(255, 255, 255, 0.18) 45%,
-    rgba(247, 235, 205, 0.35) 50%,
-    rgba(255, 255, 255, 0.18) 55%,
-    transparent 80%
+    118deg,
+    transparent 28%,
+    rgba(240, 222, 255, 0.06) 46%,
+    rgba(255, 245, 255, 0.13) 50%,
+    rgba(240, 222, 255, 0.06) 54%,
+    transparent 72%
   );
-  background-size: 260% 100%;
-  animation: foilHeartShimmer 4.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  background-size: 240% 100%;
+  animation: velvetNapShift 6.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none !important;
   z-index: 12;
-  mix-blend-mode: overlay;
-  transition: opacity 0.6s ease;
+  mix-blend-mode: soft-light;
+  transition: opacity 0.5s ease;
 }
 
+[data-revealed="true"] .scratch-velvet-sheen,
 [data-revealed="true"] .scratch-foil-shimmer {
   opacity: 0 !important;
   animation: none !important;
   pointer-events: none !important;
 }
 
-@keyframes foilHeartShimmer {
+@keyframes velvetNapShift {
   0% {
     background-position: 180% 0;
     opacity: 0;
   }
-  15% {
-    opacity: 1;
+  16% {
+    opacity: 0.85;
   }
-  65% {
+  64% {
     background-position: -80% 0;
-    opacity: 1;
+    opacity: 0.85;
   }
   80%, 100% {
     background-position: -80% 0;
@@ -3003,8 +2960,8 @@ body.theme-lavender .scratch-underneath-card,
 body.theme-lavender .scratch-heart-shape,
 body.theme-lavender .scratch-inner-typography,
 body.theme-lavender .scratch-canvas-overlay,
-body.theme-lavender .scratch-foil-shimmer,
-body.theme-lavender .scratch-outer-wreath {
+body.theme-lavender .scratch-velvet-sheen,
+body.theme-lavender .scratch-foil-shimmer {
   user-select: none !important;
   -webkit-user-select: none !important;
 }
