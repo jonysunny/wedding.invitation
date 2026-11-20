@@ -11,43 +11,82 @@ export function initGallery() {
 
   if (!modal || !previewImg || !closeBtn || !cards.length) return;
 
+  // Move lightbox modal to document.body to escape transformed section containers
+  if (modal.parentElement !== document.body) {
+    document.body.appendChild(modal);
+  }
+
   let currentIndex = 0;
   let isOpen = false;
+  let savedScrollY = 0;
+  let isTransitioning = false;
 
-  function renderSlide(index: number) {
-    if (index < 0) index = cards.length - 1;
-    if (index >= cards.length) index = 0;
+  function updateContent(index: number) {
     currentIndex = index;
-
     const card = cards[currentIndex];
     const src = card.getAttribute("data-src") || "";
     const title = card.getAttribute("data-title") || "";
     const caption = card.getAttribute("data-caption") || "";
     const alt = card.getAttribute("data-alt") || title;
 
-    // Subtle fade transition on image swap
+    previewImg.src = src;
+    previewImg.alt = alt;
+    if (previewTitle) previewTitle.textContent = title;
+    if (previewCaption) previewCaption.textContent = caption;
+    if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${cards.length}`;
+  }
+
+  function renderSlide(index: number) {
+    if (isTransitioning) return;
+    if (index < 0) index = cards.length - 1;
+    if (index >= cards.length) index = 0;
+    if (index === currentIndex && previewImg.src) return;
+
+    isTransitioning = true;
+    const nextCard = cards[index];
+    const nextSrc = nextCard.getAttribute("data-src") || "";
+
+    // Subtle fade-out of current image
     previewImg.style.opacity = "0.4";
     previewImg.style.transform = "scale(0.98)";
-    
-    setTimeout(() => {
-      previewImg.src = src;
-      previewImg.alt = alt;
-      if (previewTitle) previewTitle.textContent = title;
-      if (previewCaption) previewCaption.textContent = caption;
-      if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${cards.length}`;
-      previewImg.style.opacity = "1";
-      previewImg.style.transform = "scale(1)";
-    }, 120);
+
+    const imgLoader = new Image();
+    imgLoader.src = nextSrc;
+
+    const finalize = () => {
+      updateContent(index);
+      requestAnimationFrame(() => {
+        previewImg.style.opacity = "1";
+        previewImg.style.transform = "scale(1)";
+        setTimeout(() => {
+          isTransitioning = false;
+        }, 150);
+      });
+    };
+
+    if (imgLoader.complete) {
+      finalize();
+    } else {
+      imgLoader.onload = finalize;
+      imgLoader.onerror = finalize;
+    }
   }
 
   function openModal(index: number) {
+    if (isOpen) return; // Prevent repeated taps from opening duplicate previews
     isOpen = true;
-    renderSlide(index);
+    savedScrollY = window.scrollY;
+
+    // Immediately load target photograph before displaying modal to prevent flash of previous photo
+    previewImg.style.opacity = "1";
+    previewImg.style.transform = "scale(1)";
+    updateContent(index);
+
     modal.style.display = "flex";
     modal.setAttribute("aria-hidden", "false");
     document.body.style.overflow = "hidden";
-    
-    // Trigger CSS opacity / scale transition
+
+    // Trigger subtle fade-in transition
     requestAnimationFrame(() => {
       modal.classList.add("is-active");
       closeBtn.focus();
@@ -61,10 +100,18 @@ export function initGallery() {
     modal.setAttribute("aria-hidden", "true");
     document.body.style.overflow = "";
 
+    // Restore user's previous scroll position immediately
+    window.scrollTo({ top: savedScrollY, behavior: "instant" });
+
     setTimeout(() => {
       if (!isOpen) {
         modal.style.display = "none";
-        cards[currentIndex]?.focus();
+        try {
+          cards[currentIndex]?.focus({ preventScroll: true });
+        } catch (e) {
+          cards[currentIndex]?.focus();
+        }
+        window.scrollTo({ top: savedScrollY, behavior: "instant" });
       }
     }, 280);
   }
@@ -102,6 +149,7 @@ export function initGallery() {
   });
 
   modal.addEventListener("click", (e) => {
+    // Close when tapping the dark backdrop
     if (e.target === modal) closeModal();
   });
 
@@ -117,21 +165,29 @@ export function initGallery() {
     }
   });
 
-  // Mobile Touch Swipe support
+  // Mobile Touch Swipe support with clean threshold
   let touchStartX = 0;
-  let touchEndX = 0;
+  let touchStartY = 0;
 
   modal.addEventListener("touchstart", (e) => {
-    touchStartX = e.changedTouches[0].screenX;
+    if (e.touches.length === 1) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }
   }, { passive: true });
 
   modal.addEventListener("touchend", (e) => {
-    touchEndX = e.changedTouches[0].screenX;
-    const diff = touchEndX - touchStartX;
-    if (diff < -45) {
-      showNext();
-    } else if (diff > 45) {
-      showPrev();
+    if (e.changedTouches.length === 1) {
+      const diffX = e.changedTouches[0].clientX - touchStartX;
+      const diffY = e.changedTouches[0].clientY - touchStartY;
+      // Ensure horizontal swipe is dominant over vertical scrolling
+      if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY)) {
+        if (diffX < 0) {
+          showNext();
+        } else {
+          showPrev();
+        }
+      }
     }
   }, { passive: true });
 }

@@ -81,10 +81,10 @@ const { gallery } = Astro.props;
     
     <div class="lightbox-img-box">
       <img id="lightbox-preview-img" src="" alt="Enlarged photo preview" />
-      <div style="text-align: center;">
-        <span id="lightbox-counter" class="lightbox-counter font-sans" style="color: var(--color-champagne); font-size: 0.78rem; letter-spacing: 0.15em; display: block; margin-bottom: 4px;"></span>
-        <h4 id="lightbox-preview-title" class="font-serif" style="color: #FFFDF8; font-size: 1.25rem; margin: 0 0 4px;"></h4>
-        <p id="lightbox-preview-caption" class="font-serif-sub" style="color: var(--color-champagne-light); font-size: 0.95rem; font-style: italic; margin: 0;"></p>
+      <div class="lightbox-caption-wrap">
+        <span id="lightbox-counter" class="lightbox-counter"></span>
+        <h4 id="lightbox-preview-title" class="lightbox-preview-title"></h4>
+        <p id="lightbox-preview-caption" class="lightbox-preview-caption"></p>
       </div>
     </div>
   </div>
