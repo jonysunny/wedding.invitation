@@ -101,7 +101,7 @@ const { brideName, groomName, welcomeMessage, formattedDate, destination } = Ast
       e.preventDefault();
       const target = document.getElementById('scratch-reveal-section');
       if (target) {
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
     });
   }

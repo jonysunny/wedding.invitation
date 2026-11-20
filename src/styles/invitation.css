@@ -2824,9 +2824,8 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     box-shadow: none !important;
     border-radius: 0 !important;
     aspect-ratio: auto !important;
-    min-height: 100vh;
-    min-height: 100dvh;
-    padding: clamp(28px, 4.5vh, 44px) clamp(20px, 5.5vw, 32px) clamp(20px, 3vh, 32px) !important;
+    min-height: auto !important;
+    padding: 0 !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -4467,15 +4466,12 @@ body.theme-lavender .gallery-card img {
     display: none !important;
   }
 
-  /* Full-bleed edge-to-edge mobile cover container */
+  /* Full-bleed edge-to-edge mobile cover container (natural aspect ratio) */
   body.theme-lavender #invitation-cover {
     width: 100vw !important;
     width: 100% !important;
-    min-height: 100vh !important;
-    min-height: 100svh !important;
-    min-height: 100dvh !important;
-    height: 100vh !important;
-    height: 100dvh !important;
+    min-height: auto !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
@@ -4483,27 +4479,26 @@ body.theme-lavender .gallery-card img {
     background-color: #FAF7FE !important;
     border: none !important;
     box-shadow: none !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
+    display: block !important;
   }
 
-  /* Display the exact supplied reference floral artwork full-bleed */
+  /* Display the exact supplied reference floral artwork with natural aspect ratio */
   body.theme-lavender #invitation-cover .mobile-supplied-cover-wrap {
     display: block !important;
-    position: absolute !important;
-    inset: 0 !important;
+    position: relative !important;
     width: 100% !important;
-    height: 100% !important;
+    height: auto !important;
     z-index: 1 !important;
+    margin: 0 !important;
+    padding: 0 !important;
     pointer-events: none !important;
   }
 
   body.theme-lavender #invitation-cover .mobile-supplied-cover-img {
     width: 100% !important;
-    height: 100% !important;
-    object-fit: fill !important;
+    height: auto !important;
     display: block !important;
+    object-fit: contain !important;
   }
 
   /* Overlay container for accessibility & interactive scroll prompt */
@@ -4513,6 +4508,7 @@ body.theme-lavender .gallery-card img {
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
+    min-height: 0 !important;
     z-index: 10 !important;
     background: transparent !important;
     border: none !important;
@@ -4521,10 +4517,7 @@ body.theme-lavender .gallery-card img {
     aspect-ratio: auto !important;
     margin: 0 !important;
     padding: 0 !important;
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-end !important;
+    display: block !important;
     pointer-events: none !important;
   }
 
@@ -4537,15 +4530,16 @@ body.theme-lavender .gallery-card img {
     display: none !important;
   }
 
-  /* Interactive Scroll Button Hotspot over the printed 'SCROLL TO EXPLORE' */
+  /* Interactive Scroll Button Hotspot precisely aligned over printed 'SCROLL TO EXPLORE' (y ~ 73.8%) */
   body.theme-lavender #invitation-cover .invitation-scroll-prompt {
     pointer-events: auto !important;
     position: absolute !important;
-    bottom: 3.5% !important;
+    top: 73.8% !important;
+    bottom: auto !important;
     left: 50% !important;
-    transform: translateX(-50%) !important;
-    width: 220px !important;
-    height: 68px !important;
+    transform: translate(-50%, -50%) !important;
+    width: min(65vw, 240px) !important;
+    height: 48px !important;
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
@@ -4553,6 +4547,7 @@ body.theme-lavender .gallery-card img {
     cursor: pointer !important;
     background: transparent !important;
     z-index: 20 !important;
+    touch-action: manipulation !important;
   }
 
   body.theme-lavender #invitation-cover .invitation-scroll-sparkle,
