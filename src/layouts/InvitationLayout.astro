@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import '../styles/animations.css';
 import '../styles/invitation.css';
+import AmbientConfetti from '../components/AmbientConfetti.astro';
 
 interface Props {
   title: string;
@@ -30,6 +31,8 @@ const { title, description, image = "/jony-wedding/assets/couple/og-preview.jpg"
     <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💍</text></svg>" />
   </head>
   <body class="theme-lavender">
+    <!-- Continuous Floating Ambient Confetti (Active after Ribbon Opening) -->
+    <AmbientConfetti />
     <slot />
   </body>
 </html>

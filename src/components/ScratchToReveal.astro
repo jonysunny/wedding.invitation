@@ -56,6 +56,62 @@ const { weddingDate, formattedDate, venue, address } = Astro.props;
     <!-- Paper Confetti Celebration Canvas (One-time burst upon reveal) -->
     <canvas id="scratch-confetti-canvas" class="scratch-confetti-canvas" aria-hidden="true"></canvas>
 
+    <!-- Outer Lavender Floral Accents Framing the Heart Perimeter -->
+    <div class="scratch-outer-wreath" aria-hidden="true">
+      <!-- Top-Left Lavender Blossom & Soft Green Foliage -->
+      <div class="scratch-outer-floret floret-tl">
+        <svg viewBox="0 0 70 70" width="56" height="56" fill="none">
+          <circle cx="34" cy="34" r="14" fill="#D8C4EC" fill-opacity="0.45" />
+          <path d="M34 16 C26 24 20 30 24 40 C28 48 42 48 45 40 C48 30 42 24 34 16 Z" fill="#BEA6D6" />
+          <path d="M34 22 C29 28 26 33 28 38 C31 43 37 43 40 38 C42 33 39 28 34 22 Z" fill="#9B7CB8" />
+          <circle cx="34" cy="35" r="4" fill="#C5A56D" />
+          <path d="M22 38 C14 34 12 24 16 18 C22 22 22 30 22 38 Z" fill="#8FA08B" fill-opacity="0.75" />
+          <path d="M46 38 C54 34 56 24 52 18 C46 22 46 30 46 38 Z" fill="#8FA08B" fill-opacity="0.75" />
+        </svg>
+      </div>
+
+      <!-- Top-Right Lilac Blossom & Gold Botanical Sprig -->
+      <div class="scratch-outer-floret floret-tr">
+        <svg viewBox="0 0 70 70" width="56" height="56" fill="none">
+          <circle cx="36" cy="34" r="14" fill="#E3D3F6" fill-opacity="0.5" />
+          <path d="M36 16 C44 24 50 30 46 40 C42 48 28 48 25 40 C22 30 28 24 36 16 Z" fill="#BEA6D6" />
+          <path d="M36 22 C41 28 44 33 42 38 C39 43 33 43 30 38 C28 33 31 28 36 22 Z" fill="#9B7CB8" />
+          <circle cx="36" cy="35" r="4" fill="#C5A56D" />
+          <!-- Champagne gold sprig flourish -->
+          <path d="M42 20 Q54 18 58 8" stroke="#C5A56D" stroke-width="1.8" stroke-linecap="round" />
+          <ellipse cx="50" cy="15" rx="3.5" ry="5.5" transform="rotate(35 50 15)" fill="#DFC28A" />
+          <ellipse cx="57" cy="11" rx="3" ry="5" transform="rotate(45 57 11)" fill="#C5A56D" />
+        </svg>
+      </div>
+
+      <!-- Bottom-Left Botanical Lavender Stem -->
+      <div class="scratch-outer-floret floret-bl">
+        <svg viewBox="0 0 60 70" width="48" height="56" fill="none">
+          <path d="M45 62 Q25 42 15 15" stroke="#7E8A79" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="20" cy="22" rx="4" ry="6.5" transform="rotate(-35 20 22)" fill="#BEA6D6" />
+          <ellipse cx="30" cy="26" rx="4" ry="6.5" transform="rotate(25 30 26)" fill="#9B7CB8" />
+          <ellipse cx="24" cy="38" rx="4" ry="6" transform="rotate(-30 24 38)" fill="#D8C4EC" />
+          <ellipse cx="34" cy="42" rx="4" ry="6" transform="rotate(30 34 42)" fill="#73558D" />
+        </svg>
+      </div>
+
+      <!-- Bottom-Right Botanical Lavender Stem -->
+      <div class="scratch-outer-floret floret-br">
+        <svg viewBox="0 0 60 70" width="48" height="56" fill="none">
+          <path d="M15 62 Q35 42 45 15" stroke="#7E8A79" stroke-width="2" stroke-linecap="round" />
+          <ellipse cx="40" cy="22" rx="4" ry="6.5" transform="rotate(35 40 22)" fill="#BEA6D6" />
+          <ellipse cx="30" cy="26" rx="4" ry="6.5" transform="rotate(-25 30 26)" fill="#9B7CB8" />
+          <ellipse cx="36" cy="38" rx="4" ry="6" transform="rotate(30 36 38)" fill="#D8C4EC" />
+          <ellipse cx="26" cy="42" rx="4" ry="6" transform="rotate(-30 26 42)" fill="#73558D" />
+        </svg>
+      </div>
+
+      <!-- Center Bottom Tip Accent Flueron -->
+      <div class="scratch-outer-floret floret-tip">
+        <span class="floret-tip-icon">❦</span>
+      </div>
+    </div>
+
     <!-- Responsive Heart-shaped Card Container -->
     <div id="scratch-card-container" class="scratch-card-container" data-revealed="false">
       
@@ -72,12 +128,15 @@ const { weddingDate, formattedDate, venue, address } = Astro.props;
         </div>
       </div>
 
-      <!-- 2. TOP: HTML5 Canvas Scratch Coating (Sage Green Glitter + Gold Speckles) -->
+      <!-- 2. TOP: HTML5 Canvas Scratch Coating (Lavender Metallic-Foil Surface) -->
       <canvas 
         id="scratch-canvas" 
         class="scratch-canvas-overlay"
-        aria-label="Scratch card canvas surface"
+        aria-label="Interactive scratchable lavender heart surface"
       ></canvas>
+
+      <!-- 3. Gentle Shimmer Highlight Across Unopened Heart Surface -->
+      <div class="scratch-foil-shimmer" aria-hidden="true"></div>
     </div>
 
   </div>

@@ -1,0 +1,22 @@
+---
+// AmbientConfetti.astro
+// Lightweight full-screen canvas for continuous floating lavender petals & confetti
+---
+
+<canvas 
+  id="ambient-confetti-canvas" 
+  class="ambient-confetti-canvas" 
+  aria-hidden="true"
+></canvas>
+
+<script>
+  import { initAmbientConfetti } from '../scripts/ambient-confetti';
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+      try { initAmbientConfetti(); } catch (e) { console.error('Ambient confetti error:', e); }
+    });
+  } else {
+    try { initAmbientConfetti(); } catch (e) { console.error('Ambient confetti error:', e); }
+  }
+</script>

@@ -36,6 +36,12 @@ export function initScratchCard() {
   canvas.style.pointerEvents = "auto";
   canvas.style.transition = "none";
 
+  const shimmer = container.querySelector(".scratch-foil-shimmer") as HTMLElement | null;
+  if (shimmer) {
+    shimmer.style.opacity = "";
+    shimmer.style.display = "";
+  }
+
   if (instructionPill) {
     instructionPill.style.display = "";
     instructionPill.style.opacity = "";
@@ -50,6 +56,11 @@ export function initScratchCard() {
     if (isRevealed) return;
     isRevealed = true;
     container.setAttribute("data-revealed", "true");
+
+    if (shimmer) {
+      shimmer.style.opacity = "0";
+      shimmer.style.pointerEvents = "none";
+    }
 
     if (canvas) {
       if (immediate) {
@@ -250,53 +261,190 @@ export function initScratchCard() {
     context.closePath();
   }
 
-  // Paint initial sage-green glitter coating with gold speckles
+  // Draw inner inset heart outline for delicate double-rim styling
+  function drawInnerHeartPath(context: CanvasRenderingContext2D, w: number, h: number, scale: number = 0.88) {
+    context.save();
+    context.translate(w * 0.5, h * 0.46);
+    context.scale(scale, scale);
+    context.translate(-w * 0.5, -h * 0.46);
+    drawHeartPath(context, w, h);
+    context.restore();
+  }
+
+  // Draw embossed botanical floral vine & damask filigree pattern
+  function drawEmbossedFloralPatterns(context: CanvasRenderingContext2D, w: number, h: number) {
+    const cx = w * 0.5;
+    const cy = h * 0.43;
+
+    function renderFloralPass(color: string, ox: number, oy: number, lineWidth: number = 1.4) {
+      context.save();
+      context.translate(ox, oy);
+      context.strokeStyle = color;
+      context.lineWidth = lineWidth;
+      context.lineCap = "round";
+      context.lineJoin = "round";
+
+      // 1. Symmetrical Top Vine Flourishes curving from center dip into lobes
+      // Left lobe vine
+      context.beginPath();
+      context.moveTo(cx - w * 0.04, h * 0.20);
+      context.bezierCurveTo(cx - w * 0.14, h * 0.12, cx - w * 0.30, h * 0.13, cx - w * 0.30, h * 0.25);
+      context.bezierCurveTo(cx - w * 0.30, h * 0.34, cx - w * 0.18, h * 0.35, cx - w * 0.14, h * 0.29);
+      context.stroke();
+
+      // Left lobe leaves
+      context.beginPath();
+      context.moveTo(cx - w * 0.22, h * 0.15);
+      context.quadraticCurveTo(cx - w * 0.27, h * 0.10, cx - w * 0.23, h * 0.07);
+      context.quadraticCurveTo(cx - w * 0.19, h * 0.10, cx - w * 0.22, h * 0.15);
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(cx - w * 0.28, h * 0.22);
+      context.quadraticCurveTo(cx - w * 0.35, h * 0.17, cx - w * 0.38, h * 0.14);
+      context.stroke();
+
+      // Right lobe vine
+      context.beginPath();
+      context.moveTo(cx + w * 0.04, h * 0.20);
+      context.bezierCurveTo(cx + w * 0.14, h * 0.12, cx + w * 0.30, h * 0.13, cx + w * 0.30, h * 0.25);
+      context.bezierCurveTo(cx + w * 0.30, h * 0.34, cx + w * 0.18, h * 0.35, cx + w * 0.14, h * 0.29);
+      context.stroke();
+
+      // Right lobe leaves
+      context.beginPath();
+      context.moveTo(cx + w * 0.22, h * 0.15);
+      context.quadraticCurveTo(cx + w * 0.27, h * 0.10, cx + w * 0.23, h * 0.07);
+      context.quadraticCurveTo(cx + w * 0.19, h * 0.10, cx + w * 0.22, h * 0.15);
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(cx + w * 0.28, h * 0.22);
+      context.quadraticCurveTo(cx + w * 0.35, h * 0.17, cx + w * 0.38, h * 0.14);
+      context.stroke();
+
+      // 2. Central Floral Medallion Flourish (Delicate 4-petal royal crest motif)
+      const mr = w * 0.055;
+      context.beginPath();
+      context.moveTo(cx, cy - mr * 1.4);
+      context.bezierCurveTo(cx - mr * 0.9, cy - mr * 0.9, cx - mr * 1.4, cy, cx, cy + mr * 1.4);
+      context.bezierCurveTo(cx + mr * 1.4, cy, cx + mr * 0.9, cy - mr * 0.9, cx, cy - mr * 1.4);
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(cx - mr * 1.4, cy);
+      context.bezierCurveTo(cx - mr * 0.9, cy - mr * 0.9, cx, cy - mr * 1.4, cx + mr * 1.4, cy);
+      context.bezierCurveTo(cx, cy + mr * 1.4, cx - mr * 0.9, cy + mr * 0.9, cx - mr * 1.4, cy);
+      context.stroke();
+
+      // 3. Lower V-Stem Vines converging gently toward bottom tip
+      context.beginPath();
+      context.moveTo(cx - w * 0.22, h * 0.44);
+      context.bezierCurveTo(cx - w * 0.16, h * 0.58, cx - w * 0.08, h * 0.70, cx, h * 0.84);
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(cx + w * 0.22, h * 0.44);
+      context.bezierCurveTo(cx + w * 0.16, h * 0.58, cx + w * 0.08, h * 0.70, cx, h * 0.84);
+      context.stroke();
+
+      // Tiny lower lateral leaf sprigs
+      context.beginPath();
+      context.moveTo(cx - w * 0.14, h * 0.54);
+      context.quadraticCurveTo(cx - w * 0.20, h * 0.56, cx - w * 0.22, h * 0.52);
+      context.stroke();
+
+      context.beginPath();
+      context.moveTo(cx + w * 0.14, h * 0.54);
+      context.quadraticCurveTo(cx + w * 0.20, h * 0.56, cx + w * 0.22, h * 0.52);
+      context.stroke();
+
+      context.restore();
+    }
+
+    // Shadow pass (creates 3D physical pressed depth)
+    renderFloralPass("rgba(68, 38, 92, 0.40)", 1.2, 1.2, 1.6);
+    // Specular highlight pass (creates metallic edge reflection)
+    renderFloralPass("rgba(255, 255, 255, 0.48)", -1.0, -1.0, 1.4);
+    // Champagne gold center inlay pass
+    renderFloralPass("rgba(226, 202, 146, 0.70)", 0, 0, 1.0);
+  }
+
+  // Paint luxury lavender metallic-foil coating with embossed floral filigree
   function paintCoating() {
     if (!ctx) return;
     resizeCanvas();
     ctx.save();
     
-    // Clip to heart shape
+    // Clip strictly to heart shape
     drawHeartPath(ctx, displayWidth, displayHeight);
     ctx.clip();
 
-    // Lavender & lilac base gradient
-    const grad = ctx.createLinearGradient(0, 0, displayWidth, displayHeight);
-    grad.addColorStop(0, "#D8C4EC");   // Soft Lavender
-    grad.addColorStop(0.35, "#BEA6D6"); // Dusty Lilac
-    grad.addColorStop(0.7, "#9B7CB8");  // Mauve
-    grad.addColorStop(1, "#73558D");    // Deep Lavender
-    ctx.fillStyle = grad;
+    // 1. Multi-stop Lavender Metallic-Foil Base Gradient
+    // Radial glow originating from upper center for rich metallic dome reflection
+    const radGrad = ctx.createRadialGradient(
+      displayWidth * 0.48, displayHeight * 0.32, displayWidth * 0.05,
+      displayWidth * 0.50, displayHeight * 0.45, displayWidth * 0.65
+    );
+    radGrad.addColorStop(0, "#F7EEFE");    // Shimmering Soft Lilac Gleam
+    radGrad.addColorStop(0.22, "#E8D5F6"); // Polished Lilac Foil
+    radGrad.addColorStop(0.46, "#C8ACDE"); // Dusty Mauve
+    radGrad.addColorStop(0.70, "#9C77B7"); // Rich Royal Lavender
+    radGrad.addColorStop(0.88, "#765093"); // Deep Lavender
+    radGrad.addColorStop(1.0, "#5A3777");  // Velvet Mauve Shadow Border
+
+    ctx.fillStyle = radGrad;
     ctx.fillRect(0, 0, displayWidth, displayHeight);
 
-    // Subtle metallic sheen diagonal bands
-    ctx.fillStyle = "rgba(226, 202, 146, 0.28)";
-    for (let x = -displayWidth; x < displayWidth * 2; x += 36) {
+    // 2. Subtle diagonal champagne-gold metallic luster sheen bands
+    ctx.fillStyle = "rgba(243, 226, 185, 0.16)";
+    for (let x = -displayWidth; x < displayWidth * 2; x += 44) {
       ctx.beginPath();
       ctx.moveTo(x, 0);
-      ctx.lineTo(x + 22, 0);
-      ctx.lineTo(x + displayHeight + 22, displayHeight);
+      ctx.lineTo(x + 28, 0);
+      ctx.lineTo(x + displayHeight + 28, displayHeight);
       ctx.lineTo(x + displayHeight, displayHeight);
       ctx.fill();
     }
 
-    // Gold and lilac glitter speckles
-    for (let i = 0; i < 450; i++) {
+    // 3. Subtle embossed floral relief patterns & ornamental filigree
+    drawEmbossedFloralPatterns(ctx, displayWidth, displayHeight);
+
+    // 4. Delicate inner inset champagne-gold filigree heart outline
+    ctx.strokeStyle = "rgba(226, 202, 146, 0.78)";
+    ctx.lineWidth = 1.2;
+    drawInnerHeartPath(ctx, displayWidth, displayHeight, 0.88);
+    ctx.stroke();
+
+    // 5. Center ornamental gold pistil pearl
+    ctx.fillStyle = "rgba(235, 215, 165, 0.95)";
+    ctx.beginPath();
+    ctx.arc(displayWidth * 0.5, displayHeight * 0.43, 3.5, 0, Math.PI * 2);
+    ctx.fill();
+
+    // 6. Fine micro-foil sparkle speckles (delicate champagne gold and starlight white)
+    for (let i = 0; i < 260; i++) {
       const sx = Math.random() * displayWidth;
       const sy = Math.random() * displayHeight;
-      const sr = Math.random() * 1.8 + 0.4;
-      const alpha = Math.random() * 0.75 + 0.25;
+      const sr = Math.random() * 1.5 + 0.35;
+      const alpha = Math.random() * 0.7 + 0.25;
       ctx.fillStyle = i % 3 === 0 
         ? `rgba(226, 202, 146, ${alpha})` 
-        : (i % 3 === 1 ? `rgba(255, 255, 255, ${alpha})` : `rgba(216, 196, 236, ${alpha})`);
+        : (i % 3 === 1 ? `rgba(255, 255, 255, ${alpha})` : `rgba(220, 200, 242, ${alpha})`);
       ctx.beginPath();
       ctx.arc(sx, sy, sr, 0, Math.PI * 2);
       ctx.fill();
     }
 
-    // Outer heart gold rim border
-    ctx.strokeStyle = "rgba(197, 165, 109, 0.9)";
+    // 7. Outer champagne-gold primary heart rim
+    ctx.strokeStyle = "rgba(197, 165, 109, 0.95)";
     ctx.lineWidth = 3.5;
+    drawHeartPath(ctx, displayWidth, displayHeight);
+    ctx.stroke();
+
+    // 8. Outer delicate highlight hairline
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.45)";
+    ctx.lineWidth = 0.8;
     drawHeartPath(ctx, displayWidth, displayHeight);
     ctx.stroke();
 
