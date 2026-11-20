@@ -64,18 +64,11 @@ const pageDescription = `Join us in celebrating the wedding of ${weddingData.cou
   import weddingData from '../data/wedding.json';
 
   function initApp() {
-    // 1. Initialize Background Music Player
-    initMusic(weddingData.music.src);
-
-    // 2. Initialize Scratch to Reveal Card
-    initScratchCard();
-
-    // 3. Setup Event Listener for Wedding Countdown
-    setupCountdownListener(weddingData.weddingDate);
-
-    // 4. Initialize Photo Gallery Lightbox and Scroll Reveal
-    initGallery();
-    initScrollReveal();
+    try { initMusic(weddingData.music.src); } catch (e) { console.error('initMusic error:', e); }
+    try { initScratchCard(); } catch (e) { console.error('initScratchCard error:', e); }
+    try { setupCountdownListener(weddingData.weddingDate); } catch (e) { console.error('setupCountdownListener error:', e); }
+    try { initGallery(); } catch (e) { console.error('initGallery error:', e); }
+    try { initScrollReveal(); } catch (e) { console.error('initScrollReveal error:', e); }
   }
 
   if (document.readyState === 'loading') {

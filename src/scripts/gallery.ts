@@ -138,6 +138,17 @@ export function initGallery() {
 
 export function initScrollReveal() {
   const elements = document.querySelectorAll(".reveal-on-scroll");
+  if (!elements.length) return;
+
+  function revealVisibleElements() {
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight + 300 && rect.bottom > -200) {
+        el.classList.add("is-visible");
+      }
+    });
+  }
+
   if (!("IntersectionObserver" in window)) {
     elements.forEach(el => el.classList.add("is-visible"));
     return;
@@ -150,7 +161,25 @@ export function initScrollReveal() {
         observer.unobserve(entry.target);
       }
     });
-  }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+  }, { threshold: 0.01, rootMargin: "300px 0px 300px 0px" });
 
   elements.forEach(el => observer.observe(el));
+
+  // Check immediately on initialize
+  revealVisibleElements();
+
+  // When ribbon opening begins / completes, immediately reveal Section 2 (scratch) and visible items
+  const onRibbonEvent = () => {
+    const scratch = document.getElementById("scratch-reveal-section");
+    if (scratch) scratch.classList.add("is-visible");
+    revealVisibleElements();
+  };
+
+  window.addEventListener("wedding-ribbon-start-opening", onRibbonEvent);
+  window.addEventListener("wedding-ribbon-opened", onRibbonEvent);
+  window.addEventListener("wedding-envelope-opened", onRibbonEvent);
+
+  // Passive scroll and resize listeners as bulletproof fallbacks
+  window.addEventListener("scroll", revealVisibleElements, { passive: true });
+  window.addEventListener("resize", revealVisibleElements, { passive: true });
 }

@@ -69,11 +69,11 @@ const pageDescription = `Join us in celebrating the wedding of ${weddingData.cou
   import weddingData from '../../data/wedding.json';
 
   function initApp() {
-    initMusic(weddingData.music.src);
-    initScratchCard();
-    setupCountdownListener(weddingData.weddingDate);
-    initGallery();
-    initScrollReveal();
+    try { initMusic(weddingData.music.src); } catch (e) { console.error('initMusic error:', e); }
+    try { initScratchCard(); } catch (e) { console.error('initScratchCard error:', e); }
+    try { setupCountdownListener(weddingData.weddingDate); } catch (e) { console.error('setupCountdownListener error:', e); }
+    try { initGallery(); } catch (e) { console.error('initGallery error:', e); }
+    try { initScrollReveal(); } catch (e) { console.error('initScrollReveal error:', e); }
   }
 
   if (document.readyState === 'loading') {

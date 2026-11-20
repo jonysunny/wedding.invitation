@@ -36,11 +36,6 @@ export function initScratchCard() {
   canvas.style.pointerEvents = "auto";
   canvas.style.transition = "none";
 
-  if (saveDateContainer) {
-    saveDateContainer.style.display = "none";
-    saveDateContainer.style.opacity = "0";
-  }
-
   if (instructionPill) {
     instructionPill.style.display = "";
     instructionPill.style.opacity = "";

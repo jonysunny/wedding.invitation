@@ -43,7 +43,6 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overflow-x: clip;
 }
 
 html {
@@ -52,6 +51,9 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-paper);
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
@@ -60,9 +62,18 @@ body {
   color: var(--color-text);
   min-height: 100vh;
   line-height: 1.7;
+  overflow-x: hidden;
+  overflow-y: visible;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(233, 199, 195, 0.15) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(130, 158, 186, 0.12) 0%, transparent 45%);
+}
+
+html.scroll-locked,
+body.scroll-locked {
+  overflow: hidden !important;
+  overflow-y: hidden !important;
+  touch-action: none;
 }
 
 /* Typography Utility Classes */

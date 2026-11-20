@@ -920,8 +920,37 @@
     let isOpening = false;
     let hasDismissed = false;
 
+    const preventScrollHandler = (e: Event) => {
+      if (!hasDismissed) {
+        if (e.cancelable) e.preventDefault();
+        if (window.scrollY !== 0) window.scrollTo(0, 0);
+      }
+    };
+
+    function lockScroll() {
+      document.documentElement.classList.add("scroll-locked");
+      document.body.classList.add("scroll-locked");
+      document.body.style.overflow = "hidden";
+      document.documentElement.style.overflow = "hidden";
+      window.addEventListener("scroll", preventScrollHandler, { passive: false });
+      window.addEventListener("wheel", preventScrollHandler, { passive: false });
+      window.addEventListener("touchmove", preventScrollHandler, { passive: false });
+    }
+
+    function unlockScroll() {
+      window.removeEventListener("scroll", preventScrollHandler);
+      window.removeEventListener("wheel", preventScrollHandler);
+      window.removeEventListener("touchmove", preventScrollHandler);
+      document.documentElement.classList.remove("scroll-locked");
+      document.body.classList.remove("scroll-locked");
+      document.body.style.overflow = "";
+      document.documentElement.style.overflow = "";
+      document.body.style.overflowY = "auto";
+      document.documentElement.style.overflowY = "auto";
+    }
+
     // Lock page scrolling while unopened ribbon overlay is active
-    document.body.style.overflow = "hidden";
+    lockScroll();
 
     function startRibbonOpening() {
       if (isOpening || hasDismissed) return;
@@ -952,30 +981,43 @@
       setTimeout(() => {
         if (hasDismissed) return;
         overlay.classList.add("phase-3-cover-open");
+        overlay.style.pointerEvents = "none";
       }, 2200);
 
       // Phase 4 — Reveal actual website (3.2s - 4.0s)
       setTimeout(() => {
         if (hasDismissed) return;
         overlay.classList.add("phase-4-reveal");
+        overlay.style.pointerEvents = "none";
         if (siteMain) {
           siteMain.classList.add("wedding-site-revealed");
           siteMain.style.visibility = "visible";
         }
-        document.body.style.overflow = "";
+        unlockScroll();
+        window.dispatchEvent(new CustomEvent("wedding-ribbon-opened"));
       }, 3200);
 
       // Complete unmount at ~4.0s
       setTimeout(() => {
         dismissImmediately();
       }, 4000);
+
+      // Hard failsafe at 4.5s to guarantee dismissal and scroll unlock
+      setTimeout(() => {
+        if (!hasDismissed) {
+          dismissImmediately();
+        }
+      }, 4500);
     }
 
     function dismissImmediately() {
       if (hasDismissed) return;
       hasDismissed = true;
-      document.body.style.overflow = "";
+      unlockScroll();
       overlay.style.display = "none";
+      overlay.style.pointerEvents = "none";
+      overlay.style.visibility = "hidden";
+      overlay.setAttribute("aria-hidden", "true");
       if (siteMain) {
         siteMain.classList.add("wedding-site-revealed");
         siteMain.style.visibility = "visible";
@@ -994,7 +1036,7 @@
       window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
     }
 
-    // Click / Touch on interactive ribbon
+    // Click / Touch on interactive ribbon or anywhere on overlay to open
     interactiveWrap?.addEventListener("click", (e) => {
       e.preventDefault();
       startRibbonOpening();
@@ -1004,6 +1046,16 @@
       e.preventDefault();
       startRibbonOpening();
     }, { passive: false });
+
+    overlay?.addEventListener("click", (e) => {
+      if ((e.target as HTMLElement)?.closest("#ribbon-skip-intro-btn")) return;
+      startRibbonOpening();
+    });
+
+    overlay?.addEventListener("touchend", (e) => {
+      if ((e.target as HTMLElement)?.closest("#ribbon-skip-intro-btn")) return;
+      startRibbonOpening();
+    }, { passive: true });
 
     // Skip intro button
     skipBtn?.addEventListener("click", (e) => {
