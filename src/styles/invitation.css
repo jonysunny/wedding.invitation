@@ -2697,220 +2697,264 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
 
 /* Mobile responsive layout for Section 1: Main Invitation Cover */
 @media (max-width: 768px) {
+  /* Full-screen edge-to-edge mobile cover container */
   body.theme-lavender #invitation-cover {
-    background-color: #EEE5F8 !important;
-    background-image: radial-gradient(circle at 50% 50%, #FAF7FE 0%, #EEE5F8 55%, #D8C4EC 100%) !important;
+    width: 100vw !important;
+    width: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
+    margin: 0 !important;
     padding: 0 !important;
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
+    position: relative !important;
+    overflow: hidden !important;
+    background-color: #FAF5EE !important;
+    background: radial-gradient(circle at 50% 50%, #FAF6F1 0%, #FAF5EE 100%) !important;
+    border: none !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    align-items: center !important;
+    box-sizing: border-box !important;
   }
 
-  /* Show 4 floral corners behind content on mobile */
+  /* Hide mobile-only supplied image wrapper in favor of responsive layout */
+  body.theme-lavender #invitation-cover .mobile-supplied-cover-wrap {
+    display: none !important;
+  }
+
+  /* Hide sliced corners in favor of seamless authentic background composition */
   body.theme-lavender #invitation-cover .lavender-floral-corners {
+    display: none !important;
+  }
+
+  /* Seamless authentic floral artwork layers blended at top & bottom */
+  body.theme-lavender #invitation-cover .invitation-floral-art-layer {
     display: block !important;
-    position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-    z-index: 1;
-    overflow: hidden;
+    position: absolute !important;
+    inset: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    pointer-events: none !important;
+    z-index: 1 !important;
+    overflow: hidden !important;
   }
 
-  body.theme-lavender #invitation-cover .lavender-corner-item {
-    display: block !important;
-    position: absolute;
-    pointer-events: none;
-    z-index: 1;
+  /* Top floral composition: top-left watercolor wash & top-right royal bouquet */
+  body.theme-lavender #invitation-cover .invitation-floral-art-layer::before {
+    content: '' !important;
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 48% !important;
+    background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') top center / 100% auto no-repeat !important;
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
+    mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
+    pointer-events: none !important;
   }
 
-  body.theme-lavender #invitation-cover .lavender-corner-tr {
-    top: 0;
-    right: 0;
-    width: clamp(130px, 34vw, 185px);
-    aspect-ratio: 448 / 460;
-    background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
-    background-position: top right;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.95;
+  /* Bottom floral composition: bottom-left rose bouquet with lavender sprig & bottom-right wash */
+  body.theme-lavender #invitation-cover .invitation-floral-art-layer::after {
+    content: '' !important;
+    position: absolute !important;
+    bottom: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 52% !important;
+    background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') bottom center / 100% auto no-repeat !important;
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
+    mask-image: linear-gradient(to top, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
+    pointer-events: none !important;
   }
 
-  body.theme-lavender #invitation-cover .lavender-corner-bl {
-    bottom: 0;
-    left: 0;
-    width: clamp(130px, 34vw, 185px);
-    aspect-ratio: 440 / 454;
-    background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
-    background-position: bottom left;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.95;
-  }
-
-  body.theme-lavender #invitation-cover .lavender-corner-tl {
-    top: 0;
-    left: 0;
-    width: clamp(110px, 28vw, 155px);
-    aspect-ratio: 320 / 380;
-    background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
-    background-position: top left;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.9;
-  }
-
-  body.theme-lavender #invitation-cover .lavender-corner-br {
-    bottom: 0;
-    right: 0;
-    width: clamp(110px, 28vw, 155px);
-    aspect-ratio: 318 / 384;
-    background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
-    background-position: bottom right;
-    background-size: contain;
-    background-repeat: no-repeat;
-    opacity: 0.9;
-  }
-
-  /* Show elegant champagne gold double border on mobile */
-  body.theme-lavender #invitation-cover .invitation-page-border {
-    display: block !important;
-    position: absolute;
-    inset: clamp(10px, 2.5vw, 14px);
-    border: 1.5px solid rgba(197, 165, 109, 0.45);
-    border-radius: 12px;
-    pointer-events: none;
-    z-index: 2;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-page-inner-border {
-    position: absolute;
-    inset: 4px;
-    border: 1px dashed rgba(197, 165, 109, 0.32);
-    border-radius: 8px;
-    pointer-events: none;
-  }
-
+  /* Hide perimeter dashed lines and glyphs on mobile cover for clean watercolor artwork */
+  body.theme-lavender #invitation-cover .invitation-page-border,
   body.theme-lavender #invitation-cover .invitation-corner-ornaments {
-    display: block !important;
-    position: absolute;
-    inset: clamp(10px, 2.5vw, 14px);
-    pointer-events: none;
-    z-index: 3;
+    display: none !important;
   }
 
-  body.theme-lavender #invitation-cover .corner-ornament {
-    position: absolute;
-    color: #C5A56D;
-    font-size: 0.72rem;
-    opacity: 0.85;
-  }
-
-  body.theme-lavender #invitation-cover .corner-top-left { top: 8px; left: 8px; }
-  body.theme-lavender #invitation-cover .corner-top-right { top: 8px; right: 8px; }
-  body.theme-lavender #invitation-cover .corner-bottom-left { bottom: 8px; left: 8px; }
-  body.theme-lavender #invitation-cover .corner-bottom-right { bottom: 8px; right: 8px; }
-
-  /* Mobile Content Container with Refined Vertical Spacing */
+  /* Full Viewport Content Container */
   body.theme-lavender #invitation-cover .invitation-full-container {
+    position: relative !important;
+    width: 100% !important;
     max-width: 100% !important;
+    min-height: 100vh !important;
+    min-height: 100svh !important;
+    min-height: 100dvh !important;
+    height: 100vh !important;
+    height: 100svh !important;
+    height: 100dvh !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;
     border-radius: 0 !important;
     aspect-ratio: auto !important;
-    min-height: auto !important;
-    padding: 0 !important;
+    margin: 0 !important;
+    padding: clamp(22px, 4.2vh, 40px) 18px clamp(14px, 2.6vh, 26px) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
-    justify-content: center !important;
-    z-index: 10;
-    box-sizing: border-box;
+    justify-content: space-between !important;
+    z-index: 10 !important;
+    box-sizing: border-box !important;
+    pointer-events: auto !important;
   }
 
   /* Royal J&S Monogram Crest */
   body.theme-lavender #invitation-cover .invitation-crest-emblem {
-    width: clamp(70px, 17vw, 88px) !important;
-    height: clamp(70px, 17vw, 88px) !important;
-    margin: 0 auto clamp(6px, 1.2vh, 12px) !important;
-    flex-shrink: 0;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    width: clamp(96px, 22.5vw, 134px) !important;
+    height: clamp(96px, 22.5vw, 134px) !important;
+    margin: 0 auto clamp(2px, 0.8vh, 6px) !important;
+    flex-shrink: 0 !important;
+  }
+
+  body.theme-lavender #invitation-cover .invitation-logo-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+    mix-blend-mode: multiply !important;
+    filter: contrast(1.05) brightness(0.98) !important;
   }
 
   /* Introduction Text */
   body.theme-lavender #invitation-cover .cover-intro-lead {
-    font-size: clamp(0.64rem, 2.4vw, 0.76rem) !important;
-    letter-spacing: 0.16em !important;
+    display: block !important;
+    font-family: var(--font-sans) !important;
+    font-size: clamp(0.66rem, 2.3vw, 0.78rem) !important;
+    letter-spacing: 0.18em !important;
+    text-transform: uppercase !important;
     line-height: 1.5 !important;
-    color: #4A3358 !important;
-    margin: 0 auto clamp(8px, 1.4vh, 14px) !important;
-    max-width: clamp(260px, 78vw, 320px) !important;
-    font-weight: 500;
+    color: #7D6B8C !important;
+    margin: 0 auto clamp(4px, 1vh, 10px) !important;
+    max-width: clamp(250px, 75vw, 320px) !important;
+    font-weight: 500 !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
   }
 
   /* Couple Names */
   body.theme-lavender #invitation-cover .cover-couple-names {
-    margin: 0 auto clamp(4px, 1vh, 8px) !important;
-    gap: 2px;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: clamp(2px, 0.6vh, 6px) auto !important;
+    gap: 0px !important;
+    flex-shrink: 0 !important;
   }
 
   body.theme-lavender #invitation-cover .cover-groom-name,
   body.theme-lavender #invitation-cover .cover-bride-name {
-    font-size: clamp(2.3rem, 7.8vw, 3.1rem) !important;
+    display: block !important;
+    font-family: var(--font-serif-primary) !important;
+    font-size: clamp(2.3rem, 7.8vw, 3.2rem) !important;
+    font-weight: 500 !important;
     line-height: 1.05 !important;
     color: #2D1A38 !important;
-    letter-spacing: -0.01em;
+    letter-spacing: 0.02em !important;
+    text-align: center !important;
   }
 
   body.theme-lavender #invitation-cover .cover-ampersand {
-    font-size: clamp(1.3rem, 4.2vw, 1.6rem) !important;
-    line-height: 1 !important;
+    display: block !important;
+    font-family: var(--font-script) !important;
+    font-size: clamp(1.6rem, 5vw, 2.2rem) !important;
+    line-height: 0.9 !important;
     color: #C5A56D !important;
     margin: 1px 0 !important;
+    text-align: center !important;
   }
 
   /* Botanical Divider */
   body.theme-lavender #invitation-cover .hero-divider {
-    margin: clamp(6px, 1.1vh, 10px) auto !important;
-    width: clamp(120px, 36vw, 180px) !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    margin: clamp(2px, 0.8vh, 6px) auto !important;
+    width: clamp(110px, 32vw, 160px) !important;
+    flex-shrink: 0 !important;
   }
 
   /* Sacred Blessing Text */
   body.theme-lavender #invitation-cover .invitation-sub-lead {
-    font-size: clamp(0.82rem, 2.9vw, 0.94rem) !important;
-    line-height: 1.52 !important;
-    color: #432C56 !important;
-    max-width: clamp(250px, 76vw, 300px) !important;
-    margin: 0 auto clamp(8px, 1.6vh, 14px) !important;
+    display: block !important;
+    font-family: var(--font-serif-secondary) !important;
+    font-size: clamp(0.82rem, 2.7vw, 0.95rem) !important;
+    font-style: italic !important;
+    line-height: 1.48 !important;
+    color: #553E65 !important;
+    max-width: clamp(240px, 74vw, 300px) !important;
+    margin: 0 auto clamp(4px, 1vh, 8px) !important;
+    text-align: center !important;
+    flex-shrink: 0 !important;
   }
 
-  /* Scroll To Explore Button */
+  /* Interactive Scroll Button */
   body.theme-lavender #invitation-cover .invitation-scroll-prompt {
-    margin: clamp(4px, 1vh, 8px) auto 0 !important;
-    padding: 4px 14px !important;
-    gap: 3px !important;
+    display: inline-flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: center !important;
+    position: relative !important;
+    top: auto !important;
+    bottom: auto !important;
+    left: auto !important;
+    transform: none !important;
+    width: auto !important;
+    height: auto !important;
+    margin: clamp(4px, 0.9vh, 10px) auto 0 !important;
+    padding: 6px 16px !important;
+    gap: 4px !important;
+    color: #4A3358 !important;
+    font-family: var(--font-sans) !important;
+    font-size: 0.68rem !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.22em !important;
+    text-transform: uppercase !important;
+    text-decoration: none !important;
+    cursor: pointer !important;
+    pointer-events: auto !important;
+    background: rgba(255, 255, 255, 0.6) !important;
+    backdrop-filter: blur(6px) !important;
+    -webkit-backdrop-filter: blur(6px) !important;
+    border: 1px solid rgba(197, 165, 109, 0.42) !important;
+    border-radius: 24px !important;
+    box-shadow: 0 2px 10px rgba(74, 51, 88, 0.08) !important;
+    z-index: 20 !important;
+    touch-action: manipulation !important;
+    flex-shrink: 0 !important;
   }
 
   body.theme-lavender #invitation-cover .invitation-scroll-sparkle {
+    display: inline-block !important;
     font-size: 0.72rem !important;
     color: #C5A56D !important;
+    opacity: 1 !important;
   }
 
   body.theme-lavender #invitation-cover .invitation-scroll-label {
-    font-size: 0.65rem !important;
-    letter-spacing: 0.18em !important;
-    color: #55346E !important;
+    display: inline-block !important;
+    font-size: 0.66rem !important;
+    letter-spacing: 0.2em !important;
+    color: #4A3358 !important;
+    opacity: 1 !important;
   }
 
   body.theme-lavender #invitation-cover .invitation-scroll-line {
-    height: 16px !important;
-    margin-top: 2px !important;
+    display: block !important;
+    width: 1px !important;
+    height: 12px !important;
+    margin-top: 1px !important;
     background: linear-gradient(to bottom, #C5A56D, transparent) !important;
+    opacity: 1 !important;
   }
 }
 
@@ -4448,112 +4492,9 @@ body.theme-lavender .gallery-card img {
   display: block;
 }
 
-/* ==========================================================================
-   MOBILE FIRST PAGE — EXACT SUPPLIED REFERENCE VISUAL (NO EMPTY GAPS)
-   ========================================================================== */
-
-/* Hide mobile-only supplied image on desktop screens */
+/* Ensure mobile-only supplied image wrapper is hidden everywhere in favor of responsive layout */
 .mobile-supplied-cover-wrap {
   display: none !important;
 }
 
-@media (max-width: 768px) {
-  /* Hide desktop corners, dashed borders and corner ornaments on mobile cover */
-  body.theme-lavender #invitation-cover .lavender-floral-corners,
-  body.theme-lavender #invitation-cover .invitation-floral-art-layer,
-  body.theme-lavender #invitation-cover .invitation-page-border,
-  body.theme-lavender #invitation-cover .invitation-corner-ornaments {
-    display: none !important;
-  }
-
-  /* Full-bleed edge-to-edge mobile cover container (natural aspect ratio) */
-  body.theme-lavender #invitation-cover {
-    width: 100vw !important;
-    width: 100% !important;
-    min-height: auto !important;
-    height: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    position: relative !important;
-    overflow: hidden !important;
-    background-color: #FAF7FE !important;
-    border: none !important;
-    box-shadow: none !important;
-    display: block !important;
-  }
-
-  /* Display the exact supplied reference floral artwork with natural aspect ratio */
-  body.theme-lavender #invitation-cover .mobile-supplied-cover-wrap {
-    display: block !important;
-    position: relative !important;
-    width: 100% !important;
-    height: auto !important;
-    z-index: 1 !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    pointer-events: none !important;
-  }
-
-  body.theme-lavender #invitation-cover .mobile-supplied-cover-img {
-    width: 100% !important;
-    height: auto !important;
-    display: block !important;
-    object-fit: contain !important;
-  }
-
-  /* Overlay container for accessibility & interactive scroll prompt */
-  body.theme-lavender #invitation-cover .invitation-full-container {
-    position: absolute !important;
-    inset: 0 !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    height: 100% !important;
-    min-height: 0 !important;
-    z-index: 10 !important;
-    background: transparent !important;
-    border: none !important;
-    border-radius: 0 !important;
-    box-shadow: none !important;
-    aspect-ratio: auto !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    display: block !important;
-    pointer-events: none !important;
-  }
-
-  /* Text is already baked into the exact supplied image */
-  body.theme-lavender #invitation-cover .invitation-crest-emblem,
-  body.theme-lavender #invitation-cover .cover-intro-lead,
-  body.theme-lavender #invitation-cover .cover-couple-names,
-  body.theme-lavender #invitation-cover .hero-divider,
-  body.theme-lavender #invitation-cover .invitation-sub-lead {
-    display: none !important;
-  }
-
-  /* Interactive Scroll Button Hotspot precisely aligned over printed 'SCROLL TO EXPLORE' (y ~ 73.8%) */
-  body.theme-lavender #invitation-cover .invitation-scroll-prompt {
-    pointer-events: auto !important;
-    position: absolute !important;
-    top: 73.8% !important;
-    bottom: auto !important;
-    left: 50% !important;
-    transform: translate(-50%, -50%) !important;
-    width: min(65vw, 240px) !important;
-    height: 48px !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    text-decoration: none !important;
-    cursor: pointer !important;
-    background: transparent !important;
-    z-index: 20 !important;
-    touch-action: manipulation !important;
-  }
-
-  body.theme-lavender #invitation-cover .invitation-scroll-sparkle,
-  body.theme-lavender #invitation-cover .invitation-scroll-label,
-  body.theme-lavender #invitation-cover .invitation-scroll-line {
-    opacity: 0 !important; /* invisible hotspot over the printed button */
-  }
-}
 
