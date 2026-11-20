@@ -5,17 +5,39 @@ let globalController: { play: () => Promise<void>; pause: () => void; toggle: ()
 const TARGET_VOLUME = 0.35; // Comfortable wedding background music volume
 const FADE_DURATION_MS = 1500; // 1.5 seconds gentle fade-in
 
+export const AUDIO_START_OFFSET = 3.25; // Skips leading silence in MP3 so song starts immediately
+
 export function initMusic(audioSrc: string) {
   if (globalController) {
     return globalController;
   }
 
-  const audio = new Audio(audioSrc);
+  const audio = new Audio();
   audio.loop = true;
   audio.preload = "auto";
   audio.volume = TARGET_VOLUME;
+  audio.src = audioSrc;
   globalAudio = audio;
   (window as any).__weddingAudio = audio;
+
+  // Immediately seek past the 3.25s silence as soon as audio is ready
+  const seekToStart = () => {
+    if (audio.currentTime < AUDIO_START_OFFSET) {
+      try {
+        audio.currentTime = AUDIO_START_OFFSET;
+      } catch (e) {}
+    }
+  };
+
+  audio.addEventListener("loadedmetadata", seekToStart, { passive: true });
+  audio.addEventListener("canplay", seekToStart, { passive: true });
+
+  // If audio loops back to beginning, ensure it skips leading silence
+  audio.addEventListener("timeupdate", () => {
+    if (!audio.paused && audio.currentTime < 1.0) {
+      audio.currentTime = AUDIO_START_OFFSET;
+    }
+  }, { passive: true });
 
   const toggleBtn = document.getElementById("music-toggle-btn");
   const iconPlaying = document.getElementById("music-icon-playing");
@@ -40,37 +62,19 @@ export function initMusic(audioSrc: string) {
     }
   }
 
-  function fadeInVolume() {
-    if (fadeInterval) clearInterval(fadeInterval);
-    audio.volume = 0.05;
-    const stepTime = 50; // every 50ms
-    const totalSteps = FADE_DURATION_MS / stepTime;
-    const volumeStep = (TARGET_VOLUME - 0.05) / totalSteps;
-
-    fadeInterval = window.setInterval(() => {
-      if (audio.volume + volumeStep >= TARGET_VOLUME) {
-        audio.volume = TARGET_VOLUME;
-        if (fadeInterval) clearInterval(fadeInterval);
-      } else {
-        audio.volume = Math.min(TARGET_VOLUME, audio.volume + volumeStep);
-      }
-    }, stepTime);
-  }
-
-  async function playAudio(withFade = true) {
+  async function playAudio(withFade = false) {
     if (isPlaying) return;
     try {
-      if (withFade) {
-        audio.volume = 0.05;
-      } else {
-        audio.volume = TARGET_VOLUME;
+      if (audio.currentTime < AUDIO_START_OFFSET) {
+        try {
+          audio.currentTime = AUDIO_START_OFFSET;
+        } catch (e) {}
       }
+      // Instant target volume so melody is heard immediately
+      audio.volume = TARGET_VOLUME;
       await audio.play();
       isPlaying = true;
       updateUI();
-      if (withFade) {
-        fadeInVolume();
-      }
     } catch {
       // Browser autoplay policy prevented playback; keep paused UI for manual user tap
       isPlaying = false;
@@ -101,18 +105,18 @@ export function initMusic(audioSrc: string) {
   // Listen for ribbon opening event from guest interaction
   window.addEventListener("wedding-ribbon-start-opening", () => {
     if (!isPlaying) {
-      playAudio(true);
+      playAudio(false);
     }
   });
 
   window.addEventListener("wedding-ribbon-opened", () => {
     if (!isPlaying) {
-      playAudio(true);
+      playAudio(false);
     }
   });
 
   globalController = {
-    play: () => playAudio(true),
+    play: () => playAudio(false),
     pause: pauseAudio,
     toggle: toggleAudio
   };

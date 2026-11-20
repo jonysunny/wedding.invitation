@@ -749,12 +749,15 @@
   align-items: center;
   gap: 8px;
   width: 90%;
-  pointer-events: none;
+  pointer-events: auto;
+  cursor: pointer;
   z-index: 25;
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
 .ribbon-tap-pill {
+  cursor: pointer;
+  pointer-events: auto;
   display: inline-flex;
   align-items: center;
   gap: 10px;
@@ -968,20 +971,34 @@
     // Lock page scrolling while unopened ribbon overlay is active
     lockScroll();
 
-    function startRibbonOpening() {
-      if (isOpening || hasDismissed) return;
-      isOpening = true;
-
-      // Start background music immediately within trusted user gesture
+    // Synchronously trigger audio on trusted user interaction
+    function triggerAudioImmediate() {
       try {
         const w = window as any;
-        if (w.__weddingAudio && w.__weddingAudio.paused) {
-          w.__weddingAudio.play().catch(() => {});
+        if (w.__weddingAudio) {
+          if (w.__weddingAudio.currentTime < 3.25) {
+            try {
+              w.__weddingAudio.currentTime = 3.25;
+            } catch (e) {}
+          }
+          w.__weddingAudio.volume = 0.35;
+          const p = w.__weddingAudio.play();
+          if (p && typeof p.catch === "function") {
+            p.catch(() => {});
+          }
         }
         if (w.__weddingMusicController) {
           w.__weddingMusicController.play();
         }
       } catch (err) {}
+    }
+
+    function startRibbonOpening() {
+      if (isOpening || hasDismissed) return;
+      isOpening = true;
+
+      // Start background music immediately within trusted user gesture
+      triggerAudioImmediate();
       window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
 
       // Phase 1 — Ribbon loosens (0.0s - 0.8s)
@@ -1029,6 +1046,7 @@
     function cleanupListeners() {
       interactiveWrap?.removeEventListener("pointerdown", onTrigger);
       interactiveWrap?.removeEventListener("click", onTrigger);
+      interactiveWrap?.removeEventListener("touchstart", onTrigger);
       overlay?.removeEventListener("click", onTrigger);
       window.removeEventListener("keydown", onKeydown);
     }
@@ -1046,15 +1064,7 @@
         siteMain.classList.add("wedding-site-revealed");
         siteMain.style.visibility = "visible";
       }
-      try {
-        const w = window as any;
-        if (w.__weddingAudio && w.__weddingAudio.paused) {
-          w.__weddingAudio.play().catch(() => {});
-        }
-        if (w.__weddingMusicController) {
-          w.__weddingMusicController.play();
-        }
-      } catch (err) {}
+      triggerAudioImmediate();
       window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
       window.dispatchEvent(new CustomEvent("wedding-ribbon-opened"));
       window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
@@ -1062,6 +1072,8 @@
 
     function onTrigger(e: Event) {
       if ((e.target as HTMLElement)?.closest("#ribbon-skip-intro-btn")) return;
+      // Start audio immediately in the direct call stack of the user gesture
+      triggerAudioImmediate();
       e.preventDefault();
       interactiveWrap?.classList.add("is-pressed");
       startRibbonOpening();
@@ -1070,7 +1082,12 @@
     // Direct, immediate pointer/touch activation with zero synthetic click delay
     interactiveWrap?.addEventListener("pointerdown", onTrigger, { once: true });
     interactiveWrap?.addEventListener("click", onTrigger, { once: true });
+    interactiveWrap?.addEventListener("touchstart", onTrigger, { once: true, passive: false });
     overlay?.addEventListener("click", onTrigger);
+
+    const tapPill = overlay?.querySelector(".ribbon-tap-pill");
+    tapPill?.addEventListener("click", onTrigger);
+    tapPill?.addEventListener("pointerdown", onTrigger);
 
     // Skip intro button
     skipBtn?.addEventListener("click", (e) => {
