@@ -13,9 +13,19 @@ export function initScratchCard() {
 
   let isDrawing = false;
   let isRevealed = false;
+  let hasStartedScratching = false;
   let totalHeartPixels = 0;
   let scratchedPixels = 0;
   let moveCounter = 0;
+
+  // Preload photorealistic Luxury Lavender Silk texture
+  const silkImg = new Image();
+  silkImg.src = "/jony-wedding/assets/decorations/lavender-silk-texture.jpg";
+  silkImg.onload = () => {
+    if (!isRevealed && !hasStartedScratching) {
+      paintCoating();
+    }
+  };
 
   // Dynamic responsive canvas dimensions matching the heart container
   const dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -36,7 +46,7 @@ export function initScratchCard() {
   canvas.style.pointerEvents = "auto";
   canvas.style.transition = "none";
 
-  const shimmer = container.querySelector(".scratch-velvet-sheen, .scratch-foil-shimmer") as HTMLElement | null;
+  const shimmer = container.querySelector(".scratch-silk-sheen, .scratch-velvet-sheen, .scratch-foil-shimmer") as HTMLElement | null;
   if (shimmer) {
     shimmer.style.opacity = "";
     shimmer.style.display = "";
@@ -261,7 +271,7 @@ export function initScratchCard() {
     context.closePath();
   }
 
-  // Paint Option 1: Royal Velvet Heart Coating
+  // Paint Luxury Lavender Silk / Satin Heart Coating
   function paintCoating() {
     if (!ctx) return;
     resizeCanvas();
@@ -274,139 +284,70 @@ export function initScratchCard() {
     drawHeartPath(ctx, w, h);
     ctx.clip();
 
-    // 1. Deep Royal Velvet Base Foundation (Rich Lavender / Amethyst Fabric Tonal Blend)
-    const baseGrad = ctx.createLinearGradient(w * 0.25, 0, w * 0.75, h);
-    baseGrad.addColorStop(0.0, "#8558A7"); // Luminous upper velvet
-    baseGrad.addColorStop(0.28, "#724794"); // Rich royal lavender
-    baseGrad.addColorStop(0.58, "#5A337A"); // Deep amethyst velvet
-    baseGrad.addColorStop(0.85, "#462263"); // Shadowed velvet pile
-    baseGrad.addColorStop(1.0, "#35174D"); // Deepest bottom velvet shadow
-    ctx.fillStyle = baseGrad;
+    // 1. Fully Opaque Lavender Silk Foundation Gradient (100% opaque, immediate coverage)
+    // Palette: Highlight #DED0F0, Main #C5AFE0, Lilac #AD91C9, Soft shadow #9474B2
+    const silkGrad = ctx.createLinearGradient(0, 0, w, h);
+    silkGrad.addColorStop(0.0, "#E8DCF8"); // Luminous upper-left silk reflection
+    silkGrad.addColorStop(0.20, "#DED0F0"); // Silk highlight
+    silkGrad.addColorStop(0.52, "#C5AFE0"); // Main luxurious lavender
+    silkGrad.addColorStop(0.80, "#AD91C9"); // Lilac fold transition
+    silkGrad.addColorStop(1.0, "#9474B2");  // Soft shadow
+    ctx.fillStyle = silkGrad;
     ctx.fillRect(0, 0, w, h);
 
-    // 2. Soft Pillowed Cushion Depth (Upholstered 3D Velvet Dome)
-    // Primary plush light dome on upper-left lobe
-    const lobeLightL = ctx.createRadialGradient(
-      w * 0.36, h * 0.30, w * 0.04,
-      w * 0.36, h * 0.32, w * 0.42
-    );
-    lobeLightL.addColorStop(0, "rgba(206, 178, 235, 0.48)"); // Soft plush lilac sheen
-    lobeLightL.addColorStop(0.45, "rgba(168, 134, 202, 0.25)");
-    lobeLightL.addColorStop(1, "rgba(100, 55, 140, 0)");
-    ctx.fillStyle = lobeLightL;
-    ctx.fillRect(0, 0, w, h);
+    // 2. Render Realistic Lavender Silk Texture Artwork (if loaded)
+    if (silkImg.complete && silkImg.naturalWidth > 0) {
+      ctx.drawImage(silkImg, 0, 0, w, h);
 
-    // Secondary plush light dome on upper-right lobe
-    const lobeLightR = ctx.createRadialGradient(
-      w * 0.68, h * 0.34, w * 0.04,
-      w * 0.68, h * 0.36, w * 0.38
-    );
-    lobeLightR.addColorStop(0, "rgba(196, 168, 226, 0.38)");
-    lobeLightR.addColorStop(0.50, "rgba(152, 118, 186, 0.18)");
-    lobeLightR.addColorStop(1, "rgba(90, 48, 128, 0)");
-    ctx.fillStyle = lobeLightR;
-    ctx.fillRect(0, 0, w, h);
+      // Subtle upper-left soft lighting accent to enhance 3D fullness and match ribbon lighting
+      const silkLightAccent = ctx.createRadialGradient(
+        w * 0.35, h * 0.28, w * 0.04,
+        w * 0.35, h * 0.28, w * 0.45
+      );
+      silkLightAccent.addColorStop(0, "rgba(255, 255, 255, 0.20)");
+      silkLightAccent.addColorStop(0.5, "rgba(238, 225, 252, 0.08)");
+      silkLightAccent.addColorStop(1, "rgba(197, 175, 224, 0)");
+      ctx.fillStyle = silkLightAccent;
+      ctx.fillRect(0, 0, w, h);
+    } else {
+      // Procedural natural silky reflections and subtle 3D depth from upper-left
+      const lobeLightL = ctx.createRadialGradient(
+        w * 0.35, h * 0.28, w * 0.04,
+        w * 0.35, h * 0.28, w * 0.40
+      );
+      lobeLightL.addColorStop(0, "rgba(255, 255, 255, 0.32)");
+      lobeLightL.addColorStop(0.5, "rgba(222, 208, 240, 0.14)");
+      lobeLightL.addColorStop(1, "rgba(173, 145, 201, 0)");
+      ctx.fillStyle = lobeLightL;
+      ctx.fillRect(0, 0, w, h);
 
-    // Subtle lower center plush bounce
-    const bounceLight = ctx.createRadialGradient(
-      w * 0.50, h * 0.68, w * 0.02,
-      w * 0.50, h * 0.68, w * 0.30
-    );
-    bounceLight.addColorStop(0, "rgba(180, 150, 212, 0.22)");
-    bounceLight.addColorStop(1, "rgba(75, 38, 105, 0)");
-    ctx.fillStyle = bounceLight;
-    ctx.fillRect(0, 0, w, h);
-
-    // 3. Natural Velvet Nap & Fabric Folds (Smooth, Organic Tonal Shifts)
-    ctx.save();
-    ctx.globalCompositeOperation = "source-over";
-
-    // Nap sweep 1: Gentle diagonal velvet wave across left lobe into center
-    ctx.beginPath();
-    ctx.moveTo(w * 0.12, h * 0.18);
-    ctx.bezierCurveTo(w * 0.28, h * 0.26, w * 0.42, h * 0.42, w * 0.52, h * 0.62);
-    ctx.bezierCurveTo(w * 0.42, h * 0.64, w * 0.24, h * 0.44, w * 0.10, h * 0.32);
-    ctx.closePath();
-    const napGrad1 = ctx.createLinearGradient(w * 0.12, h * 0.18, w * 0.52, h * 0.62);
-    napGrad1.addColorStop(0, "rgba(225, 204, 246, 0.14)");
-    napGrad1.addColorStop(0.5, "rgba(200, 172, 228, 0.08)");
-    napGrad1.addColorStop(1, "rgba(135, 95, 170, 0)");
-    ctx.fillStyle = napGrad1;
-    ctx.fill();
-
-    // Nap sweep 2: Counter soft sweep on right lobe
-    ctx.beginPath();
-    ctx.moveTo(w * 0.88, h * 0.22);
-    ctx.bezierCurveTo(w * 0.72, h * 0.32, w * 0.58, h * 0.46, w * 0.48, h * 0.66);
-    ctx.bezierCurveTo(w * 0.56, h * 0.68, w * 0.74, h * 0.48, w * 0.90, h * 0.34);
-    ctx.closePath();
-    const napGrad2 = ctx.createLinearGradient(w * 0.88, h * 0.22, w * 0.48, h * 0.66);
-    napGrad2.addColorStop(0, "rgba(215, 192, 240, 0.12)");
-    napGrad2.addColorStop(0.5, "rgba(188, 158, 220, 0.07)");
-    napGrad2.addColorStop(1, "rgba(120, 80, 155, 0)");
-    ctx.fillStyle = napGrad2;
-    ctx.fill();
-
-    // Soft velvet cleft indentation shadow (between the two top lobes)
-    const cleftShadow = ctx.createRadialGradient(
-      w * 0.50, h * 0.16, 1,
-      w * 0.50, h * 0.24, w * 0.18
-    );
-    cleftShadow.addColorStop(0, "rgba(32, 10, 48, 0.48)");
-    cleftShadow.addColorStop(0.55, "rgba(45, 18, 64, 0.22)");
-    cleftShadow.addColorStop(1, "rgba(70, 32, 95, 0)");
-    ctx.fillStyle = cleftShadow;
-    ctx.fillRect(0, 0, w, h);
-    ctx.restore();
-
-    // 4. Velvet Micro-Fiber Pile Texture (Tactile Fabric Weave Grain)
-    ctx.save();
-    const grainCount = Math.round(w * h * 0.012);
-    for (let i = 0; i < grainCount; i++) {
-      const gx = Math.random() * w;
-      const gy = Math.random() * h;
-      const gr = Math.random() * 1.2 + 0.3;
-      const isLight = i % 2 === 0;
-      ctx.fillStyle = isLight 
-        ? `rgba(240, 225, 255, ${Math.random() * 0.045 + 0.015})`
-        : `rgba(28, 8, 42, ${Math.random() * 0.055 + 0.02})`;
-      ctx.beginPath();
-      ctx.arc(gx, gy, gr, 0, Math.PI * 2);
-      ctx.fill();
+      const lobeLightR = ctx.createRadialGradient(
+        w * 0.68, h * 0.32, w * 0.04,
+        w * 0.68, h * 0.32, w * 0.36
+      );
+      lobeLightR.addColorStop(0, "rgba(245, 235, 255, 0.22)");
+      lobeLightR.addColorStop(0.5, "rgba(215, 195, 238, 0.10)");
+      lobeLightR.addColorStop(1, "rgba(173, 145, 201, 0)");
+      ctx.fillStyle = lobeLightR;
+      ctx.fillRect(0, 0, w, h);
     }
-    ctx.restore();
 
-    // 5. Plush Velvet Padded Perimeter (Cushioned Pillow Edge Shadow)
+    // 3. Smooth, subtle edge depth (Natural soft rim - NO gold, NO heavy borders)
+    ctx.strokeStyle = "rgba(148, 116, 178, 0.22)";
+    ctx.lineWidth = 1.6;
+    drawHeartPath(ctx, w, h);
+    ctx.stroke();
+
+    // Delicate upper silk highlight edge
     ctx.save();
-    ctx.strokeStyle = "rgba(24, 7, 36, 0.48)";
-    ctx.lineWidth = 10;
-    drawHeartPath(ctx, w, h);
-    ctx.stroke();
-
-    ctx.strokeStyle = "rgba(32, 10, 48, 0.30)";
-    ctx.lineWidth = 18;
+    ctx.beginPath();
+    ctx.rect(0, 0, w, h * 0.45);
+    ctx.clip();
+    ctx.strokeStyle = "rgba(255, 255, 255, 0.35)";
+    ctx.lineWidth = 1.0;
     drawHeartPath(ctx, w, h);
     ctx.stroke();
     ctx.restore();
-
-    // 6. Refined Champagne-Gold Soft Stitched Edge Rim
-    // Soft outer warm glow
-    ctx.strokeStyle = "rgba(235, 215, 175, 0.28)";
-    ctx.lineWidth = 4.0;
-    drawHeartPath(ctx, w, h);
-    ctx.stroke();
-
-    // Delicate main champagne gold rim
-    ctx.strokeStyle = "rgba(215, 190, 145, 0.75)";
-    ctx.lineWidth = 1.8;
-    drawHeartPath(ctx, w, h);
-    ctx.stroke();
-
-    // Fine inner velvet seam hairline
-    ctx.strokeStyle = "rgba(245, 230, 200, 0.38)";
-    ctx.lineWidth = 0.8;
-    drawHeartPath(ctx, w, h);
-    ctx.stroke();
 
     ctx.restore();
 
@@ -490,6 +431,7 @@ export function initScratchCard() {
   function onPointerDown(e: PointerEvent) {
     if (isRevealed) return;
     isDrawing = true;
+    hasStartedScratching = true;
     try {
       canvas?.setPointerCapture(e.pointerId);
     } catch {}

@@ -1170,12 +1170,13 @@ body.theme-lavender #music-icon-muted {
   aspect-ratio: 340 / 320;
   height: auto;
   margin: 0 auto;
-  /* Luxurious plush royal velvet ambient glow and deep drop-shadow */
-  filter: drop-shadow(0 20px 42px rgba(52, 22, 75, 0.38)) drop-shadow(0 6px 18px rgba(115, 85, 141, 0.24));
+  /* Soft, natural shadow for luxury lavender silk heart */
+  filter: drop-shadow(0 12px 28px rgba(115, 85, 141, 0.18)) drop-shadow(0 4px 10px rgba(148, 116, 178, 0.12));
   transition: filter 0.4s ease;
 }
 
-/* Subtle Velvet Nap Sheen (Soft Minimal Fabric Light Shift) */
+/* Subtle Silk Light Shift (Soft Minimal Fabric Sheen) */
+.scratch-silk-sheen,
 .scratch-velvet-sheen,
 .scratch-foil-shimmer {
   position: absolute;
@@ -1186,20 +1187,21 @@ body.theme-lavender #music-icon-muted {
   -webkit-clip-path: url(#svg-heart-clip);
   background: linear-gradient(
     118deg,
-    transparent 28%,
-    rgba(240, 222, 255, 0.06) 46%,
-    rgba(255, 245, 255, 0.13) 50%,
-    rgba(240, 222, 255, 0.06) 54%,
+    transparent 32%,
+    rgba(255, 255, 255, 0.05) 48%,
+    rgba(255, 255, 255, 0.12) 52%,
+    rgba(255, 255, 255, 0.05) 56%,
     transparent 72%
   );
-  background-size: 240% 100%;
-  animation: velvetNapShift 6.8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+  background-size: 260% 100%;
+  animation: silkLightShift 8s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   pointer-events: none !important;
   z-index: 12;
   mix-blend-mode: soft-light;
   transition: opacity 0.5s ease;
 }
 
+[data-revealed="true"] .scratch-silk-sheen,
 [data-revealed="true"] .scratch-velvet-sheen,
 [data-revealed="true"] .scratch-foil-shimmer {
   opacity: 0 !important;
@@ -1207,7 +1209,7 @@ body.theme-lavender #music-icon-muted {
   pointer-events: none !important;
 }
 
-@keyframes velvetNapShift {
+@keyframes silkLightShift {
   0% {
     background-position: 180% 0;
     opacity: 0;
@@ -2960,6 +2962,7 @@ body.theme-lavender .scratch-underneath-card,
 body.theme-lavender .scratch-heart-shape,
 body.theme-lavender .scratch-inner-typography,
 body.theme-lavender .scratch-canvas-overlay,
+body.theme-lavender .scratch-silk-sheen,
 body.theme-lavender .scratch-velvet-sheen,
 body.theme-lavender .scratch-foil-shimmer {
   user-select: none !important;
