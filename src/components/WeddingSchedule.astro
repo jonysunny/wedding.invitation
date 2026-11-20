@@ -1,0 +1,219 @@
+---
+// WeddingSchedule.astro
+// Premium Lavender Floral Wedding Schedule - Creative Split Timeline
+
+interface ScheduleEvent {
+  time: string;
+  title: string;
+  officiant?: string;
+  icon: string;
+  highlight?: boolean;
+}
+
+const scheduleEvents: ScheduleEvent[] = [
+  {
+    time: "4:00 PM",
+    title: "Groom Entry",
+    icon: "🤵"
+  },
+  {
+    time: "—",
+    title: "Songs",
+    icon: "🎶"
+  },
+  {
+    time: "4:30 PM",
+    title: "Bride Entry",
+    icon: "👰"
+  },
+  {
+    time: "4:45 PM",
+    title: "God's Word",
+    officiant: "By Rev. Dr. K. Daniel Solomon",
+    icon: "📖"
+  },
+  {
+    time: "5:30 PM",
+    title: "Wedding Ceremony",
+    officiant: "By Rev. Dr. K. Daniel Solomon",
+    icon: "💍",
+    highlight: true
+  },
+  {
+    time: "6:10 PM",
+    title: "Prayer by all servants of God",
+    icon: "🙏"
+  },
+  {
+    time: "6:20 PM",
+    title: "Wedding Greetings",
+    icon: "🕊️"
+  },
+  {
+    time: "6:50 PM",
+    title: "Couple Walk Along the Aisle",
+    icon: "💐"
+  },
+  {
+    time: "7:00 PM",
+    title: "Closing Prayer, followed by Reception & Lunch at Noor Convention",
+    icon: "🥂",
+    highlight: true
+  }
+];
+---
+
+<section id="wedding-schedule-section" class="invite-section wedding-schedule-page reveal-on-scroll">
+  <!-- Dedicated Lavender 4-Corner Accent Layer -->
+  <div class="lavender-section-decor decor-comp-schedule" aria-hidden="true">
+    <div class="lavender-corner-item lavender-corner-tl"></div>
+    <div class="lavender-corner-item lavender-corner-tr"></div>
+    <div class="lavender-corner-item lavender-corner-bl"></div>
+    <div class="lavender-corner-item lavender-corner-br"></div>
+  </div>
+
+  <!-- Perimeter Luxury Double Border Inset -->
+  <div class="invitation-page-border" aria-hidden="true">
+    <div class="invitation-page-inner-border"></div>
+  </div>
+  <div class="invitation-corner-ornaments" aria-hidden="true">
+    <span class="corner-ornament corner-top-left">❦</span>
+    <span class="corner-ornament corner-top-right">❦</span>
+    <span class="corner-ornament corner-bottom-left">❦</span>
+    <span class="corner-ornament corner-bottom-right">❦</span>
+  </div>
+
+  <div class="schedule-content-container">
+    <!-- Header Block -->
+    <div class="section-heading-block schedule-header-block">
+      <div class="schedule-date-badge font-serif">
+        <span class="badge-sparkle">✦</span>
+        <span>Tuesday, 29 December 2026</span>
+        <span class="badge-sparkle">✦</span>
+      </div>
+      <h2 class="section-title schedule-section-title font-serif">Wedding Schedule</h2>
+      <p class="section-desc schedule-section-subtitle font-serif-sub">A celebration of faith, love and togetherness</p>
+      
+      <div class="botanical-divider schedule-divider" aria-hidden="true">
+        <span class="botanical-divider-icon">❦</span>
+      </div>
+    </div>
+
+    <!-- Center Stationery Panel with Creative Split Timeline -->
+    <div class="page-invitation-card schedule-main-card stationery-panel">
+      <div class="schedule-split-timeline" id="schedule-split-timeline">
+        <!-- Central Animated Spine Passing Down Between Columns -->
+        <div class="split-spine-track-wrapper" id="split-spine-wrapper" aria-hidden="true">
+          <div class="split-spine-line-base"></div>
+          <div class="split-spine-progress" id="split-spine-progress"></div>
+          <div class="split-spine-runner" id="split-spine-runner">
+            <span class="runner-sparkle">✦</span>
+          </div>
+        </div>
+
+        <!-- Split Timeline Rows -->
+        <div class="split-timeline-rows" id="split-timeline-rows">
+          {scheduleEvents.map((item, index) => (
+            <div 
+              class={`split-timeline-row ${item.highlight ? 'is-highlighted' : ''}`} 
+              data-step={index + 1}
+            >
+              <!-- Left Column: Time -->
+              <div class="split-col-time">
+                <span class={`split-time-pill ${item.time === '—' ? 'is-dash' : ''}`}>
+                  {item.time}
+                </span>
+              </div>
+
+              <!-- Center Column: Animated Node Anchor -->
+              <div class="split-col-center" aria-hidden="true">
+                <div class="split-node">
+                  <span class="node-halo"></span>
+                  <span class="node-icon">{item.icon}</span>
+                </div>
+              </div>
+
+              <!-- Right Column: Event Title & Details -->
+              <div class="split-col-event">
+                <div class="split-event-card">
+                  <h3 class="split-event-title font-serif">{item.title}</h3>
+                  {item.officiant && (
+                    <p class="split-event-officiant font-serif-sub">{item.officiant}</p>
+                  )}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script is:inline>
+  (function initSplitTimelineAnimation() {
+    function setup() {
+      const section = document.getElementById('wedding-schedule-section');
+      const spineWrapper = document.getElementById('split-spine-wrapper');
+      const spineProgress = document.getElementById('split-spine-progress');
+      const spineRunner = document.getElementById('split-spine-runner');
+      const rows = document.querySelectorAll('.split-timeline-row');
+
+      if (!section || !spineWrapper || !spineProgress || !spineRunner) return;
+
+      let ticking = false;
+
+      function updateSpineProgress() {
+        ticking = false;
+        const rect = section.getBoundingClientRect();
+        const vh = window.innerHeight || document.documentElement.clientHeight;
+
+        if (rect.bottom < 0 || rect.top > vh) {
+          return;
+        }
+
+        const triggerY = vh * 0.55;
+        const totalHeight = rect.height;
+        const elapsed = triggerY - rect.top;
+        let progress = elapsed / totalHeight;
+        progress = Math.max(0, Math.min(1, progress));
+
+        spineProgress.style.transform = 'scaleY(' + progress + ')';
+
+        const spineHeight = spineWrapper.offsetHeight;
+        const runnerY = progress * spineHeight;
+        spineRunner.style.transform = 'translate(-50%, ' + runnerY + 'px)';
+        spineRunner.style.opacity = progress > 0.01 ? '1' : '0';
+
+        rows.forEach(function(row) {
+          const rRect = row.getBoundingClientRect();
+          const rMid = rRect.top + rRect.height / 2;
+          if (rMid <= triggerY + 20) {
+            row.classList.add('is-passed');
+          } else {
+            row.classList.remove('is-passed');
+          }
+        });
+      }
+
+      function onScroll() {
+        if (!ticking) {
+          window.requestAnimationFrame(updateSpineProgress);
+          ticking = true;
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', onScroll, { passive: true });
+      updateSpineProgress();
+      setTimeout(updateSpineProgress, 250);
+      setTimeout(updateSpineProgress, 750);
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', setup);
+    } else {
+      setup();
+    }
+  })();
+</script>
