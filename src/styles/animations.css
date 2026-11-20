@@ -37,6 +37,7 @@
 .reveal-on-scroll.is-visible {
   opacity: 1;
   transform: translateY(0);
+  will-change: auto;
 }
 
 /* Staggered Heading and Title Entrance */
@@ -107,13 +108,15 @@
               background 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.btn-champagne:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(199, 167, 123, 0.42);
+@media (hover: hover) and (pointer: fine) {
+  .btn-champagne:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(199, 167, 123, 0.42);
+  }
 }
 
 .btn-champagne:active {
-  transform: translateY(0px) scale(0.98);
+  transform: translateY(0px) scale(0.96);
   box-shadow: 0 2px 10px rgba(199, 167, 123, 0.3);
 }
 
@@ -162,15 +165,17 @@
   right: 20px;
 }
 
-.lightbox-nav-btn:hover {
-  background: rgba(197, 165, 109, 0.95);
-  color: #2D1A38;
-  transform: translateY(-50%) scale(1.06);
-  border-color: #FFFDF8;
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-nav-btn:hover {
+    background: rgba(197, 165, 109, 0.95);
+    color: #2D1A38;
+    transform: translateY(-50%) scale(1.06);
+    border-color: #FFFDF8;
+  }
 }
 
 .lightbox-nav-btn:active {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%) scale(0.94);
 }
 
 @media (max-width: 600px) {

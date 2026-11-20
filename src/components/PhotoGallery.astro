@@ -56,6 +56,8 @@ const { gallery } = Astro.props;
         <img 
           src={photo.url} 
           alt={photo.alt || photo.title} 
+          loading="lazy"
+          decoding="async"
         />
         <div class="gallery-caption-bar">
           <p>{photo.title}</p>

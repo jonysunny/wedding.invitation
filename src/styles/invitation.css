@@ -785,6 +785,9 @@
   box-shadow: var(--shadow-soft);
   cursor: pointer;
   border: 1px solid var(--color-border-subtle);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease;
 }
 
 .gallery-card img {
@@ -794,8 +797,14 @@
   transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.gallery-card:hover img {
-  transform: scale(1.03);
+@media (hover: hover) and (pointer: fine) {
+  .gallery-card:hover img {
+    transform: scale(1.03);
+  }
+}
+
+.gallery-card:active {
+  transform: scale(0.98);
 }
 
 .gallery-caption-bar {
@@ -858,19 +867,27 @@
   justify-content: center;
   cursor: pointer;
   z-index: 100010;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
   line-height: 1;
   padding: 0;
 }
 
-.lightbox-close-btn:hover,
-.lightbox-close-btn:focus-visible {
-  background: rgba(197, 165, 109, 0.95);
-  color: #2D1A38;
-  transform: scale(1.08);
-  border-color: #FFFDF8;
-  box-shadow: 0 6px 20px rgba(197, 165, 109, 0.4);
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-close-btn:hover,
+  .lightbox-close-btn:focus-visible {
+    background: rgba(197, 165, 109, 0.95);
+    color: #2D1A38;
+    transform: scale(1.08);
+    border-color: #FFFDF8;
+    box-shadow: 0 6px 20px rgba(197, 165, 109, 0.4);
+  }
+}
+
+.lightbox-close-btn:active {
+  transform: scale(0.94);
 }
 
 /* Lightbox Navigation Buttons */
@@ -889,7 +906,9 @@
   justify-content: center;
   cursor: pointer;
   z-index: 100008;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), background 0.2s ease, border-color 0.2s ease;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.4);
 }
 
@@ -901,17 +920,19 @@
   right: max(16px, env(safe-area-inset-right, 16px));
 }
 
-.lightbox-nav-btn:hover,
-.lightbox-nav-btn:focus-visible {
-  background: rgba(197, 165, 109, 0.95) !important;
-  color: #2D1A38 !important;
-  transform: translateY(-50%) scale(1.08);
-  border-color: #FFFDF8 !important;
-  box-shadow: 0 6px 20px rgba(197, 165, 109, 0.4);
+@media (hover: hover) and (pointer: fine) {
+  .lightbox-nav-btn:hover,
+  .lightbox-nav-btn:focus-visible {
+    background: rgba(197, 165, 109, 0.95) !important;
+    color: #2D1A38 !important;
+    transform: translateY(-50%) scale(1.08);
+    border-color: #FFFDF8 !important;
+    box-shadow: 0 6px 20px rgba(197, 165, 109, 0.4);
+  }
 }
 
 .lightbox-nav-btn:active {
-  transform: translateY(-50%) scale(0.96);
+  transform: translateY(-50%) scale(0.94);
 }
 
 /* Centred Content Box */
@@ -2837,11 +2858,19 @@ body.theme-lavender #invitation-cover .invitation-scroll-prompt {
   box-shadow: none !important;
   padding: 0 !important;
   cursor: pointer;
-  transition: transform 0.25s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease;
 }
 
-body.theme-lavender #invitation-cover .invitation-scroll-prompt:hover {
-  transform: translateY(-2px);
+@media (hover: hover) and (pointer: fine) {
+  body.theme-lavender #invitation-cover .invitation-scroll-prompt:hover {
+    transform: translateY(-2px);
+  }
+}
+
+body.theme-lavender #invitation-cover .invitation-scroll-prompt:active {
+  transform: scale(0.96);
 }
 
 body.theme-lavender #invitation-cover .invitation-scroll-sparkle {
@@ -3227,13 +3256,22 @@ body.theme-lavender #save-the-date-btn {
   color: #FFFDF8 !important;
   border: 1.5px solid #C5A56D !important;
   box-shadow: 0 6px 20px rgba(115, 85, 141, 0.28) !important;
-  transition: all 0.25s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-body.theme-lavender #save-the-date-btn:hover {
-  background: linear-gradient(135deg, #8665A3 0%, #73558D 100%) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(115, 85, 141, 0.38) !important;
+@media (hover: hover) and (pointer: fine) {
+  body.theme-lavender #save-the-date-btn:hover {
+    background: linear-gradient(135deg, #8665A3 0%, #73558D 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 28px rgba(115, 85, 141, 0.38) !important;
+  }
+}
+
+body.theme-lavender #save-the-date-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 12px rgba(115, 85, 141, 0.25) !important;
 }
 
 /* SECTION 3: COUNTDOWN */
@@ -3334,15 +3372,24 @@ body.theme-lavender .event-directions-btn {
   color: #FFFDF8 !important;
   border: 1.5px solid rgba(197, 165, 109, 0.6) !important;
   box-shadow: 0 6px 18px rgba(115, 85, 141, 0.25) !important;
-  transition: all 0.25s ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 }
 
-body.theme-lavender .event-directions-btn:hover {
-  background: linear-gradient(135deg, #C5A56D 0%, #B39155 100%) !important;
-  color: #3E2910 !important;
-  border-color: #C5A56D !important;
-  transform: translateY(-2px);
-  box-shadow: 0 10px 24px rgba(197, 165, 109, 0.35) !important;
+@media (hover: hover) and (pointer: fine) {
+  body.theme-lavender .event-directions-btn:hover {
+    background: linear-gradient(135deg, #C5A56D 0%, #B39155 100%) !important;
+    color: #3E2910 !important;
+    border-color: #C5A56D !important;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(197, 165, 109, 0.35) !important;
+  }
+}
+
+body.theme-lavender .event-directions-btn:active {
+  transform: scale(0.96);
+  box-shadow: 0 3px 10px rgba(115, 85, 141, 0.25) !important;
 }
 
 /* SECTION 5: PHOTO GALLERY */

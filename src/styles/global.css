@@ -47,7 +47,6 @@ body {
 
 html {
   font-size: 16px;
-  scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--bg-paper);
@@ -149,12 +148,22 @@ body.scroll-locked {
   border: none;
   cursor: pointer;
   box-shadow: var(--shadow-gold);
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, background 0.2s ease;
 }
-.btn-champagne:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 6px 20px rgba(199, 167, 123, 0.4);
-  background: linear-gradient(135deg, #DFCAAC, #C7A77B);
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-champagne:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(199, 167, 123, 0.4);
+    background: linear-gradient(135deg, #DFCAAC, #C7A77B);
+  }
+}
+
+.btn-champagne:active {
+  transform: scale(0.96);
+  box-shadow: 0 2px 8px rgba(199, 167, 123, 0.3);
 }
 
 @media (prefers-reduced-motion: reduce) {

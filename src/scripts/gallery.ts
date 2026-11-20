@@ -58,9 +58,7 @@ export function initGallery() {
       requestAnimationFrame(() => {
         previewImg.style.opacity = "1";
         previewImg.style.transform = "scale(1)";
-        setTimeout(() => {
-          isTransitioning = false;
-        }, 150);
+        isTransitioning = false;
       });
     };
 
@@ -70,6 +68,23 @@ export function initGallery() {
       imgLoader.onload = finalize;
       imgLoader.onerror = finalize;
     }
+  }
+
+  // Preload all gallery images in background to make lightbox switching instant
+  function preloadGalleryImages() {
+    cards.forEach(card => {
+      const src = card.getAttribute("data-src");
+      if (src) {
+        const img = new Image();
+        img.src = src;
+      }
+    });
+  }
+
+  if (document.readyState === "complete") {
+    preloadGalleryImages();
+  } else {
+    window.addEventListener("load", preloadGalleryImages, { once: true });
   }
 
   function openModal(index: number) {
@@ -196,15 +211,6 @@ export function initScrollReveal() {
   const elements = document.querySelectorAll(".reveal-on-scroll");
   if (!elements.length) return;
 
-  function revealVisibleElements() {
-    elements.forEach(el => {
-      const rect = el.getBoundingClientRect();
-      if (rect.top < window.innerHeight + 300 && rect.bottom > -200) {
-        el.classList.add("is-visible");
-      }
-    });
-  }
-
   if (!("IntersectionObserver" in window)) {
     elements.forEach(el => el.classList.add("is-visible"));
     return;
@@ -221,21 +227,13 @@ export function initScrollReveal() {
 
   elements.forEach(el => observer.observe(el));
 
-  // Check immediately on initialize
-  revealVisibleElements();
-
   // When ribbon opening begins / completes, immediately reveal Section 2 (scratch) and visible items
   const onRibbonEvent = () => {
     const scratch = document.getElementById("scratch-reveal-section");
     if (scratch) scratch.classList.add("is-visible");
-    revealVisibleElements();
   };
 
   window.addEventListener("wedding-ribbon-start-opening", onRibbonEvent);
   window.addEventListener("wedding-ribbon-opened", onRibbonEvent);
   window.addEventListener("wedding-envelope-opened", onRibbonEvent);
-
-  // Passive scroll and resize listeners as bulletproof fallbacks
-  window.addEventListener("scroll", revealVisibleElements, { passive: true });
-  window.addEventListener("resize", revealVisibleElements, { passive: true });
 }

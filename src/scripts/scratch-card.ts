@@ -352,25 +352,53 @@ export function initScratchCard() {
     ctx.restore();
 
     // Count initial solid heart pixels for threshold calculation
-    calculateInitialHeartArea();
+    // Count initial solid heart pixels using low-res offscreen sample mask
+    initSampleMask();
   }
 
-  function calculateInitialHeartArea() {
-    if (!ctx || !canvas) return;
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  // Low-resolution offscreen sampling canvas (68x64) for near-instant 99% faster completion checks
+  const SAMPLE_W = 68;
+  const SAMPLE_H = 64;
+  let sampleCanvas: HTMLCanvasElement | null = null;
+  let sampleCtx: CanvasRenderingContext2D | null = null;
+
+  function initSampleMask() {
+    if (!sampleCanvas) {
+      sampleCanvas = document.createElement("canvas");
+      sampleCanvas.width = SAMPLE_W;
+      sampleCanvas.height = SAMPLE_H;
+      sampleCtx = sampleCanvas.getContext("2d", { willReadFrequently: true });
+    }
+    if (!sampleCtx) return;
+
+    sampleCtx.clearRect(0, 0, SAMPLE_W, SAMPLE_H);
+    sampleCtx.save();
+    sampleCtx.fillStyle = "#FFFFFF";
+    drawHeartPath(sampleCtx, SAMPLE_W, SAMPLE_H);
+    sampleCtx.fill();
+    sampleCtx.restore();
+
+    // Count initial heart pixels on sample mask
+    const imgData = sampleCtx.getImageData(0, 0, SAMPLE_W, SAMPLE_H).data;
     totalHeartPixels = 0;
-    for (let i = 3; i < imgData.length; i += 16) { // sample every 4th pixel
+    for (let i = 3; i < imgData.length; i += 4) {
       if (imgData[i] > 100) {
         totalHeartPixels++;
       }
     }
   }
 
-  function checkScratchPercentage() {
-    if (isRevealed || !ctx || !canvas || totalHeartPixels === 0) return;
-    const imgData = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+  let lastCheckTime = 0;
+  function checkScratchPercentage(force = false) {
+    if (isRevealed || !sampleCtx || totalHeartPixels === 0) return;
+    const now = performance.now();
+    // Throttle checks to at most once every 120ms during active dragging, unless forced on pointerup
+    if (!force && now - lastCheckTime < 120) return;
+    lastCheckTime = now;
+
+    const imgData = sampleCtx.getImageData(0, 0, SAMPLE_W, SAMPLE_H).data;
     let solidPixels = 0;
-    for (let i = 3; i < imgData.length; i += 16) {
+    for (let i = 3; i < imgData.length; i += 4) {
       if (imgData[i] > 80) {
         solidPixels++;
       }
@@ -388,12 +416,11 @@ export function initScratchCard() {
 
   function erasePath(x1: number, y1: number, x2: number, y2: number) {
     if (!ctx) return;
-    ctx.save();
-    ctx.globalCompositeOperation = "destination-out";
-    
-    // Smooth scratch brush scaled with display width
     const brushRadius = Math.max(26, Math.round(displayWidth * 0.085));
 
+    // 1. Erase on primary display canvas
+    ctx.save();
+    ctx.globalCompositeOperation = "destination-out";
     ctx.lineWidth = brushRadius * 2;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
@@ -401,27 +428,70 @@ export function initScratchCard() {
     ctx.moveTo(x1, y1);
     ctx.lineTo(x2, y2);
     ctx.stroke();
-
     ctx.restore();
+
+    // 2. Mirror erase on sample mask for fast completion checking
+    if (sampleCtx) {
+      const scaleX = SAMPLE_W / displayWidth;
+      const scaleY = SAMPLE_H / displayHeight;
+      const sampleBrushRadius = brushRadius * scaleX;
+
+      sampleCtx.save();
+      sampleCtx.globalCompositeOperation = "destination-out";
+      sampleCtx.lineWidth = sampleBrushRadius * 2;
+      sampleCtx.lineCap = "round";
+      sampleCtx.lineJoin = "round";
+      sampleCtx.beginPath();
+      sampleCtx.moveTo(x1 * scaleX, y1 * scaleY);
+      sampleCtx.lineTo(x2 * scaleX, y2 * scaleY);
+      sampleCtx.stroke();
+      sampleCtx.restore();
+    }
   }
 
   function eraseCircle(x: number, y: number) {
     if (!ctx) return;
+    const brushRadius = Math.max(26, Math.round(displayWidth * 0.085));
+
+    // 1. Primary display canvas
     ctx.save();
     ctx.globalCompositeOperation = "destination-out";
-    
-    // Smooth scratch brush scaled with display width
-    const brushRadius = Math.max(26, Math.round(displayWidth * 0.085));
     ctx.fillStyle = "rgba(0,0,0,1)";
     ctx.beginPath();
     ctx.arc(x, y, brushRadius, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
+
+    // 2. Sample mask
+    if (sampleCtx) {
+      const scaleX = SAMPLE_W / displayWidth;
+      const scaleY = SAMPLE_H / displayHeight;
+      const sampleBrushRadius = brushRadius * scaleX;
+
+      sampleCtx.save();
+      sampleCtx.globalCompositeOperation = "destination-out";
+      sampleCtx.fillStyle = "rgba(0,0,0,1)";
+      sampleCtx.beginPath();
+      sampleCtx.arc(x * scaleX, y * scaleY, sampleBrushRadius, 0, Math.PI * 2);
+      sampleCtx.fill();
+      sampleCtx.restore();
+    }
+  }
+
+  // Cached canvas bounding rectangle to avoid layout thrashing during finger movement
+  let cachedCanvasRect: DOMRect | null = null;
+
+  function updateCanvasRect() {
+    if (canvas) {
+      cachedCanvasRect = canvas.getBoundingClientRect();
+    }
   }
 
   function getCanvasCoords(e: PointerEvent): { x: number; y: number } {
-    if (!canvas) return { x: 0, y: 0 };
-    const rect = canvas.getBoundingClientRect();
+    if (!cachedCanvasRect) {
+      updateCanvasRect();
+    }
+    const rect = cachedCanvasRect || { left: 0, top: 0 };
     return {
       x: e.clientX - rect.left,
       y: e.clientY - rect.top
@@ -432,13 +502,17 @@ export function initScratchCard() {
     if (isRevealed) return;
     isDrawing = true;
     hasStartedScratching = true;
+    updateCanvasRect();
+
     try {
       canvas?.setPointerCapture(e.pointerId);
     } catch {}
+
     if (instructionPill) {
       instructionPill.style.opacity = "0";
       instructionPill.style.pointerEvents = "none";
     }
+
     const coords = getCanvasCoords(e);
     lastX = coords.x;
     lastY = coords.y;
@@ -452,10 +526,7 @@ export function initScratchCard() {
     eraseCircle(coords.x, coords.y);
     lastX = coords.x;
     lastY = coords.y;
-    moveCounter++;
-    if (moveCounter % 4 === 0) {
-      checkScratchPercentage();
-    }
+    checkScratchPercentage(false);
   }
 
   function onPointerUp(e: PointerEvent) {
@@ -464,14 +535,27 @@ export function initScratchCard() {
     try {
       canvas?.releasePointerCapture(e.pointerId);
     } catch {}
-    checkScratchPercentage();
+    checkScratchPercentage(true);
   }
 
+  function onPointerCancel(e: PointerEvent) {
+    if (!isDrawing) return;
+    isDrawing = false;
+    try {
+      canvas?.releasePointerCapture(e.pointerId);
+    } catch {}
+  }
+
+  // Update cached rect on window scroll / resize
+  window.addEventListener("scroll", () => { cachedCanvasRect = null; }, { passive: true });
+  window.addEventListener("resize", () => { cachedCanvasRect = null; }, { passive: true });
+
   // Pointer Events Registration (clean up previous if any)
+  canvas.style.touchAction = "none";
   canvas.onpointerdown = onPointerDown;
   canvas.onpointermove = onPointerMove;
   canvas.onpointerup = onPointerUp;
-  canvas.onpointercancel = onPointerUp;
+  canvas.onpointercancel = onPointerCancel;
 
   // Accessible Fallback Button (if present in DOM)
   if (accessibleBtn) {

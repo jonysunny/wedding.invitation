@@ -532,6 +532,20 @@
   justify-content: center;
   cursor: pointer;
   outline: none;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.ribbon-interactive-wrap:active .bow-center-seal,
+.ribbon-interactive-wrap.is-pressed .bow-center-seal {
+  transform: translate(-50%, -50%) scale(0.94);
+  transition: transform 0.1s ease;
+}
+
+.ribbon-interactive-wrap:active .ribbon-tap-pill,
+.ribbon-interactive-wrap.is-pressed .ribbon-tap-pill {
+  transform: scale(0.95);
+  transition: transform 0.1s ease;
 }
 
 /* Satin Ribbon Bands */
@@ -945,8 +959,10 @@
       document.body.classList.remove("scroll-locked");
       document.body.style.overflow = "";
       document.documentElement.style.overflow = "";
-      document.body.style.overflowY = "auto";
-      document.documentElement.style.overflowY = "auto";
+      document.body.style.overflowY = "";
+      document.documentElement.style.overflowY = "";
+      document.body.style.touchAction = "";
+      document.documentElement.style.touchAction = "";
     }
 
     // Lock page scrolling while unopened ribbon overlay is active
@@ -1010,9 +1026,17 @@
       }, 4500);
     }
 
+    function cleanupListeners() {
+      interactiveWrap?.removeEventListener("pointerdown", onTrigger);
+      interactiveWrap?.removeEventListener("click", onTrigger);
+      overlay?.removeEventListener("click", onTrigger);
+      window.removeEventListener("keydown", onKeydown);
+    }
+
     function dismissImmediately() {
       if (hasDismissed) return;
       hasDismissed = true;
+      cleanupListeners();
       unlockScroll();
       overlay.style.display = "none";
       overlay.style.pointerEvents = "none";
@@ -1036,26 +1060,17 @@
       window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
     }
 
-    // Click / Touch on interactive ribbon or anywhere on overlay to open
-    interactiveWrap?.addEventListener("click", (e) => {
-      e.preventDefault();
-      startRibbonOpening();
-    });
-
-    interactiveWrap?.addEventListener("touchend", (e) => {
-      e.preventDefault();
-      startRibbonOpening();
-    }, { passive: false });
-
-    overlay?.addEventListener("click", (e) => {
+    function onTrigger(e: Event) {
       if ((e.target as HTMLElement)?.closest("#ribbon-skip-intro-btn")) return;
+      e.preventDefault();
+      interactiveWrap?.classList.add("is-pressed");
       startRibbonOpening();
-    });
+    }
 
-    overlay?.addEventListener("touchend", (e) => {
-      if ((e.target as HTMLElement)?.closest("#ribbon-skip-intro-btn")) return;
-      startRibbonOpening();
-    }, { passive: true });
+    // Direct, immediate pointer/touch activation with zero synthetic click delay
+    interactiveWrap?.addEventListener("pointerdown", onTrigger, { once: true });
+    interactiveWrap?.addEventListener("click", onTrigger, { once: true });
+    overlay?.addEventListener("click", onTrigger);
 
     // Skip intro button
     skipBtn?.addEventListener("click", (e) => {
@@ -1064,7 +1079,7 @@
     });
 
     // Keyboard support: Enter / Space to open, Escape to skip
-    window.addEventListener("keydown", (e) => {
+    function onKeydown(e: KeyboardEvent) {
       if (hasDismissed) return;
       if (e.key === "Escape") {
         dismissImmediately();
@@ -1072,7 +1087,8 @@
         e.preventDefault();
         startRibbonOpening();
       }
-    });
+    }
+    window.addEventListener("keydown", onKeydown);
 
     // Handle replay event if requested
     window.addEventListener("wedding-replay-ribbon-opening", () => {
