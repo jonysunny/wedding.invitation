@@ -3414,317 +3414,217 @@ body.theme-lavender .schedule-main-card {
   margin: 0 auto;
 }
 
-/* Creative Split Timeline Container */
-body.theme-lavender .schedule-split-timeline {
+/* Wedding Schedule Stationery Panel Matching Mockup */
+body.theme-lavender .schedule-mockup-panel {
+  background: #F4EDFB;
+  background-image: linear-gradient(180deg, #F8F2FC 0%, #EFE5F8 100%);
+  border: 1px solid rgba(197, 165, 109, 0.40);
+  border-radius: 20px;
+  box-shadow: 0 10px 32px rgba(115, 85, 141, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  padding: 28px 20px 32px;
+  position: relative;
+  overflow: hidden;
+  max-width: 580px;
+  margin: 0 auto;
+}
+
+/* Mockup Header */
+body.theme-lavender .schedule-mockup-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+body.theme-lavender .schedule-mockup-title {
+  font-family: var(--font-serif-primary);
+  font-size: clamp(1.4rem, 4.5vw, 1.85rem);
+  font-style: italic;
+  font-weight: 600;
+  color: #543869 !important;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.02em;
+}
+
+body.theme-lavender .schedule-mockup-subtitle {
+  font-family: var(--font-serif-secondary);
+  font-size: clamp(0.78rem, 2.4vw, 0.88rem);
+  color: #7B628E !important;
+  margin: 0;
+  letter-spacing: 0.03em;
+}
+
+/* Mockup Timeline Wrap */
+body.theme-lavender .schedule-mockup-timeline-wrap {
   position: relative;
   width: 100%;
+  --mockup-time-w: clamp(72px, 26%, 115px);
+  --mockup-spacer-w: clamp(28px, 9%, 38px);
 }
 
-/* Central Animated Spine Passing Down Between Columns */
-body.theme-lavender .split-spine-track-wrapper {
+/* Winding Botanical Creeper Corridor passing between Time and Event */
+body.theme-lavender .schedule-mockup-creeper-wrapper {
   position: absolute;
-  top: 14px;
-  bottom: 14px;
-  left: calc(var(--time-col-w) + var(--center-col-w) / 2);
-  width: 2px;
+  top: 10px;
+  bottom: 10px;
+  left: calc(var(--mockup-time-w) + var(--mockup-spacer-w) / 2);
+  width: var(--mockup-spacer-w);
   transform: translateX(-50%);
-  z-index: 1;
+  z-index: 3;
   pointer-events: none;
 }
 
-body.theme-lavender .split-spine-line-base {
-  position: absolute;
-  inset: 0;
-  width: 2px;
-  background: linear-gradient(
-    to bottom,
-    rgba(197, 165, 109, 0.3) 0%,
-    rgba(155, 124, 184, 0.35) 50%,
-    rgba(197, 165, 109, 0.3) 100%
-  );
-  border-radius: 2px;
-}
-
-body.theme-lavender .split-spine-progress {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 2px;
+body.theme-lavender .schedule-mockup-creeper-svg {
+  width: 100%;
   height: 100%;
-  background: linear-gradient(
-    to bottom,
-    #C5A56D 0%,
-    #9B7CB8 50%,
-    #5E4176 100%
-  );
-  border-radius: 2px;
-  transform-origin: top center;
-  transform: scaleY(0);
-  box-shadow: 0 0 8px rgba(197, 165, 109, 0.7), 0 0 14px rgba(155, 124, 184, 0.5);
-  will-change: transform;
+  overflow: visible;
+  display: block;
 }
 
-body.theme-lavender .split-spine-runner {
+/* Base Stem & Leaves */
+body.theme-lavender .mockup-stem-base {
+  opacity: 0.70;
+  stroke-dasharray: none;
+  filter: drop-shadow(0 1px 2px rgba(115, 85, 141, 0.20));
+}
+
+body.theme-lavender .mockup-leaf {
+  filter: drop-shadow(0 1px 2px rgba(115, 85, 141, 0.18));
+}
+
+/* Active Glowing Trail (Illuminated as Heart Passes) */
+body.theme-lavender .mockup-stem-glow {
+  transition: stroke-dashoffset 0.08s linear;
+  will-change: stroke-dashoffset;
+}
+
+/* Solid Rich Purple Travelling Heart with Soft Glow Halo */
+body.theme-lavender .mockup-travelling-heart {
   position: absolute;
-  left: 50%;
   top: 0;
-  transform: translate(-50%, 0);
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  background: radial-gradient(circle, #FFFDF8 25%, rgba(197, 165, 109, 0.85) 60%, rgba(197, 165, 109, 0) 100%);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 14px rgba(197, 165, 109, 0.9), 0 0 6px rgba(255, 255, 255, 0.95);
-  opacity: 0;
-  transition: opacity 0.25s ease;
+  left: 50%;
+  transform: translate3d(-50%, 0, 0);
+  z-index: 5;
   pointer-events: none;
-  z-index: 4;
-  will-change: transform, opacity;
+  will-change: transform;
+  filter: drop-shadow(0 0 10px rgba(131, 91, 163, 0.85)) drop-shadow(0 3px 6px rgba(84, 56, 105, 0.35));
 }
 
-body.theme-lavender .split-spine-runner .runner-sparkle {
-  font-size: 0.65rem;
-  color: #5E4176;
-  line-height: 1;
+body.theme-lavender .mockup-heart-svg {
+  display: block;
+  animation: heartPulseMockup 2.2s ease-in-out infinite alternate;
+  transform-origin: center center;
 }
 
-/* Split Timeline Rows Layout */
-body.theme-lavender .split-timeline-rows {
+@keyframes heartPulseMockup {
+  0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(197, 165, 109, 0.5)); }
+  100% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(131, 91, 163, 0.95)); }
+}
+
+/* Unified Rounded Lavender Cards */
+body.theme-lavender .schedule-mockup-rows {
   display: flex;
   flex-direction: column;
-  gap: clamp(14px, 2.5vw, 22px);
+  gap: 14px;
   position: relative;
   z-index: 2;
 }
 
-body.theme-lavender .split-timeline-row {
+body.theme-lavender .mockup-event-row {
   display: flex;
-  align-items: flex-start;
-  position: relative;
-}
-
-/* Split Timeline Rows - Always Accessible, Gracefully Enhanced */
-body.theme-lavender .split-timeline-row .split-col-time {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-body.theme-lavender .split-timeline-row .split-node {
-  opacity: 0.95;
-  transform: scale(1);
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease, border-color 0.4s ease;
-}
-
-body.theme-lavender .split-timeline-row .split-col-event {
-  opacity: 1;
-  transform: translateX(0);
-  transition: opacity 0.4s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Enhanced blooming effect when runner passes row */
-body.theme-lavender .split-timeline-row.is-passed .split-node {
-  border-color: #C5A56D;
-  box-shadow: 0 0 14px rgba(197, 165, 109, 0.65), 0 4px 12px rgba(115, 85, 141, 0.22);
-  transform: scale(1.08);
-}
-
-body.theme-lavender .split-timeline-row.is-passed .node-halo {
-  opacity: 1;
-  transform: scale(1.35);
-  border-color: rgba(197, 165, 109, 0.7);
-}
-
-body.theme-lavender .split-timeline-row.is-passed .split-event-card {
-  border-color: rgba(197, 165, 109, 0.65);
-  box-shadow: 0 6px 20px rgba(115, 85, 141, 0.14);
-}
-
-/* Left Column: Time */
-body.theme-lavender .split-col-time {
-  width: var(--time-col-w);
-  flex: 0 0 var(--time-col-w);
-  display: flex;
-  justify-content: flex-end;
-  align-items: flex-start;
-  padding-top: 6px;
-  box-sizing: border-box;
-}
-
-body.theme-lavender .split-time-pill {
-  display: inline-flex;
   align-items: center;
-  justify-content: center;
-  padding: 4px 12px;
-  border-radius: 16px;
-  background: linear-gradient(135deg, #73558D 0%, #5E4176 100%);
-  color: #FFFDF8;
-  font-family: var(--font-sans);
-  font-size: clamp(0.70rem, 1.4vw, 0.80rem);
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  box-shadow: 0 2px 6px rgba(115, 85, 141, 0.22);
+  background: #DDD0ED;
+  background-image: linear-gradient(135deg, #E2D6F2 0%, #D8C8EC 100%);
+  border-radius: 14px;
+  padding: 14px 16px;
+  box-shadow: 0 3px 10px rgba(115, 85, 141, 0.10);
+  border: 1px solid rgba(255, 255, 255, 0.55);
+  position: relative;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease, border-color 0.25s ease;
+}
+
+body.theme-lavender .mockup-event-row.is-active-event {
+  background: #EFE5FA;
+  background-image: linear-gradient(135deg, #F3EAFA 0%, #E3D2F7 100%);
+  border-color: rgba(197, 165, 109, 0.80);
+  box-shadow: 0 6px 20px rgba(115, 85, 141, 0.18), 0 0 10px rgba(197, 165, 109, 0.25);
+  transform: scale(1.015);
+}
+
+body.theme-lavender .mockup-event-row.is-highlighted-event {
+  border: 1px solid rgba(197, 165, 109, 0.55);
+}
+
+body.theme-lavender .mockup-row-time {
+  width: var(--mockup-time-w);
+  flex: 0 0 var(--mockup-time-w);
+  text-align: center;
+}
+
+body.theme-lavender .mockup-time-text {
+  font-size: clamp(0.85rem, 2.7vw, 1.05rem);
+  font-weight: 600;
+  color: #4D3261 !important;
+  letter-spacing: 0.04em;
   white-space: nowrap;
 }
 
-body.theme-lavender .split-time-pill.is-dash {
-  background: rgba(197, 165, 109, 0.2);
-  color: #73558D;
-  border: 1px solid rgba(197, 165, 109, 0.45);
-  padding: 2px 14px;
+body.theme-lavender .mockup-row-spacer {
+  width: var(--mockup-spacer-w);
+  flex: 0 0 var(--mockup-spacer-w);
 }
 
-/* Center Column: Node Anchor */
-body.theme-lavender .split-col-center {
-  width: var(--center-col-w);
-  flex: 0 0 var(--center-col-w);
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  position: relative;
-  z-index: 3;
-  padding-top: 2px;
-  box-sizing: border-box;
-}
-
-body.theme-lavender .split-node {
-  width: 38px;
-  height: 38px;
-  min-width: 38px;
-  border-radius: 50%;
-  background: linear-gradient(135deg, #FAF7FE 0%, #EEE5F8 100%);
-  border: 1.5px solid #C5A56D;
-  box-shadow: 0 4px 10px rgba(115, 85, 141, 0.18);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-}
-
-body.theme-lavender .split-node .node-halo {
-  position: absolute;
-  inset: -3px;
-  border-radius: 50%;
-  border: 1px solid rgba(197, 165, 109, 0.5);
-  opacity: 0;
-  transform: scale(0.9);
-  pointer-events: none;
-  transition: opacity 0.4s ease, transform 0.4s ease;
-}
-
-body.theme-lavender .split-node .node-icon {
-  font-size: 1.15rem;
-  line-height: 1;
-}
-
-/* Right Column: Event Content Card */
-body.theme-lavender .split-col-event {
+body.theme-lavender .mockup-row-content {
   flex: 1;
   min-width: 0;
-  box-sizing: border-box;
+  text-align: left;
 }
 
-body.theme-lavender .split-event-card {
-  background: rgba(255, 253, 255, 0.88);
-  border: 1px solid rgba(197, 165, 109, 0.35);
-  border-radius: 12px;
-  padding: clamp(10px, 1.8vw, 15px) clamp(12px, 2.2vw, 20px);
-  box-shadow: 0 4px 14px rgba(115, 85, 141, 0.07);
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
-}
-
-@media (hover: hover) and (pointer: fine) {
-  body.theme-lavender .split-event-card:hover {
-    transform: translateX(3px);
-    border-color: rgba(197, 165, 109, 0.7);
-    box-shadow: 0 6px 18px rgba(115, 85, 141, 0.12);
-  }
-}
-
-body.theme-lavender .split-timeline-row.is-highlighted .split-event-card {
-  background: linear-gradient(135deg, rgba(255, 253, 255, 0.96) 0%, rgba(246, 238, 254, 0.92) 100%);
-  border: 1.5px solid rgba(197, 165, 109, 0.65);
-  box-shadow: 0 6px 18px rgba(115, 85, 141, 0.12), 0 1px 3px rgba(197, 165, 109, 0.25);
-}
-
-body.theme-lavender .split-timeline-row.is-highlighted .split-node {
-  border: 2px solid #C5A56D;
-  background: linear-gradient(135deg, #FFFDF8 0%, #E8DCF8 100%);
-  box-shadow: 0 6px 16px rgba(197, 165, 109, 0.35);
-}
-
-body.theme-lavender .split-event-title {
-  color: #432C56 !important;
-  font-size: clamp(0.95rem, 1.9vw, 1.15rem);
+body.theme-lavender .mockup-event-title {
+  font-family: var(--font-serif-primary);
+  font-size: clamp(0.95rem, 3.2vw, 1.15rem);
   font-weight: 600;
-  letter-spacing: 0.03em;
+  color: #38204C !important;
   margin: 0;
-  line-height: 1.35;
-  word-break: break-word;
-}
-
-body.theme-lavender .split-event-officiant {
-  color: #73558D !important;
-  font-size: clamp(0.80rem, 1.5vw, 0.90rem);
-  font-style: italic;
-  margin: 0;
-  line-height: 1.38;
+  line-height: 1.25;
   letter-spacing: 0.02em;
 }
 
-/* Mobile Layout Tuning for Creative Split Timeline */
+body.theme-lavender .mockup-event-subtitle {
+  font-family: var(--font-serif-secondary);
+  font-size: clamp(0.72rem, 2.2vw, 0.84rem);
+  color: #624874 !important;
+  margin: 3px 0 0 0;
+  line-height: 1.25;
+  letter-spacing: 0.01em;
+}
+
+/* Mobile Layout Tuning for Mockup Design */
 @media (max-width: 600px) {
-  body.theme-lavender .schedule-main-card {
-    --time-col-w: clamp(64px, 20vw, 84px);
-    --center-col-w: clamp(32px, 9.5vw, 40px);
-    padding: 18px 8px;
+  body.theme-lavender .schedule-mockup-panel {
+    padding: 20px 10px 24px;
+    border-radius: 16px;
   }
-  body.theme-lavender .split-timeline-rows {
-    gap: 14px;
+  body.theme-lavender .schedule-mockup-rows {
+    gap: 11px;
   }
-  body.theme-lavender .split-col-time {
-    padding-top: 5px;
+  body.theme-lavender .mockup-event-row {
+    padding: 11px 10px;
+    border-radius: 12px;
   }
-  body.theme-lavender .split-time-pill {
-    padding: 3px 8px;
-    font-size: clamp(0.66rem, 2.2vw, 0.74rem);
-    letter-spacing: 0.03em;
+  body.theme-lavender .schedule-mockup-timeline-wrap {
+    --mockup-time-w: clamp(64px, 25%, 82px);
+    --mockup-spacer-w: clamp(24px, 8.5%, 32px);
   }
-  body.theme-lavender .split-time-pill.is-dash {
-    padding: 2px 10px;
+  body.theme-lavender .mockup-time-text {
+    font-size: clamp(0.78rem, 2.6vw, 0.90rem);
   }
-  body.theme-lavender .split-node {
-    width: 30px;
-    height: 30px;
-    min-width: 30px;
+  body.theme-lavender .mockup-event-title {
+    font-size: clamp(0.88rem, 3vw, 1.0rem);
   }
-  body.theme-lavender .split-node .node-icon {
-    font-size: 0.95rem;
-  }
-  body.theme-lavender .split-spine-runner {
-    width: 15px;
-    height: 15px;
-  }
-  body.theme-lavender .split-spine-runner .runner-sparkle {
-    font-size: 0.55rem;
-  }
-  body.theme-lavender .split-event-card {
-    padding: 8px 10px;
-  }
-  body.theme-lavender .split-event-title {
-    font-size: 0.90rem;
-    line-height: 1.3;
-  }
-  body.theme-lavender .split-event-officiant {
-    font-size: 0.76rem;
-    line-height: 1.35;
+  body.theme-lavender .mockup-event-subtitle {
+    font-size: clamp(0.70rem, 2.1vw, 0.78rem);
   }
 }
+
 
 /* SECTION 5: EVENT SCHEDULE */
 body.theme-lavender #event-schedule {

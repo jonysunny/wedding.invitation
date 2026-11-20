@@ -1,63 +1,56 @@
 ---
 // WeddingSchedule.astro
-// Premium Lavender Floral Wedding Schedule - Creative Split Timeline
+// Premium Lavender Floral Wedding Schedule - Matching User's Mockup Design
+// Features unified rounded lavender cards, central winding botanical creeper, and scroll-controlled solid purple heart
 
 interface ScheduleEvent {
   time: string;
   title: string;
-  officiant?: string;
-  icon: string;
+  subtitle?: string;
   highlight?: boolean;
 }
 
 const scheduleEvents: ScheduleEvent[] = [
   {
     time: "4:00 PM",
-    title: "Groom Entry",
-    icon: "🤵"
+    title: "Groom Entry"
   },
   {
-    time: "—",
-    title: "Songs",
-    icon: "🎶"
+    time: "",
+    title: "Songs"
   },
   {
     time: "4:30 PM",
-    title: "Bride Entry",
-    icon: "👰"
+    title: "Bride Entry"
   },
   {
     time: "4:45 PM",
     title: "God's Word",
-    officiant: "By Rev. Dr. K. Daniel Solomon",
-    icon: "📖"
+    subtitle: "Rev. Dr. K. Daniel Solomon"
   },
   {
     time: "5:30 PM",
     title: "Wedding Ceremony",
-    officiant: "By Rev. Dr. K. Daniel Solomon",
-    icon: "💍",
+    subtitle: "Rev. Dr. K. Daniel Solomon",
     highlight: true
   },
   {
     time: "6:10 PM",
-    title: "Prayer by all servants of God",
-    icon: "🙏"
+    title: "Prayer",
+    subtitle: "By all servants of God"
   },
   {
     time: "6:20 PM",
-    title: "Wedding Greetings",
-    icon: "🕊️"
+    title: "Wedding Greetings"
   },
   {
     time: "6:50 PM",
-    title: "Couple Walk Along the Aisle",
-    icon: "💐"
+    title: "Couple Walk Along the Aisle"
   },
   {
     time: "7:00 PM",
-    title: "Closing Prayer, followed by Reception & Lunch at Noor Convention",
-    icon: "🥂",
+    title: "Closing Prayer",
+    subtitle: "Followed by Reception & Lunch at Noor Convention",
     highlight: true
   }
 ];
@@ -84,58 +77,129 @@ const scheduleEvents: ScheduleEvent[] = [
   </div>
 
   <div class="schedule-content-container">
-    <!-- Header Block -->
-    <div class="section-heading-block schedule-header-block">
-      <h2 class="section-title schedule-section-title font-serif">Wedding Schedule</h2>
-      <p class="section-desc schedule-section-subtitle font-serif-sub">A celebration of faith, love and togetherness</p>
-      
-      <div class="botanical-divider schedule-divider" aria-hidden="true">
-        <span class="botanical-divider-icon">❦</span>
+    <!-- Main Stationery Panel matching user's reference mockup -->
+    <div class="page-invitation-card schedule-mockup-panel stationery-panel">
+      <!-- Mockup Section Header -->
+      <div class="schedule-mockup-header">
+        <h2 class="schedule-mockup-title font-serif">Wedding Schedule</h2>
+        <p class="schedule-mockup-subtitle font-serif-sub">Scroll down to experience the animation</p>
       </div>
-    </div>
 
-    <!-- Center Stationery Panel with Creative Split Timeline -->
-    <div class="page-invitation-card schedule-main-card stationery-panel">
-      <div class="schedule-split-timeline" id="schedule-split-timeline">
-        <!-- Central Animated Spine Passing Down Between Columns -->
-        <div class="split-spine-track-wrapper" id="split-spine-wrapper" aria-hidden="true">
-          <div class="split-spine-line-base"></div>
-          <div class="split-spine-progress" id="split-spine-progress"></div>
-          <div class="split-spine-runner" id="split-spine-runner">
-            <span class="runner-sparkle">✦</span>
+      <div class="schedule-mockup-timeline-wrap" id="schedule-split-timeline">
+        <!-- Winding Botanical Creeper Corridor passing between Time and Event columns -->
+        <div class="schedule-mockup-creeper-wrapper" id="schedule-creeper-wrapper" aria-hidden="true">
+          <svg class="schedule-mockup-creeper-svg" id="schedule-creeper-svg" viewBox="0 0 50 1000" preserveAspectRatio="none">
+            <defs>
+              <linearGradient id="mockupStemGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="rgba(182, 157, 207, 0.55)" />
+                <stop offset="50%" stop-color="rgba(165, 137, 194, 0.70)" />
+                <stop offset="100%" stop-color="rgba(135, 102, 168, 0.85)" />
+              </linearGradient>
+              <linearGradient id="mockupGlowGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#C5A56D" />
+                <stop offset="30%" stop-color="#A57ECC" />
+                <stop offset="70%" stop-color="#835BA3" />
+                <stop offset="100%" stop-color="#552F7A" />
+              </linearGradient>
+              <filter id="mockupGlowFilter" x="-50%" y="-50%" width="200%" height="200%">
+                <feGaussianBlur stdDeviation="3" result="blur" />
+                <feMerge>
+                  <feMergeNode in="blur" />
+                  <feMergeNode in="SourceGraphic" />
+                </feMerge>
+              </filter>
+            </defs>
+
+            <!-- Base Winding Creeper Stem -->
+            <path 
+              class="mockup-stem-base" 
+              id="creeper-stem-base"
+              d="M 25 15 C 33 75, 17 135, 25 195 C 33 255, 17 315, 25 375 C 33 435, 17 495, 25 555 C 33 615, 17 675, 25 735 C 33 795, 17 855, 25 915 C 30 955, 25 985, 25 985" 
+              fill="none" 
+              stroke="url(#mockupStemGrad)" 
+              stroke-width="2.6" 
+              stroke-linecap="round"
+            />
+
+            <!-- Organic Leaf Pairs along the vine curves (matching mockup reference) -->
+            <!-- Pair 1 -->
+            <path class="mockup-leaf" d="M 25 108 C 30 102, 39 104, 41 110 C 39 114, 30 114, 25 108 Z" fill="#B8A0CE" opacity="0.85" />
+            <path class="mockup-leaf" d="M 24 113 C 19 108, 10 111, 8 117 C 11 120, 20 118, 24 113 Z" fill="#B8A0CE" opacity="0.85" />
+
+            <!-- Pair 2 -->
+            <path class="mockup-leaf" d="M 25 288 C 30 282, 39 284, 41 290 C 39 294, 30 294, 25 288 Z" fill="#B8A0CE" opacity="0.85" />
+            <path class="mockup-leaf" d="M 24 293 C 19 288, 10 291, 8 297 C 11 300, 20 298, 24 293 Z" fill="#B8A0CE" opacity="0.85" />
+
+            <!-- Pair 3 -->
+            <path class="mockup-leaf" d="M 25 468 C 30 462, 39 464, 41 470 C 39 474, 30 474, 25 468 Z" fill="#B8A0CE" opacity="0.85" />
+            <path class="mockup-leaf" d="M 24 473 C 19 468, 10 471, 8 477 C 11 480, 20 478, 24 473 Z" fill="#B8A0CE" opacity="0.85" />
+
+            <!-- Pair 4 -->
+            <path class="mockup-leaf" d="M 25 648 C 30 642, 39 644, 41 650 C 39 654, 30 654, 25 648 Z" fill="#B8A0CE" opacity="0.85" />
+            <path class="mockup-leaf" d="M 24 653 C 19 648, 10 651, 8 657 C 11 660, 20 658, 24 653 Z" fill="#B8A0CE" opacity="0.85" />
+
+            <!-- Pair 5 -->
+            <path class="mockup-leaf" d="M 25 828 C 30 822, 39 824, 41 830 C 39 834, 30 834, 25 828 Z" fill="#B8A0CE" opacity="0.85" />
+            <path class="mockup-leaf" d="M 24 833 C 19 828, 10 831, 8 837 C 11 840, 20 838, 24 833 Z" fill="#B8A0CE" opacity="0.85" />
+
+            <!-- Active Illuminated Stem Glow -->
+            <path 
+              class="mockup-stem-glow" 
+              id="creeper-stem-glow"
+              d="M 25 15 C 33 75, 17 135, 25 195 C 33 255, 17 315, 25 375 C 33 435, 17 495, 25 555 C 33 615, 17 675, 25 735 C 33 795, 17 855, 25 915 C 30 955, 25 985, 25 985" 
+              fill="none" 
+              stroke="url(#mockupGlowGrad)" 
+              stroke-width="3.2" 
+              stroke-linecap="round"
+              filter="url(#mockupGlowFilter)"
+            />
+          </svg>
+
+          <!-- Solid Rich Purple Heart with Soft Glowing Halo (exact match to reference mockup) -->
+          <div class="mockup-travelling-heart" id="schedule-travelling-heart" aria-hidden="true">
+            <svg class="mockup-heart-svg" viewBox="0 0 32 32" width="32" height="32">
+              <defs>
+                <radialGradient id="mockupHeartAura" cx="50%" cy="50%" r="50%">
+                  <stop offset="0%" stop-color="rgba(131, 91, 163, 0.85)" />
+                  <stop offset="60%" stop-color="rgba(165, 126, 204, 0.40)" />
+                  <stop offset="100%" stop-color="rgba(165, 126, 204, 0)" />
+                </radialGradient>
+              </defs>
+              <!-- Outer glowing aura -->
+              <circle cx="16" cy="16" r="15" fill="url(#mockupHeartAura)" />
+              <!-- Solid Rich Purple Heart -->
+              <path 
+                d="M16 26 C16 26 5.5 18.5 5.5 11.5 C5.5 8 8 5.5 11.2 5.5 C13.3 5.5 14.8 6.6 16 8 C17.2 6.6 18.7 5.5 20.8 5.5 C24 5.5 26.5 8 26.5 11.5 C26.5 18.5 16 26 16 26 Z" 
+                fill="#835BA3" 
+                stroke="rgba(255, 255, 255, 0.4)" 
+                stroke-width="0.6"
+              />
+            </svg>
           </div>
         </div>
 
-        <!-- Split Timeline Rows -->
-        <div class="split-timeline-rows" id="split-timeline-rows">
+        <!-- Schedule Event Rows: Unified Rounded Lavender Cards -->
+        <div class="schedule-mockup-rows" id="split-timeline-rows">
           {scheduleEvents.map((item, index) => (
             <div 
-              class={`split-timeline-row ${item.highlight ? 'is-highlighted' : ''}`} 
+              class={`mockup-event-row ${item.highlight ? 'is-highlighted-event' : ''}`} 
               data-step={index + 1}
+              id={`schedule-row-${index + 1}`}
             >
               <!-- Left Column: Time -->
-              <div class="split-col-time">
-                <span class={`split-time-pill ${item.time === '—' ? 'is-dash' : ''}`}>
-                  {item.time}
-                </span>
+              <div class="mockup-row-time">
+                <span class="mockup-time-text font-serif">{item.time}</span>
               </div>
 
-              <!-- Center Column: Animated Node Anchor -->
-              <div class="split-col-center" aria-hidden="true">
-                <div class="split-node">
-                  <span class="node-halo"></span>
-                  <span class="node-icon">{item.icon}</span>
-                </div>
-              </div>
+              <!-- Corridor Spacer: Where Creeper passes -->
+              <div class="mockup-row-spacer" aria-hidden="true"></div>
 
-              <!-- Right Column: Event Title & Details -->
-              <div class="split-col-event">
-                <div class="split-event-card">
-                  <h3 class="split-event-title font-serif">{item.title}</h3>
-                  {item.officiant && (
-                    <p class="split-event-officiant font-serif-sub">{item.officiant}</p>
-                  )}
-                </div>
+              <!-- Right Column: Event Title & Subtitle -->
+              <div class="mockup-row-content">
+                <h3 class="mockup-event-title font-serif">{item.title}</h3>
+                {item.subtitle && (
+                  <p class="mockup-event-subtitle font-serif-sub">{item.subtitle}</p>
+                )}
               </div>
             </div>
           ))}
@@ -146,63 +210,173 @@ const scheduleEvents: ScheduleEvent[] = [
 </section>
 
 <script is:inline>
-  (function initSplitTimelineAnimation() {
+  // High-Performance 60 FPS Scroll-Controlled Travelling Heart on Central Creeper
+  (function initMockupCreeperHeart() {
     function setup() {
       const section = document.getElementById('wedding-schedule-section');
-      const spineWrapper = document.getElementById('split-spine-wrapper');
-      const spineProgress = document.getElementById('split-spine-progress');
-      const spineRunner = document.getElementById('split-spine-runner');
-      const rows = document.querySelectorAll('.split-timeline-row');
+      const scheduleTimeline = document.getElementById('schedule-split-timeline');
+      const creeperSvg = document.getElementById('schedule-creeper-svg');
+      const creeperBase = document.getElementById('creeper-stem-base');
+      const creeperGlow = document.getElementById('creeper-stem-glow');
+      const heart = document.getElementById('schedule-travelling-heart');
+      const rows = document.querySelectorAll('.mockup-event-row');
 
-      if (!section || !spineWrapper || !spineProgress || !spineRunner) return;
+      if (!section || !scheduleTimeline || !creeperBase || !creeperGlow || !heart || rows.length === 0) return;
+
+      const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Cache total path length
+      let pathLength = 0;
+      try {
+        pathLength = creeperBase.getTotalLength();
+      } catch (e) {
+        pathLength = 1000;
+      }
+
+      // Initialize glow path dasharray to match path length
+      creeperGlow.style.strokeDasharray = pathLength + ' ' + pathLength;
+      creeperGlow.style.strokeDashoffset = pathLength;
 
       let ticking = false;
+      let cachedRowTops = [];
 
-      function updateSpineProgress() {
+      function updateMeasurements() {
+        if (!scheduleTimeline) return;
+        const timelineRect = scheduleTimeline.getBoundingClientRect();
+        const timelineTopDoc = timelineRect.top + window.scrollY;
+        
+        cachedRowTops = Array.from(rows).map(function(row) {
+          const r = row.getBoundingClientRect();
+          return {
+            element: row,
+            top: (r.top + window.scrollY) - timelineTopDoc,
+            mid: (r.top + window.scrollY + r.height / 2) - timelineTopDoc
+          };
+        });
+      }
+
+      function updateHeartPosition() {
         ticking = false;
-        const rect = section.getBoundingClientRect();
+        const timelineRect = scheduleTimeline.getBoundingClientRect();
         const vh = window.innerHeight || document.documentElement.clientHeight;
 
-        if (rect.bottom < 0 || rect.top > vh) {
+        // Skip calculations if schedule is offscreen
+        if (timelineRect.bottom < -100 || timelineRect.top > vh + 100) {
           return;
         }
 
-        const triggerY = vh * 0.55;
-        const totalHeight = rect.height;
-        const elapsed = triggerY - rect.top;
-        let progress = elapsed / totalHeight;
+        // Target trigger line: center of screen (vh * 0.5)
+        const triggerY = vh * 0.50;
+        
+        // Offset inside the timeline container
+        const currentY = triggerY - timelineRect.top;
+        const totalHeight = timelineRect.height;
+
+        if (cachedRowTops.length === 0 || cachedRowTops[0].mid === 0) {
+          updateMeasurements();
+        }
+
+        // First row middle and last row middle for exact milestone bounds
+        const firstRowMid = cachedRowTops.length > 0 ? cachedRowTops[0].mid : 20;
+        const lastRowMid = cachedRowTops.length > 0 ? cachedRowTops[cachedRowTops.length - 1].mid : totalHeight - 20;
+        const travelSpan = lastRowMid - firstRowMid;
+
+        let progress = 0;
+        if (travelSpan > 0) {
+          progress = (currentY - firstRowMid) / travelSpan;
+        }
+        // Strict clamping: stays precisely within first event and last event
         progress = Math.max(0, Math.min(1, progress));
 
-        spineProgress.style.transform = 'scaleY(' + progress + ')';
+        if (prefersReducedMotion) {
+          heart.style.opacity = '1';
+          return;
+        }
 
-        const spineHeight = spineWrapper.offsetHeight;
-        const runnerY = progress * spineHeight;
-        spineRunner.style.transform = 'translate(-50%, ' + runnerY + 'px)';
-        spineRunner.style.opacity = progress > 0.01 ? '1' : '0';
+        // Get exact (x, y) along the curved SVG path
+        const point = creeperBase.getPointAtLength(pathLength * progress);
 
-        rows.forEach(function(row) {
-          const rRect = row.getBoundingClientRect();
-          const rMid = rRect.top + rRect.height / 2;
-          if (rMid <= triggerY + 20) {
-            row.classList.add('is-passed');
-          } else {
-            row.classList.remove('is-passed');
+        // Map SVG viewBox (width 50) coordinates to actual pixel container dimensions:
+        const creeperCorridorWidth = creeperSvg.clientWidth || 36;
+        const xOffsetPx = ((point.x - 25) / 50) * creeperCorridorWidth;
+        
+        // Vertical position: smoothly mapped from firstRowMid to lastRowMid
+        const yOffsetPx = firstRowMid + (progress * travelSpan);
+
+        // Hardware-accelerated translate3d for 60 FPS motion
+        heart.style.transform = 'translate3d(calc(-50% + ' + xOffsetPx.toFixed(1) + 'px), ' + (yOffsetPx - 16).toFixed(1) + 'px, 0)';
+        heart.style.opacity = '1';
+
+        // Update glowing trail behind heart
+        const glowOffset = pathLength * (1 - progress);
+        creeperGlow.style.strokeDashoffset = glowOffset.toFixed(1);
+
+        // Highlight the row nearest to current heart position
+        let closestIndex = -1;
+        let minDiff = Infinity;
+        for (let i = 0; i < cachedRowTops.length; i++) {
+          const diff = Math.abs(cachedRowTops[i].mid - yOffsetPx);
+          if (diff < minDiff) {
+            minDiff = diff;
+            closestIndex = i;
           }
-        });
+        }
+
+        for (let i = 0; i < rows.length; i++) {
+          if (i === closestIndex && minDiff < 85) {
+            rows[i].classList.add('is-active-event');
+          } else {
+            rows[i].classList.remove('is-active-event');
+          }
+
+          if (cachedRowTops[i] && cachedRowTops[i].mid <= yOffsetPx + 15) {
+            rows[i].classList.add('is-passed');
+          } else {
+            rows[i].classList.remove('is-passed');
+          }
+        }
       }
 
       function onScroll() {
         if (!ticking) {
-          window.requestAnimationFrame(updateSpineProgress);
+          window.requestAnimationFrame(updateHeartPosition);
           ticking = true;
         }
       }
 
       window.addEventListener('scroll', onScroll, { passive: true });
-      window.addEventListener('resize', onScroll, { passive: true });
-      updateSpineProgress();
-      setTimeout(updateSpineProgress, 250);
-      setTimeout(updateSpineProgress, 750);
+      window.addEventListener('resize', () => {
+        updateMeasurements();
+        onScroll();
+      }, { passive: true });
+      window.addEventListener('wedding-ribbon-opened', () => {
+        updateMeasurements();
+        updateHeartPosition();
+      }, { passive: true });
+      window.addEventListener('wedding-ribbon-start-opening', () => {
+        updateMeasurements();
+        updateHeartPosition();
+      }, { passive: true });
+      window.addEventListener('wedding-envelope-opened', () => {
+        updateMeasurements();
+        updateHeartPosition();
+      }, { passive: true });
+
+      // Initial measurement and positioning
+      updateMeasurements();
+      updateHeartPosition();
+      setTimeout(() => {
+        updateMeasurements();
+        updateHeartPosition();
+      }, 250);
+      setTimeout(() => {
+        updateMeasurements();
+        updateHeartPosition();
+      }, 750);
+      setTimeout(() => {
+        updateMeasurements();
+        updateHeartPosition();
+      }, 1500);
     }
 
     if (document.readyState === 'loading') {
