@@ -2841,9 +2841,21 @@ body.theme-lavender #invitation-cover .invitation-sub-lead {
   font-style: italic;
   font-size: clamp(0.82rem, 1.35vw, 1.02rem);
   line-height: 1.55;
-  max-width: 420px;
+  max-width: 440px;
   margin: 0 auto clamp(16px, 2.8vh, 28px);
   color: #4C3C50;
+}
+
+body.theme-lavender #invitation-cover .invitation-verse-citation {
+  display: block;
+  margin-top: 4px;
+  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
+  font-size: 0.82em;
+  font-style: normal;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  color: #73558D;
+  text-transform: uppercase;
 }
 
 /* Refined Scroll Prompt (Exact Match to Reference Photo) */
