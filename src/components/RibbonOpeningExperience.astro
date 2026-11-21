@@ -953,21 +953,16 @@
       document.documentElement.style.removeProperty("overflow-y");
       document.body.style.removeProperty("touch-action");
       document.documentElement.style.removeProperty("touch-action");
+      document.body.style.removeProperty("overscroll-behavior-y");
+      document.documentElement.style.removeProperty("overscroll-behavior-y");
+      document.body.style.removeProperty("overscroll-behavior");
+      document.documentElement.style.removeProperty("overscroll-behavior");
     }
 
-    // Check if ribbon was already dismissed in this session
-    const isAlreadyDismissed = (function() {
-      try {
-        return sessionStorage.getItem("wedding_ribbon_dismissed") === "true";
-      } catch (e) {
-        return false;
-      }
-    })();
-
-    if (isAlreadyDismissed) {
-      dismissImmediately();
-      return;
-    }
+    // Ensure clean reset on page refresh / load: an intentional page refresh resets ribbon opening
+    try {
+      sessionStorage.removeItem("wedding_ribbon_dismissed");
+    } catch (e) {}
 
     // Lock page scrolling while unopened ribbon overlay is active
     lockScroll();
@@ -997,9 +992,6 @@
     function startRibbonOpening() {
       if (isOpening || hasDismissed) return;
       isOpening = true;
-      try {
-        sessionStorage.setItem("wedding_ribbon_dismissed", "true");
-      } catch (e) {}
 
       // Start background music immediately within trusted user gesture
       triggerAudioImmediate();
@@ -1019,6 +1011,7 @@
         if (hasDismissed) return;
         overlay.classList.add("phase-3-cover-open");
         overlay.style.pointerEvents = "none";
+        unlockScroll();
       }, 2200);
 
       // Phase 4 — Reveal actual website (3.2s - 4.0s)
@@ -1058,9 +1051,6 @@
     function dismissImmediately() {
       if (hasDismissed) return;
       hasDismissed = true;
-      try {
-        sessionStorage.setItem("wedding_ribbon_dismissed", "true");
-      } catch (e) {}
       cleanupListeners();
       unlockScroll();
       overlay.style.display = "none";

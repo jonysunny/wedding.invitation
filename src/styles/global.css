@@ -52,7 +52,7 @@ html {
   background-color: var(--bg-paper);
   overflow-x: hidden;
   overflow-y: auto;
-  overscroll-behavior-y: none;
+  overscroll-behavior-y: auto;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: auto;
 }
@@ -66,6 +66,7 @@ body {
   overflow: visible;
   overflow-x: clip;
   touch-action: pan-y;
+  overscroll-behavior-y: auto;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(233, 199, 195, 0.15) 0%, transparent 40%),
     radial-gradient(circle at 90% 80%, rgba(130, 158, 186, 0.12) 0%, transparent 45%);
