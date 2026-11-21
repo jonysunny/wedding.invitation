@@ -2741,11 +2741,19 @@ body.theme-lavender #invitation-cover .invitation-full-container {
   box-sizing: border-box;
 }
 
+/* Top Header Group: Monogram Crest + Introductory Welcome */
+body.theme-lavender #invitation-cover .invitation-header-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(12px, 2.0vh, 20px);
+}
+
 /* Royal J&S Monogram Crest */
 body.theme-lavender #invitation-cover .invitation-crest-emblem {
-  width: clamp(92px, 13vw, 132px);
-  height: clamp(92px, 13vw, 132px);
-  margin: 0 auto clamp(10px, 1.8vh, 18px);
+  width: clamp(92px, 13vw, 128px);
+  height: clamp(92px, 13vw, 128px);
+  margin: 0 auto clamp(4px, 0.8vh, 8px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -2760,17 +2768,16 @@ body.theme-lavender #invitation-cover .invitation-logo-img {
 
 /* Lead Welcome Text */
 body.theme-lavender #invitation-cover .cover-intro-lead {
-  font-family: var(--font-serif-primary, 'Cinzel', serif);
-  font-size: clamp(0.68rem, 1.1vw, 0.82rem);
-  line-height: 1.55;
+  font-family: var(--font-serif-primary, 'Cormorant Garamond', serif);
+  font-size: clamp(0.72rem, 1.1vw, 0.84rem);
+  line-height: 1.5;
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: #3C2B42;
-  margin: 0 auto clamp(14px, 2.4vh, 24px);
+  margin: 0 auto;
   max-width: 380px;
   font-weight: 500;
 }
-
 
 /* Couple Names Display */
 body.theme-lavender #invitation-cover .cover-couple-names {
@@ -2778,30 +2785,38 @@ body.theme-lavender #invitation-cover .cover-couple-names {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  margin: 0 auto clamp(8px, 1.4vh, 16px);
+  margin: 0 auto clamp(10px, 1.8vh, 18px);
 }
 
 body.theme-lavender #invitation-cover .cover-groom-name,
 body.theme-lavender #invitation-cover .cover-bride-name {
-  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
-  font-size: clamp(2.6rem, 5.4vw, 4.0rem);
-  line-height: 1.06;
+  font-family: var(--font-serif-primary, 'Cormorant Garamond', Georgia, serif);
+  font-size: clamp(3.2rem, 5.8vw, 4.6rem);
+  line-height: 1.04;
   font-weight: 500;
   color: #2F2133;
-  letter-spacing: 0.01em;
+  letter-spacing: 0.02em;
   margin: 0;
   text-transform: capitalize;
 }
 
 body.theme-lavender #invitation-cover .cover-ampersand {
-  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
-  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
-  font-style: italic;
+  font-family: var(--font-script, 'Great Vibes', cursive);
+  font-size: clamp(2.2rem, 4.2vw, 3.0rem);
+  font-style: normal;
   font-weight: 400;
   color: #C5A56D;
-  line-height: 1;
-  margin: clamp(3px, 0.6vh, 8px) 0;
+  line-height: 0.9;
+  margin: clamp(4px, 0.7vh, 8px) 0;
   text-shadow: 0 1px 2px rgba(197, 165, 109, 0.25);
+}
+
+/* Sacred Scripture & Blessing Block */
+body.theme-lavender #invitation-cover .invitation-blessing-block {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: clamp(14px, 2.4vh, 24px);
 }
 
 /* Botanical Divider with Thin Gold Lateral Lines */
@@ -2809,8 +2824,8 @@ body.theme-lavender #invitation-cover .hero-divider {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: clamp(150px, 30vw, 230px);
-  margin: clamp(8px, 1.4vh, 14px) auto clamp(12px, 2vh, 18px);
+  width: clamp(140px, 26vw, 210px);
+  margin: 0 auto clamp(10px, 1.6vh, 14px);
   gap: 12px;
 }
 
@@ -2830,23 +2845,23 @@ body.theme-lavender #invitation-cover .botanical-divider-icon {
 
 /* Sacred Blessing Note */
 body.theme-lavender #invitation-cover .invitation-sub-lead {
-  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
+  font-family: var(--font-serif-secondary, 'EB Garamond', Georgia, serif);
   font-style: italic;
-  font-size: clamp(0.82rem, 1.35vw, 1.02rem);
+  font-size: clamp(1.02rem, 1.55vw, 1.22rem);
   line-height: 1.55;
-  max-width: 440px;
-  margin: 0 auto clamp(16px, 2.8vh, 28px);
+  max-width: 500px;
+  margin: 0 auto;
   color: #4C3C50;
 }
 
 body.theme-lavender #invitation-cover .invitation-verse-citation {
   display: block;
-  margin-top: 4px;
-  font-family: var(--font-serif-secondary, 'Playfair Display', Georgia, serif);
-  font-size: 0.82em;
+  margin-top: 6px;
+  font-family: var(--font-serif-secondary, 'EB Garamond', Georgia, serif);
+  font-size: 0.85em;
   font-style: normal;
   font-weight: 600;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.09em;
   color: #73558D;
   text-transform: uppercase;
 }
@@ -3012,7 +3027,7 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     border-radius: 0 !important;
     aspect-ratio: auto !important;
     margin: 0 !important;
-    padding: clamp(22px, 4.2vh, 40px) 18px clamp(14px, 2.6vh, 26px) !important;
+    padding: clamp(20px, 3.6vh, 36px) 16px clamp(12px, 2.2vh, 22px) !important;
     display: flex !important;
     flex-direction: column !important;
     align-items: center !important;
@@ -3022,14 +3037,23 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     pointer-events: auto !important;
   }
 
+  /* Top Header Group: Monogram Crest + Introductory Welcome */
+  body.theme-lavender #invitation-cover .invitation-header-block {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    margin: 0 auto !important;
+  }
+
   /* Royal J&S Monogram Crest */
   body.theme-lavender #invitation-cover .invitation-crest-emblem {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    width: clamp(96px, 22.5vw, 134px) !important;
-    height: clamp(96px, 22.5vw, 134px) !important;
-    margin: 0 auto clamp(2px, 0.8vh, 6px) !important;
+    width: clamp(84px, 19vw, 118px) !important;
+    height: clamp(84px, 19vw, 118px) !important;
+    margin: 0 auto clamp(1px, 0.4vh, 4px) !important;
     flex-shrink: 0 !important;
   }
 
@@ -3045,13 +3069,13 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
   body.theme-lavender #invitation-cover .cover-intro-lead {
     display: block !important;
     font-family: var(--font-sans) !important;
-    font-size: clamp(0.66rem, 2.3vw, 0.78rem) !important;
-    letter-spacing: 0.18em !important;
+    font-size: clamp(0.64rem, 2.1vw, 0.76rem) !important;
+    letter-spacing: 0.16em !important;
     text-transform: uppercase !important;
-    line-height: 1.5 !important;
+    line-height: 1.45 !important;
     color: #7D6B8C !important;
-    margin: 0 auto clamp(4px, 1vh, 10px) !important;
-    max-width: clamp(250px, 75vw, 320px) !important;
+    margin: clamp(2px, 0.4vh, 5px) auto 0 !important;
+    max-width: clamp(240px, 72vw, 310px) !important;
     font-weight: 500 !important;
     text-align: center !important;
     flex-shrink: 0 !important;
@@ -3063,7 +3087,7 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     flex-direction: column !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: clamp(2px, 0.6vh, 6px) auto !important;
+    margin: 0 auto !important;
     gap: 0px !important;
     flex-shrink: 0 !important;
   }
@@ -3072,9 +3096,9 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
   body.theme-lavender #invitation-cover .cover-bride-name {
     display: block !important;
     font-family: var(--font-serif-primary) !important;
-    font-size: clamp(2.3rem, 7.8vw, 3.2rem) !important;
+    font-size: clamp(2.9rem, 10.5vw, 4.0rem) !important;
     font-weight: 500 !important;
-    line-height: 1.05 !important;
+    line-height: 1.02 !important;
     color: #2D1A38 !important;
     letter-spacing: 0.02em !important;
     text-align: center !important;
@@ -3083,11 +3107,20 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
   body.theme-lavender #invitation-cover .cover-ampersand {
     display: block !important;
     font-family: var(--font-script) !important;
-    font-size: clamp(1.6rem, 5vw, 2.2rem) !important;
-    line-height: 0.9 !important;
+    font-size: clamp(1.9rem, 6.2vw, 2.7rem) !important;
+    line-height: 0.85 !important;
     color: #C5A56D !important;
-    margin: 1px 0 !important;
+    margin: clamp(1px, 0.4vh, 4px) 0 !important;
     text-align: center !important;
+  }
+
+  /* Sacred Scripture & Blessing Block */
+  body.theme-lavender #invitation-cover .invitation-blessing-block {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    flex-shrink: 0 !important;
+    margin: 0 auto !important;
   }
 
   /* Botanical Divider */
@@ -3095,8 +3128,8 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
-    margin: clamp(2px, 0.8vh, 6px) auto !important;
-    width: clamp(110px, 32vw, 160px) !important;
+    margin: 0 auto clamp(5px, 0.9vh, 8px) !important;
+    width: clamp(100px, 28vw, 150px) !important;
     flex-shrink: 0 !important;
   }
 
@@ -3104,14 +3137,26 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
   body.theme-lavender #invitation-cover .invitation-sub-lead {
     display: block !important;
     font-family: var(--font-serif-secondary) !important;
-    font-size: clamp(0.82rem, 2.7vw, 0.95rem) !important;
+    font-size: clamp(1.02rem, 3.8vw, 1.20rem) !important;
     font-style: italic !important;
-    line-height: 1.48 !important;
+    line-height: 1.5 !important;
     color: #553E65 !important;
-    max-width: clamp(240px, 74vw, 300px) !important;
-    margin: 0 auto clamp(4px, 1vh, 8px) !important;
+    max-width: clamp(270px, 82vw, 360px) !important;
+    margin: 0 auto !important;
     text-align: center !important;
     flex-shrink: 0 !important;
+  }
+
+  body.theme-lavender #invitation-cover .invitation-verse-citation {
+    display: block !important;
+    margin-top: clamp(4px, 0.8vh, 7px) !important;
+    font-family: var(--font-serif-secondary) !important;
+    font-size: 0.84em !important;
+    font-style: normal !important;
+    font-weight: 600 !important;
+    letter-spacing: 0.09em !important;
+    color: #73558D !important;
+    text-transform: uppercase !important;
   }
 
   /* Interactive Scroll Button */

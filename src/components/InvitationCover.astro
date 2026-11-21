@@ -50,37 +50,38 @@ const { brideName, groomName, welcomeMessage, formattedDate, destination } = Ast
 
   <!-- Invitation Main Body Covering the Full Viewport -->
   <div class="invitation-full-container">
-    <!-- Royal J&S Monogram Logo Crest -->
-    <div class="invitation-crest-emblem">
-      <img 
-        src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
-        alt="J&S Royal Wedding Monogram Crest" 
-        class="invitation-logo-img"
-        width="208"
-        height="208"
-        decoding="async"
-      />
+    <!-- Top Header Group: Monogram Crest + Introductory Welcome -->
+    <div class="invitation-header-block">
+      <div class="invitation-crest-emblem">
+        <img 
+          src="/jony-wedding/assets/decorations/wedding-logo-crest.png" 
+          alt="J&S Royal Wedding Monogram Crest" 
+          class="invitation-logo-img"
+          width="208"
+          height="208"
+          decoding="async"
+        />
+      </div>
+      <p class="invitation-lead-text cover-intro-lead">{welcomeMessage}</p>
     </div>
 
-    <!-- Invitation Heading / Welcome Message -->
-    <p class="invitation-lead-text cover-intro-lead">{welcomeMessage}</p>
-
-    <!-- Couple Names Display -->
+    <!-- Centerpiece: Couple Names Display -->
     <div class="invitation-couple-block cover-couple-names">
       <h1 class="invitation-groom-name cover-groom-name">{groomName}</h1>
       <span class="invitation-ampersand cover-ampersand">&</span>
       <h1 class="invitation-bride-name cover-bride-name">{brideName}</h1>
     </div>
 
-    <div class="botanical-divider hero-divider">
-      <span class="botanical-divider-icon">❦</span>
+    <!-- Sacred Scripture & Blessing Block -->
+    <div class="invitation-blessing-block">
+      <div class="botanical-divider hero-divider">
+        <span class="botanical-divider-icon">❦</span>
+      </div>
+      <p class="invitation-sub-lead">
+        “For of him, and through him, and to him, are all things: to whom be glory for ever. Amen.”
+        <span class="invitation-verse-citation">— Romans 11:36</span>
+      </p>
     </div>
-
-    <!-- Sacred Scripture Verse -->
-    <p class="invitation-sub-lead">
-      “For of him, and through him, and to him, are all things: to whom be glory for ever. Amen.”
-      <span class="invitation-verse-citation">— Romans 11:36</span>
-    </p>
 
     <!-- Refined Interactive Scroll-Down Indicator -->
     <a 
