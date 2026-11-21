@@ -231,7 +231,34 @@ export function initScrollReveal() {
   const onRibbonEvent = () => {
     const scratch = document.getElementById("scratch-reveal-section");
     if (scratch) scratch.classList.add("is-visible");
+    const vh = window.innerHeight || 800;
+    elements.forEach(el => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < vh + 300 && rect.bottom > -300) {
+        el.classList.add("is-visible");
+      }
+    });
   };
+
+  // Safe fallback: ensure sections become visible on scroll if observer is delayed
+  let ticking = false;
+  window.addEventListener("scroll", () => {
+    if (!ticking) {
+      window.requestAnimationFrame(() => {
+        const vh = window.innerHeight || 800;
+        elements.forEach(el => {
+          if (!el.classList.contains("is-visible")) {
+            const rect = el.getBoundingClientRect();
+            if (rect.top < vh + 200 && rect.bottom > -200) {
+              el.classList.add("is-visible");
+            }
+          }
+        });
+        ticking = false;
+      });
+      ticking = true;
+    }
+  }, { passive: true });
 
   window.addEventListener("wedding-ribbon-start-opening", onRibbonEvent);
   window.addEventListener("wedding-ribbon-opened", onRibbonEvent);

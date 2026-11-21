@@ -101,12 +101,14 @@ const { brideName, groomName, welcomeMessage, formattedDate, destination } = Ast
   // Smooth scroll handler for the hero scroll-down button
   const scrollBtn = document.getElementById('hero-scroll-btn');
   if (scrollBtn) {
-    scrollBtn.addEventListener('click', (e) => {
+    const onScrollToScratch = (e: Event) => {
       e.preventDefault();
+      e.stopPropagation();
       const target = document.getElementById('scratch-reveal-section');
       if (target) {
         target.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-    });
+    };
+    scrollBtn.addEventListener('click', onScrollToScratch);
   }
 </script>

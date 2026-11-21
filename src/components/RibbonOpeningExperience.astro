@@ -199,6 +199,8 @@
   user-select: none;
   -webkit-user-select: none;
   perspective: 1200px;
+  touch-action: none;
+  overscroll-behavior: contain;
 }
 
 /* Ambient Lavender Watercolor Backdrop */
@@ -937,35 +939,20 @@
     let isOpening = false;
     let hasDismissed = false;
 
-    const preventScrollHandler = (e: Event) => {
-      if (!hasDismissed) {
-        if (e.cancelable) e.preventDefault();
-        if (window.scrollY !== 0) window.scrollTo(0, 0);
-      }
-    };
-
     function lockScroll() {
       document.documentElement.classList.add("scroll-locked");
       document.body.classList.add("scroll-locked");
-      document.body.style.overflow = "hidden";
-      document.documentElement.style.overflow = "hidden";
-      window.addEventListener("scroll", preventScrollHandler, { passive: false });
-      window.addEventListener("wheel", preventScrollHandler, { passive: false });
-      window.addEventListener("touchmove", preventScrollHandler, { passive: false });
     }
 
     function unlockScroll() {
-      window.removeEventListener("scroll", preventScrollHandler);
-      window.removeEventListener("wheel", preventScrollHandler);
-      window.removeEventListener("touchmove", preventScrollHandler);
       document.documentElement.classList.remove("scroll-locked");
       document.body.classList.remove("scroll-locked");
-      document.body.style.overflow = "";
-      document.documentElement.style.overflow = "";
-      document.body.style.overflowY = "";
-      document.documentElement.style.overflowY = "";
-      document.body.style.touchAction = "";
-      document.documentElement.style.touchAction = "";
+      document.body.style.removeProperty("overflow");
+      document.documentElement.style.removeProperty("overflow");
+      document.body.style.removeProperty("overflow-y");
+      document.documentElement.style.removeProperty("overflow-y");
+      document.body.style.removeProperty("touch-action");
+      document.documentElement.style.removeProperty("touch-action");
     }
 
     // Check if ribbon was already dismissed in this session
@@ -1080,6 +1067,9 @@
       overlay.style.pointerEvents = "none";
       overlay.style.visibility = "hidden";
       overlay.setAttribute("aria-hidden", "true");
+      try {
+        overlay.remove();
+      } catch (e) {}
       if (siteMain) {
         siteMain.classList.add("wedding-site-revealed");
         siteMain.style.visibility = "visible";

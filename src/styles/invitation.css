@@ -2926,18 +2926,16 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
 @media (max-width: 768px) {
   /* Full-screen edge-to-edge mobile cover container */
   body.theme-lavender #invitation-cover {
-    width: 100vw !important;
     width: 100% !important;
     min-height: 100vh !important;
     min-height: 100svh !important;
     min-height: 100dvh !important;
-    height: 100vh !important;
-    height: 100svh !important;
-    height: 100dvh !important;
+    height: auto !important;
     margin: 0 !important;
     padding: 0 !important;
     position: relative !important;
     overflow: hidden !important;
+    touch-action: pan-y !important;
     background-color: #FAF5EE !important;
     background: radial-gradient(circle at 50% 50%, #FAF6F1 0%, #FAF5EE 100%) !important;
     border: none !important;
@@ -3013,9 +3011,8 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     min-height: 100vh !important;
     min-height: 100svh !important;
     min-height: 100dvh !important;
-    height: 100vh !important;
-    height: 100svh !important;
-    height: 100dvh !important;
+    height: auto !important;
+    touch-action: pan-y !important;
     background: transparent !important;
     border: none !important;
     box-shadow: none !important;

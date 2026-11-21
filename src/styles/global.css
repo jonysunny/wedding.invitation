@@ -43,7 +43,6 @@ body {
   width: 100%;
   margin: 0;
   padding: 0;
-  overscroll-behavior-y: none;
 }
 
 html {
@@ -53,6 +52,7 @@ html {
   background-color: var(--bg-paper);
   overflow-x: hidden;
   overflow-y: auto;
+  overscroll-behavior-y: none;
   -webkit-overflow-scrolling: touch;
   scroll-behavior: auto;
 }
@@ -63,8 +63,8 @@ body {
   color: var(--color-text);
   min-height: 100vh;
   line-height: 1.7;
-  overflow-x: hidden;
-  overflow-y: visible;
+  overflow: visible;
+  overflow-x: clip;
   touch-action: pan-y;
   background-image: 
     radial-gradient(circle at 10% 20%, rgba(233, 199, 195, 0.15) 0%, transparent 40%),
@@ -74,7 +74,6 @@ body {
 html.scroll-locked,
 body.scroll-locked {
   overflow: hidden !important;
-  overflow-y: hidden !important;
   touch-action: none !important;
 }
 
