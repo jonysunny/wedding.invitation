@@ -3512,11 +3512,12 @@ body.theme-lavender .mockup-heart-svg {
   display: block;
   animation: heartPulseMockup 2.2s ease-in-out infinite alternate;
   transform-origin: center center;
+  will-change: transform;
 }
 
 @keyframes heartPulseMockup {
-  0% { transform: scale(1); filter: drop-shadow(0 0 4px rgba(197, 165, 109, 0.5)); }
-  100% { transform: scale(1.08); filter: drop-shadow(0 0 10px rgba(131, 91, 163, 0.95)); }
+  0% { transform: scale(1); }
+  100% { transform: scale(1.06); }
 }
 
 /* Unified Rounded Lavender Cards */

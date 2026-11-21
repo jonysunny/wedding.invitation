@@ -238,52 +238,61 @@ const scheduleEvents: ScheduleEvent[] = [
       creeperGlow.style.strokeDashoffset = pathLength;
 
       let ticking = false;
+      let isListeningScroll = false;
+      let cachedTimelineTopDoc = 0;
+      let cachedTimelineHeight = 0;
+      let cachedCorridorWidth = 36;
+      let cachedVh = window.innerHeight || 800;
       let cachedRowTops = [];
+      let cachedFirstRowMid = 20;
+      let cachedLastRowMid = 980;
+      let cachedTravelSpan = 960;
+      let lastActiveIndex = -2;
+      let lastPassedIndex = -2;
 
       function updateMeasurements() {
         if (!scheduleTimeline) return;
+        cachedVh = window.innerHeight || document.documentElement.clientHeight || 800;
         const timelineRect = scheduleTimeline.getBoundingClientRect();
-        const timelineTopDoc = timelineRect.top + window.scrollY;
+        const currentScrollY = window.scrollY || window.pageYOffset || 0;
+        cachedTimelineTopDoc = timelineRect.top + currentScrollY;
+        cachedTimelineHeight = timelineRect.height || 1000;
+        cachedCorridorWidth = creeperSvg?.clientWidth || 36;
         
         cachedRowTops = Array.from(rows).map(function(row) {
           const r = row.getBoundingClientRect();
           return {
             element: row,
-            top: (r.top + window.scrollY) - timelineTopDoc,
-            mid: (r.top + window.scrollY + r.height / 2) - timelineTopDoc
+            top: (r.top + currentScrollY) - cachedTimelineTopDoc,
+            mid: (r.top + currentScrollY + r.height / 2) - cachedTimelineTopDoc
           };
         });
+
+        if (cachedRowTops.length > 0) {
+          cachedFirstRowMid = cachedRowTops[0].mid;
+          cachedLastRowMid = cachedRowTops[cachedRowTops.length - 1].mid;
+          cachedTravelSpan = cachedLastRowMid - cachedFirstRowMid;
+        }
       }
 
       function updateHeartPosition() {
         ticking = false;
-        const timelineRect = scheduleTimeline.getBoundingClientRect();
-        const vh = window.innerHeight || document.documentElement.clientHeight;
+        const scrollY = window.scrollY || window.pageYOffset || 0;
+        const timelineTop = cachedTimelineTopDoc - scrollY;
+        const timelineBottom = timelineTop + cachedTimelineHeight;
 
-        // Skip calculations if schedule is offscreen
-        if (timelineRect.bottom < -100 || timelineRect.top > vh + 100) {
+        // Fast skip if schedule is not in active viewport area
+        if (timelineBottom < -100 || timelineTop > cachedVh + 100) {
           return;
         }
 
         // Target trigger line: center of screen (vh * 0.5)
-        const triggerY = vh * 0.50;
-        
-        // Offset inside the timeline container
-        const currentY = triggerY - timelineRect.top;
-        const totalHeight = timelineRect.height;
-
-        if (cachedRowTops.length === 0 || cachedRowTops[0].mid === 0) {
-          updateMeasurements();
-        }
-
-        // First row middle and last row middle for exact milestone bounds
-        const firstRowMid = cachedRowTops.length > 0 ? cachedRowTops[0].mid : 20;
-        const lastRowMid = cachedRowTops.length > 0 ? cachedRowTops[cachedRowTops.length - 1].mid : totalHeight - 20;
-        const travelSpan = lastRowMid - firstRowMid;
+        const triggerY = cachedVh * 0.50;
+        const currentY = triggerY - timelineTop;
 
         let progress = 0;
-        if (travelSpan > 0) {
-          progress = (currentY - firstRowMid) / travelSpan;
+        if (cachedTravelSpan > 0) {
+          progress = (currentY - cachedFirstRowMid) / cachedTravelSpan;
         }
         // Strict clamping: stays precisely within first event and last event
         progress = Math.max(0, Math.min(1, progress));
@@ -297,13 +306,12 @@ const scheduleEvents: ScheduleEvent[] = [
         const point = creeperBase.getPointAtLength(pathLength * progress);
 
         // Map SVG viewBox (width 50) coordinates to actual pixel container dimensions:
-        const creeperCorridorWidth = creeperSvg.clientWidth || 36;
-        const xOffsetPx = ((point.x - 25) / 50) * creeperCorridorWidth;
+        const xOffsetPx = ((point.x - 25) / 50) * cachedCorridorWidth;
         
         // Vertical position: smoothly mapped from firstRowMid to lastRowMid
-        const yOffsetPx = firstRowMid + (progress * travelSpan);
+        const yOffsetPx = cachedFirstRowMid + (progress * cachedTravelSpan);
 
-        // Hardware-accelerated translate3d for 60 FPS motion
+        // Hardware-accelerated translate3d for 60 FPS motion with zero reflow
         heart.style.transform = 'translate3d(calc(-50% + ' + xOffsetPx.toFixed(1) + 'px), ' + (yOffsetPx - 16).toFixed(1) + 'px, 0)';
         heart.style.opacity = '1';
 
@@ -311,28 +319,38 @@ const scheduleEvents: ScheduleEvent[] = [
         const glowOffset = pathLength * (1 - progress);
         creeperGlow.style.strokeDashoffset = glowOffset.toFixed(1);
 
-        // Highlight the row nearest to current heart position
+        // Highlight the row nearest to current heart position with batched DOM updates
         let closestIndex = -1;
         let minDiff = Infinity;
+        let passedIndex = -1;
         for (let i = 0; i < cachedRowTops.length; i++) {
           const diff = Math.abs(cachedRowTops[i].mid - yOffsetPx);
           if (diff < minDiff) {
             minDiff = diff;
             closestIndex = i;
           }
+          if (cachedRowTops[i].mid <= yOffsetPx + 15) {
+            passedIndex = i;
+          }
         }
 
-        for (let i = 0; i < rows.length; i++) {
-          if (i === closestIndex && minDiff < 85) {
-            rows[i].classList.add('is-active-event');
-          } else {
-            rows[i].classList.remove('is-active-event');
-          }
+        // Only modify DOM classList when active or passed index changes to avoid style invalidations
+        if (closestIndex !== lastActiveIndex || passedIndex !== lastPassedIndex) {
+          lastActiveIndex = closestIndex;
+          lastPassedIndex = passedIndex;
 
-          if (cachedRowTops[i] && cachedRowTops[i].mid <= yOffsetPx + 15) {
-            rows[i].classList.add('is-passed');
-          } else {
-            rows[i].classList.remove('is-passed');
+          for (let i = 0; i < rows.length; i++) {
+            if (i === closestIndex && minDiff < 85) {
+              rows[i].classList.add('is-active-event');
+            } else {
+              rows[i].classList.remove('is-active-event');
+            }
+
+            if (i <= passedIndex) {
+              rows[i].classList.add('is-passed');
+            } else {
+              rows[i].classList.remove('is-passed');
+            }
           }
         }
       }
@@ -344,39 +362,58 @@ const scheduleEvents: ScheduleEvent[] = [
         }
       }
 
-      window.addEventListener('scroll', onScroll, { passive: true });
+      function attachScrollListener() {
+        if (!isListeningScroll) {
+          window.addEventListener('scroll', onScroll, { passive: true });
+          isListeningScroll = true;
+        }
+      }
+
+      function detachScrollListener() {
+        if (isListeningScroll) {
+          window.removeEventListener('scroll', onScroll);
+          isListeningScroll = false;
+        }
+      }
+
+      // IntersectionObserver: Only listen to scroll events when section is visible
+      if ('IntersectionObserver' in window) {
+        const observer = new IntersectionObserver(function(entries) {
+          entries.forEach(function(entry) {
+            if (entry.isIntersecting) {
+              updateMeasurements();
+              attachScrollListener();
+              onScroll();
+            } else {
+              detachScrollListener();
+            }
+          });
+        }, { rootMargin: '300px 0px 300px 0px' });
+        observer.observe(section);
+      } else {
+        attachScrollListener();
+      }
+
       window.addEventListener('resize', () => {
         updateMeasurements();
         onScroll();
       }, { passive: true });
-      window.addEventListener('wedding-ribbon-opened', () => {
+
+      const onAppReady = () => {
         updateMeasurements();
         updateHeartPosition();
-      }, { passive: true });
-      window.addEventListener('wedding-ribbon-start-opening', () => {
-        updateMeasurements();
-        updateHeartPosition();
-      }, { passive: true });
-      window.addEventListener('wedding-envelope-opened', () => {
-        updateMeasurements();
-        updateHeartPosition();
-      }, { passive: true });
+      };
+
+      window.addEventListener('wedding-ribbon-opened', onAppReady, { passive: true });
+      window.addEventListener('wedding-ribbon-start-opening', onAppReady, { passive: true });
+      window.addEventListener('wedding-envelope-opened', onAppReady, { passive: true });
 
       // Initial measurement and positioning
       updateMeasurements();
       updateHeartPosition();
-      setTimeout(() => {
-        updateMeasurements();
-        updateHeartPosition();
-      }, 250);
-      setTimeout(() => {
-        updateMeasurements();
-        updateHeartPosition();
-      }, 750);
-      setTimeout(() => {
-        updateMeasurements();
-        updateHeartPosition();
-      }, 1500);
+      setTimeout(onAppReady, 250);
+      setTimeout(onAppReady, 750);
+      setTimeout(onAppReady, 1500);
     }
 
     if (document.readyState === 'loading') {
