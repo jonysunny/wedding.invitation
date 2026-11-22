@@ -2134,13 +2134,13 @@ body.theme-lavender #music-icon-muted {
 body.theme-option-1 .site-theme-fixed-backdrop {
   opacity: 1;
   background-color: #FBF8F2;
-  background-image: url('/jony-wedding/assets/decorations/jony-sunny-option-1-floral-background.webp');
+  background-image: url('/wedding.invitation/assets/decorations/jony-sunny-option-1-floral-background.webp');
 }
 
 body.theme-option-2 .site-theme-fixed-backdrop {
   opacity: 1;
   background-color: #FBF9F4;
-  background-image: url('/jony-wedding/assets/decorations/jony-sunny-option-2-floral-background.webp');
+  background-image: url('/wedding.invitation/assets/decorations/jony-sunny-option-2-floral-background.webp');
 }
 
 /* Ensure website sections sit above the fixed backdrop */
@@ -2599,12 +2599,12 @@ body.modal-open {
 
 .comparison-card-opt1 {
   background-color: #FBF8F2;
-  background-image: url('/jony-wedding/assets/decorations/jony-sunny-option-1-floral-background.webp');
+  background-image: url('/wedding.invitation/assets/decorations/jony-sunny-option-1-floral-background.webp');
 }
 
 .comparison-card-opt2 {
   background-color: #FBF9F4;
-  background-image: url('/jony-wedding/assets/decorations/jony-sunny-option-2-floral-background.webp');
+  background-image: url('/wedding.invitation/assets/decorations/jony-sunny-option-2-floral-background.webp');
 }
 
 .comparison-invitation-card .invitation-crest-emblem {
@@ -2725,7 +2725,7 @@ body.theme-lavender #invitation-cover .invitation-full-container {
   width: 100%;
   max-width: clamp(380px, 48vw, 660px);
   aspect-ratio: 3 / 4;
-  background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') center center / cover no-repeat;
+  background: url('/wedding.invitation/assets/decorations/jony-sunny-lavender-floral-bg.webp') center center / cover no-repeat;
   border-radius: 14px;
   box-shadow: 
     0 24px 70px rgba(95, 65, 120, 0.24),
@@ -2985,7 +2985,7 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     left: 0 !important;
     width: 100% !important;
     height: 48% !important;
-    background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') top center / 100% auto no-repeat !important;
+    background: url('/wedding.invitation/assets/decorations/jony-sunny-lavender-floral-bg.webp') top center / 100% auto no-repeat !important;
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
     mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
     pointer-events: none !important;
@@ -2999,7 +2999,7 @@ body.theme-lavender #invitation-cover .invitation-scroll-line {
     left: 0 !important;
     width: 100% !important;
     height: 52% !important;
-    background: url('/jony-wedding/assets/decorations/jony-sunny-lavender-floral-bg.webp') bottom center / 100% auto no-repeat !important;
+    background: url('/wedding.invitation/assets/decorations/jony-sunny-lavender-floral-bg.webp') bottom center / 100% auto no-repeat !important;
     -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
     mask-image: linear-gradient(to top, rgba(0,0,0,1) 68%, rgba(0,0,0,0) 100%) !important;
     pointer-events: none !important;
@@ -4017,7 +4017,7 @@ body.theme-lavender .closing-card-overlay {
   right: 0;
   width: clamp(140px, 14vw, 230px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
 }
 
@@ -4027,7 +4027,7 @@ body.theme-lavender .closing-card-overlay {
   left: 0;
   width: clamp(140px, 14vw, 230px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
 }
 
@@ -4037,7 +4037,7 @@ body.theme-lavender .closing-card-overlay {
   left: 0;
   width: clamp(110px, 11vw, 180px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top left;
   opacity: 0.9;
 }
@@ -4048,7 +4048,7 @@ body.theme-lavender .closing-card-overlay {
   right: 0;
   width: clamp(110px, 11vw, 180px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom right;
   opacity: 0.9;
 }
@@ -4628,7 +4628,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(130px, 34vw, 210px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
   opacity: 0.95;
 }
@@ -4638,7 +4638,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(130px, 34vw, 210px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
   opacity: 0.95;
 }
@@ -4648,7 +4648,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top left;
   opacity: 0.9;
 }
@@ -4658,7 +4658,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom right;
   opacity: 0.9;
 }
@@ -4671,7 +4671,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(135px, 34vw, 210px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: top left;
   transform: scale(1, -1);
   opacity: 0.95;
@@ -4682,7 +4682,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(135px, 34vw, 210px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: bottom right;
   transform: scale(-1, -1);
   opacity: 0.95;
@@ -4693,7 +4693,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top right;
   transform: scaleX(-1);
   opacity: 0.9;
@@ -4704,7 +4704,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom left;
   transform: scaleX(-1);
   opacity: 0.9;
@@ -4718,7 +4718,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(135px, 34vw, 210px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top left;
   transform: scaleX(-1);
   opacity: 0.95;
@@ -4729,7 +4729,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(135px, 34vw, 210px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
   opacity: 0.95;
 }
@@ -4739,7 +4739,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(120px, 30vw, 190px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
   opacity: 0.95;
 }
@@ -4749,7 +4749,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(120px, 30vw, 190px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom right;
   transform: scaleX(-1);
   opacity: 0.95;
@@ -4774,7 +4774,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(130px, 32vw, 200px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top left;
   transform: scaleX(-1);
   opacity: 0.95;
@@ -4785,7 +4785,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(130px, 32vw, 200px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
   opacity: 0.95;
 }
@@ -4795,7 +4795,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(120px, 28vw, 180px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
   opacity: 0.95;
 }
@@ -4805,7 +4805,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(120px, 28vw, 180px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom right;
   transform: scaleX(-1);
   opacity: 0.95;
@@ -4819,7 +4819,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(135px, 35vw, 215px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: top left;
   transform: scale(1, -1);
   opacity: 0.95;
@@ -4830,7 +4830,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(135px, 35vw, 215px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
   opacity: 0.95;
 }
@@ -4840,7 +4840,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top right;
   transform: scaleX(-1);
   opacity: 0.9;
@@ -4851,7 +4851,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom right;
   opacity: 0.9;
 }
@@ -4864,7 +4864,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(135px, 35vw, 215px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
   opacity: 0.95;
 }
@@ -4874,7 +4874,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(135px, 35vw, 215px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom right;
   transform: scaleX(-1);
   opacity: 0.95;
@@ -4885,7 +4885,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top left;
   opacity: 0.9;
 }
@@ -4895,7 +4895,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom left;
   transform: scaleX(-1);
   opacity: 0.9;
@@ -4909,7 +4909,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(125px, 32vw, 195px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
   opacity: 0.95;
 }
@@ -4919,7 +4919,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(125px, 32vw, 195px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
   opacity: 0.95;
 }
@@ -4929,7 +4929,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(105px, 26vw, 160px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top left;
   opacity: 0.9;
 }
@@ -4939,7 +4939,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(105px, 26vw, 160px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom right;
   opacity: 0.9;
 }
@@ -4952,7 +4952,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(130px, 34vw, 210px);
   aspect-ratio: 448 / 460;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-top-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-top-right.webp');
   background-position: top right;
   opacity: 0.95;
 }
@@ -4962,7 +4962,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(130px, 34vw, 210px);
   aspect-ratio: 440 / 454;
-  background-image: url('/jony-wedding/assets/decorations/lavender-corner-bottom-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-corner-bottom-left.webp');
   background-position: bottom left;
   opacity: 0.95;
 }
@@ -4972,7 +4972,7 @@ body.theme-lavender .lavender-corner-item {
   left: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 320 / 380;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-top-left.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-top-left.webp');
   background-position: top left;
   opacity: 0.9;
 }
@@ -4982,7 +4982,7 @@ body.theme-lavender .lavender-corner-item {
   right: 0;
   width: clamp(110px, 28vw, 170px);
   aspect-ratio: 318 / 384;
-  background-image: url('/jony-wedding/assets/decorations/lavender-wash-bottom-right.webp');
+  background-image: url('/wedding.invitation/assets/decorations/lavender-wash-bottom-right.webp');
   background-position: bottom right;
   opacity: 0.9;
 }

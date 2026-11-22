@@ -6,14 +6,14 @@
       "fullName": "Jony",
       "title": "The Groom",
       "bio": "Son of their loving families",
-      "photo": "/jony-wedding/assets/couple/groom-cream-suit.png"
+      "photo": "/wedding.invitation/assets/couple/groom-cream-suit.png"
     },
     "bride": {
       "firstName": "Sunny",
       "fullName": "Sunny",
       "title": "The Bride",
       "bio": "Daughter of their loving families",
-      "photo": "/jony-wedding/assets/couple/bride-pink-saree.png"
+      "photo": "/wedding.invitation/assets/couple/bride-pink-saree.png"
     }
   },
   "monogram": "J & S",
@@ -55,13 +55,13 @@
   ],
   "gallery": [
     {
-      "url": "/jony-wedding/assets/couple/groom-cream-suit.png",
+      "url": "/wedding.invitation/assets/couple/groom-cream-suit.png",
       "title": "Jony",
       "caption": "",
       "alt": "Jony"
     },
     {
-      "url": "/jony-wedding/assets/couple/bride-pink-saree.png",
+      "url": "/wedding.invitation/assets/couple/bride-pink-saree.png",
       "title": "Sunny",
       "caption": "",
       "alt": "Sunny"
@@ -69,7 +69,7 @@
   ],
   "music": {
     "title": "Wedding Background Music",
-    "src": "/jony-wedding/audio/jony-sunny-new-bgm.mp3"
+    "src": "/wedding.invitation/audio/jony-sunny-new-bgm.mp3"
   },
   "closing": {
     "heading": "With Love & Blessings",

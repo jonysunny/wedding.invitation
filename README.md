@@ -2,9 +2,9 @@
 
 A mobile-first, interactive digital wedding invitation website built with [Astro](https://astro.build), TypeScript, CSS3 animations, and deployed to **GitHub Pages** with zero hosting costs (₹0).
 
-- **GitHub Repository**: [https://github.com/tanmaymanohar22-chinwed/jony-wedding](https://github.com/tanmaymanohar22-chinwed/jony-wedding)
-- **Live Invitation URL**: [https://tanmaymanohar22-chinwed.github.io/jony-wedding/](https://tanmaymanohar22-chinwed.github.io/jony-wedding/)
-- **Direct Guest Link**: [https://tanmaymanohar22-chinwed.github.io/jony-wedding/invite/priya-and-rohit/](https://tanmaymanohar22-chinwed.github.io/jony-wedding/invite/priya-and-rohit/)
+- **GitHub Repository**: [https://github.com/jonysunny/wedding.invitation](https://github.com/jonysunny/wedding.invitation)
+- **Live Invitation URL**: [https://jonysunny.github.io/wedding.invitation/](https://jonysunny.github.io/wedding.invitation/)
+- **Direct Guest Link**: [https://jonysunny.github.io/wedding.invitation/invite/priya-and-rohit/](https://jonysunny.github.io/wedding.invitation/invite/priya-and-rohit/)
 
 ## ✨ Features
 
@@ -25,12 +25,12 @@ A mobile-first, interactive digital wedding invitation website built with [Astro
 npm run dev
 ```
 
-Visit `http://localhost:4321/jony-wedding/` in your browser.
+Visit `http://localhost:4321/wedding.invitation/` in your browser.
 
 ## 📦 How to Push & Deploy to GitHub Pages
 
 The repository remote `origin` is already linked to:
-`https://github.com/tanmaymanohar22-chinwed/jony-wedding.git`
+`https://github.com/jonysunny/wedding.invitation.git`
 
 To push changes to GitHub:
 ```bash
@@ -41,7 +41,7 @@ git push -u origin main
 ```
 
 ### GitHub Pages Setup (One-time)
-1. In your GitHub repository: [https://github.com/tanmaymanohar22-chinwed/jony-wedding](https://github.com/tanmaymanohar22-chinwed/jony-wedding)
+1. In your GitHub repository: [https://github.com/jonysunny/wedding.invitation](https://github.com/jonysunny/wedding.invitation)
 2. Go to **Settings** > **Pages**.
 3. Under **Build and deployment** > **Source**, choose **GitHub Actions**.
 4. The included `.github/workflows/deploy.yml` workflow will automatically build and publish your site!

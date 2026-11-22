@@ -2,8 +2,8 @@ import { defineConfig } from 'astro/config';
 
 // https://astro.build/config
 export default defineConfig({
-  site: 'https://tanmaymanohar22-chinwed.github.io',
-  base: '/jony-wedding',
+  site: 'https://jonysunny.github.io',
+  base: '/wedding.invitation',
   build: {
     assets: 'assets'
   }

@@ -11,7 +11,7 @@ export function initMusic(audioSrc?: string) {
   }
 
   // Bind directly to the preloaded DOM audio element, or fallback to new Audio
-  const audio = (document.getElementById("wedding-bgm-audio") as HTMLAudioElement) || new Audio(audioSrc || "/jony-wedding/audio/jony-sunny-new-bgm.mp3");
+  const audio = (document.getElementById("wedding-bgm-audio") as HTMLAudioElement) || new Audio(audioSrc || "/wedding.invitation/audio/jony-sunny-new-bgm.mp3");
   audio.loop = true;
   audio.preload = "auto";
   audio.volume = TARGET_VOLUME;

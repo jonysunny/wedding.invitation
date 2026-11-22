@@ -20,7 +20,7 @@ export function initScratchCard() {
 
   // Preload photorealistic Luxury Lavender Silk texture
   const silkImg = new Image();
-  silkImg.src = "/jony-wedding/assets/decorations/lavender-silk-texture.jpg";
+  silkImg.src = "/wedding.invitation/assets/decorations/lavender-silk-texture.jpg";
   silkImg.onload = () => {
     if (!isRevealed && !hasStartedScratching) {
       paintCoating();
