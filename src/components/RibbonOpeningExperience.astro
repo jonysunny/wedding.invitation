@@ -972,12 +972,7 @@
       try {
         const w = window as any;
         if (w.__weddingAudio) {
-          if (w.__weddingAudio.currentTime < 3.25) {
-            try {
-              w.__weddingAudio.currentTime = 3.25;
-            } catch (e) {}
-          }
-          w.__weddingAudio.volume = 0.35;
+          w.__weddingAudio.volume = 0.40;
           const p = w.__weddingAudio.play();
           if (p && typeof p.catch === "function") {
             p.catch(() => {});
