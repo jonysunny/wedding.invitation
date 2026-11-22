@@ -32,7 +32,10 @@ export function initGallery() {
     previewImg.src = src;
     previewImg.alt = alt;
     if (previewTitle) previewTitle.textContent = title;
-    if (previewCaption) previewCaption.textContent = caption;
+    if (previewCaption) {
+      previewCaption.textContent = caption;
+      previewCaption.style.display = caption ? "block" : "none";
+    }
     if (counterEl) counterEl.textContent = `${currentIndex + 1} / ${cards.length}`;
   }
 

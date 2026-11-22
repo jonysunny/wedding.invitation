@@ -45,6 +45,70 @@ const initialSeconds = Math.floor((initialDiff % 60000) / 1000);
   <div class="countdown-container">
     <!-- State 1: Active Circular Countdown Rings -->
     <div class="countdown-state-panel countdown-state-timer" id="countdown-state-timer">
+      <!-- Enhanced Header: Entwined Wedding Rings + Christian Wedding Theme & Scripture -->
+      <div class="countdown-header-block">
+        <div class="countdown-rings-graphic-wrap" aria-hidden="true">
+          <svg class="wedding-rings-svg" viewBox="0 0 120 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <linearGradient id="ringGoldGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#F5E7C4" />
+                <stop offset="35%" stop-color="#C5A56D" />
+                <stop offset="70%" stop-color="#9C7938" />
+                <stop offset="100%" stop-color="#D8BC82" />
+              </linearGradient>
+              <linearGradient id="ringGoldGrad2" x1="100%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" stop-color="#F9ECD0" />
+                <stop offset="35%" stop-color="#D4B67D" />
+                <stop offset="70%" stop-color="#A47F3E" />
+                <stop offset="100%" stop-color="#C5A56D" />
+              </linearGradient>
+              <linearGradient id="gemFacetGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#FFFFFF" />
+                <stop offset="60%" stop-color="#EADBFA" />
+                <stop offset="100%" stop-color="#C5A56D" />
+              </linearGradient>
+              <filter id="softRingGlow" x="-20%" y="-20%" width="140%" height="140%">
+                <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#C5A56D" flood-opacity="0.35" />
+              </filter>
+            </defs>
+            <g class="wedding-rings-group" filter="url(#softRingGlow)">
+              <!-- Back ring (Right ring) -->
+              <ellipse cx="71" cy="34" rx="20" ry="14" transform="rotate(14 71 34)" stroke="url(#ringGoldGrad2)" stroke-width="4.2" fill="none" />
+              <ellipse cx="71" cy="34" rx="19.2" ry="13.2" transform="rotate(14 71 34)" stroke="rgba(255, 255, 255, 0.45)" stroke-width="0.8" fill="none" />
+
+              <!-- Front ring (Left ring) -->
+              <ellipse cx="49" cy="34" rx="20" ry="14" transform="rotate(-14 49 34)" stroke="url(#ringGoldGrad1)" stroke-width="4.2" fill="none" />
+              <ellipse cx="49" cy="34" rx="19.2" ry="13.2" transform="rotate(-14 49 34)" stroke="rgba(255, 255, 255, 0.55)" stroke-width="0.8" fill="none" />
+
+              <!-- Overlap arc: realistic 3D interlocking illusion -->
+              <path d="M 57 23.5 A 20 14 0 0 1 73 21" stroke="url(#ringGoldGrad2)" stroke-width="4.2" stroke-linecap="round" fill="none" />
+
+              <!-- Solitaire diamond accent on left ring -->
+              <g class="ring-solitaire-gem" transform="translate(36, 20)">
+                <polygon points="0,-4 3.5,0 0,4.5 -3.5,0" fill="url(#gemFacetGrad)" />
+                <circle cx="0" cy="0" r="1.2" fill="#FFFFFF" />
+              </g>
+
+              <!-- Subtle romantic sparkle star on right ring -->
+              <path class="ring-sparkle-star" d="M84 18 Q84 21 87 21 Q84 21 84 24 Q84 21 81 21 Q84 21 84 18Z" fill="#F7EDD2" />
+            </g>
+          </svg>
+        </div>
+
+        <h2 class="countdown-heading font-serif">Two Hearts. One Covenant.</h2>
+        
+        <p class="countdown-scripture font-serif-sub">
+          <span class="scripture-verse">“He has made everything beautiful in its time.”</span>
+          <span class="scripture-cite">Ecclesiastes 3:11</span>
+        </p>
+
+        <div class="countdown-message-divider" aria-hidden="true">
+          <span class="divider-line"></span>
+          <span class="divider-flourish">❦</span>
+          <span class="divider-line"></span>
+        </div>
+      </div>
+
       <div class="countdown-rings-grid" id="countdown-rings-container">
         <!-- DAYS (Deep Lavender) -->
         <div class="countdown-circle-unit unit-days">

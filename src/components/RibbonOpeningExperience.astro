@@ -967,18 +967,41 @@
     // Lock page scrolling while unopened ribbon overlay is active
     lockScroll();
 
+    // Prime audio element immediately on page load
+    const bgmAudio = document.getElementById("wedding-bgm-audio") as HTMLAudioElement | null;
+    if (bgmAudio) {
+      bgmAudio.volume = 0.45;
+      const primeOffset = () => {
+        if (bgmAudio.currentTime < 0.46) {
+          try { bgmAudio.currentTime = 0.46; } catch (e) {}
+        }
+      };
+      if (bgmAudio.readyState >= 1) {
+        primeOffset();
+      } else {
+        bgmAudio.addEventListener("loadedmetadata", primeOffset, { once: true, passive: true });
+        bgmAudio.addEventListener("canplay", primeOffset, { once: true, passive: true });
+      }
+    }
+
     // Synchronously trigger audio on trusted user interaction
     function triggerAudioImmediate() {
       try {
-        const w = window as any;
-        if (w.__weddingAudio) {
-          w.__weddingAudio.volume = 0.40;
-          const p = w.__weddingAudio.play();
+        const audio = (document.getElementById("wedding-bgm-audio") as HTMLAudioElement) || (window as any).__weddingAudio;
+        if (audio) {
+          if (audio.currentTime < 0.46) {
+            try { audio.currentTime = 0.46; } catch (e) {}
+          }
+          audio.volume = 0.45;
+          const p = audio.play();
           if (p && typeof p.catch === "function") {
-            p.catch(() => {});
+            p.catch((err) => {
+              console.warn("Audio autoplay blocked by browser:", err);
+            });
           }
         }
-        if (w.__weddingMusicController) {
+        const w = window as any;
+        if (w.__weddingMusicController && typeof w.__weddingMusicController.play === "function") {
           w.__weddingMusicController.play();
         }
       } catch (err) {}
@@ -988,8 +1011,6 @@
       if (isOpening || hasDismissed) return;
       isOpening = true;
 
-      // Start background music immediately within trusted user gesture
-      triggerAudioImmediate();
       window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
 
       // Phase 1 — Ribbon loosens (0.0s - 0.8s)
@@ -1038,7 +1059,7 @@
     function cleanupListeners() {
       interactiveWrap?.removeEventListener("pointerdown", onTrigger);
       interactiveWrap?.removeEventListener("click", onTrigger);
-      interactiveWrap?.removeEventListener("touchstart", onTrigger);
+      interactiveWrap?.removeEventListener("touchend", onTrigger);
       overlay?.removeEventListener("click", onTrigger);
       window.removeEventListener("keydown", onKeydown);
     }
@@ -1059,8 +1080,6 @@
         siteMain.classList.add("wedding-site-revealed");
         siteMain.style.visibility = "visible";
       }
-      triggerAudioImmediate();
-      window.dispatchEvent(new CustomEvent("wedding-ribbon-start-opening"));
       window.dispatchEvent(new CustomEvent("wedding-ribbon-opened"));
       window.dispatchEvent(new CustomEvent("wedding-envelope-opened"));
     }
@@ -1069,7 +1088,6 @@
       if ((e.target as HTMLElement)?.closest("#ribbon-skip-intro-btn")) return;
       // Start audio immediately in the direct call stack of the user gesture
       triggerAudioImmediate();
-      e.preventDefault();
       interactiveWrap?.classList.add("is-pressed");
       startRibbonOpening();
     }
@@ -1077,7 +1095,7 @@
     // Direct, immediate pointer/touch activation with zero synthetic click delay
     interactiveWrap?.addEventListener("pointerdown", onTrigger, { once: true });
     interactiveWrap?.addEventListener("click", onTrigger, { once: true });
-    interactiveWrap?.addEventListener("touchstart", onTrigger, { once: true, passive: false });
+    interactiveWrap?.addEventListener("touchend", onTrigger, { once: true });
     overlay?.addEventListener("click", onTrigger);
 
     const tapPill = overlay?.querySelector(".ribbon-tap-pill");

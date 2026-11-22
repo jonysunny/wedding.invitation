@@ -56,15 +56,15 @@
   "gallery": [
     {
       "url": "/jony-wedding/assets/couple/groom-cream-suit.png",
-      "title": "The Groom — Jony",
-      "caption": "Groom in a tailored cream suit amidst lush garden greenery",
-      "alt": "Groom in cream suit outdoors amidst greenery"
+      "title": "Jony",
+      "caption": "",
+      "alt": "Jony"
     },
     {
       "url": "/jony-wedding/assets/couple/bride-pink-saree.png",
-      "title": "The Bride — Sunny",
-      "caption": "Bride in an elegant pink embroidered saree surrounded by floral blossoms",
-      "alt": "Bride in pink embroidered saree outdoors with flowers and greenery"
+      "title": "Sunny",
+      "caption": "",
+      "alt": "Sunny"
     }
   ],
   "music": {

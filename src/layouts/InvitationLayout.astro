@@ -33,6 +33,14 @@ const { title, description, image = "/jony-wedding/assets/couple/og-preview.jpg"
   <body class="theme-lavender">
     <!-- Continuous Floating Ambient Confetti (Active after Ribbon Opening) -->
     <AmbientConfetti />
+    <!-- Single Persistent Wedding Background Music Audio Element -->
+    <audio 
+      id="wedding-bgm-audio" 
+      src="/jony-wedding/audio/jony-sunny-new-bgm.mp3" 
+      preload="auto" 
+      loop 
+      playsinline
+    ></audio>
     <slot />
   </body>
 </html>

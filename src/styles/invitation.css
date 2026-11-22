@@ -5260,4 +5260,141 @@ body.theme-lavender .gallery-card img {
   display: none !important;
 }
 
+/* --------------------------------------------------------------------------
+   COUNTDOWN HEADER: ENTWINED WEDDING RINGS & CHRISTIAN WEDDING SCRIPTURE
+   -------------------------------------------------------------------------- */
+body.theme-lavender .countdown-header-block {
+  text-align: center;
+  margin-bottom: clamp(16px, 3vh, 26px);
+  position: relative;
+  z-index: 5;
+}
+
+body.theme-lavender .countdown-rings-graphic-wrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto clamp(6px, 1.5vh, 12px);
+  width: clamp(84px, 18vw, 112px);
+  height: auto;
+}
+
+body.theme-lavender .wedding-rings-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 3px 12px rgba(180, 145, 85, 0.28));
+  animation: ringsGentleFloat 5s ease-in-out infinite;
+}
+
+body.theme-lavender .ring-sparkle-star {
+  transform-origin: 84px 21px;
+  animation: gemSparklePulse 3.5s ease-in-out infinite;
+}
+
+body.theme-lavender .ring-solitaire-gem {
+  animation: gemSparklePulse 3.5s ease-in-out infinite 0.7s;
+}
+
+@keyframes ringsGentleFloat {
+  0%, 100% {
+    transform: translateY(0px) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-4px) rotate(0.4deg);
+  }
+}
+
+@keyframes gemSparklePulse {
+  0%, 100% {
+    opacity: 0.55;
+    transform: scale(0.92);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.15);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.theme-lavender .wedding-rings-svg,
+  body.theme-lavender .ring-sparkle-star,
+  body.theme-lavender .ring-solitaire-gem {
+    animation: none !important;
+  }
+}
+
+body.theme-lavender .countdown-heading {
+  font-family: var(--font-serif-primary, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.35rem, 4.2vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: #3C234E;
+  margin: 0 0 clamp(6px, 1.4vh, 10px);
+  line-height: 1.25;
+}
+
+body.theme-lavender .countdown-scripture {
+  margin: 0 auto clamp(10px, 1.8vh, 16px);
+  max-width: 480px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+body.theme-lavender .scripture-verse {
+  font-family: var(--font-serif-secondary, 'Cinzel Decorative', 'Playfair Display', Georgia, serif);
+  font-style: italic;
+  font-size: clamp(0.85rem, 2.4vw, 1.05rem);
+  color: #553E65;
+  line-height: 1.45;
+  letter-spacing: 0.01em;
+}
+
+body.theme-lavender .scripture-cite {
+  font-family: var(--font-sans);
+  font-size: clamp(0.68rem, 1.8vw, 0.78rem);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #85679E;
+  margin-top: 2px;
+}
+
+body.theme-lavender .countdown-header-block .countdown-message-divider {
+  margin-top: clamp(8px, 1.6vh, 14px);
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   PHOTO GALLERY: SIMPLIFIED NAME-ONLY CAPTIONS (LAVENDER THEME)
+   -------------------------------------------------------------------------- */
+body.theme-lavender .gallery-caption-bar {
+  position: absolute;
+  bottom: 0;
+  inset-inline: 0;
+  background: linear-gradient(to top, rgba(35, 16, 46, 0.84) 0%, rgba(35, 16, 46, 0.45) 60%, transparent 100%);
+  color: #FFFDF8;
+  padding: clamp(24px, 5vh, 36px) 14px clamp(10px, 1.8vh, 16px);
+  text-align: center;
+  pointer-events: none;
+  z-index: 2;
+}
+
+body.theme-lavender .gallery-caption-bar p {
+  margin: 0;
+  font-family: var(--font-serif-primary, 'Playfair Display', Georgia, serif);
+  font-size: clamp(1.05rem, 2.8vw, 1.28rem);
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  color: #FFFDF8;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+}
+
+/* Lightbox: Clean empty caption hiding */
+.lightbox-preview-caption:empty {
+  display: none !important;
+}
+
 
