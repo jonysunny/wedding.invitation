@@ -43,63 +43,119 @@ const initialSeconds = Math.floor((initialDiff % 60000) / 1000);
   </div>
 
   <div class="countdown-container">
-    <!-- Centered Circular Countdown Rings (Strictly 4 units, zero headings/subtitles) -->
-    <div class="countdown-rings-grid" id="countdown-rings-container">
-      <!-- DAYS (Muted Sage Green) -->
-      <div class="countdown-circle-unit unit-days">
-        <div class="circle-graphic-box">
-          <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-bg" cx="50" cy="50" r="42" />
-            <circle class="ring-meter" id="ring-days-meter" cx="50" cy="50" r="42" />
-          </svg>
-          <div class="circle-center-content">
-            <span id="countdown-days" class="countdown-circle-num font-serif">{String(initialDays).padStart(2, "0")}</span>
+    <!-- State 1: Active Circular Countdown Rings -->
+    <div class="countdown-state-panel countdown-state-timer" id="countdown-state-timer">
+      <div class="countdown-rings-grid" id="countdown-rings-container">
+        <!-- DAYS (Deep Lavender) -->
+        <div class="countdown-circle-unit unit-days">
+          <div class="circle-graphic-box">
+            <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+              <circle class="ring-bg" cx="50" cy="50" r="42" />
+              <circle class="ring-meter" id="ring-days-meter" cx="50" cy="50" r="42" />
+            </svg>
+            <div class="circle-center-content">
+              <span id="countdown-days" class="countdown-circle-num font-serif">{String(initialDays).padStart(2, "0")}</span>
+            </div>
           </div>
+          <span class="countdown-circle-label font-sans">DAYS</span>
         </div>
-        <span class="countdown-circle-label font-sans">DAYS</span>
-      </div>
 
-      <!-- HOURS (Soft Blush Pink) -->
-      <div class="countdown-circle-unit unit-hours">
-        <div class="circle-graphic-box">
-          <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-bg" cx="50" cy="50" r="42" />
-            <circle class="ring-meter" id="ring-hours-meter" cx="50" cy="50" r="42" />
-          </svg>
-          <div class="circle-center-content">
-            <span id="countdown-hours" class="countdown-circle-num font-serif">{String(initialHours).padStart(2, "0")}</span>
+        <!-- HOURS (Mauve) -->
+        <div class="countdown-circle-unit unit-hours">
+          <div class="circle-graphic-box">
+            <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+              <circle class="ring-bg" cx="50" cy="50" r="42" />
+              <circle class="ring-meter" id="ring-hours-meter" cx="50" cy="50" r="42" />
+            </svg>
+            <div class="circle-center-content">
+              <span id="countdown-hours" class="countdown-circle-num font-serif">{String(initialHours).padStart(2, "0")}</span>
+            </div>
           </div>
+          <span class="countdown-circle-label font-sans">HOURS</span>
         </div>
-        <span class="countdown-circle-label font-sans">HOURS</span>
-      </div>
 
-      <!-- MINUTES (Gentle Peach) -->
-      <div class="countdown-circle-unit unit-mins">
-        <div class="circle-graphic-box">
-          <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-bg" cx="50" cy="50" r="42" />
-            <circle class="ring-meter" id="ring-mins-meter" cx="50" cy="50" r="42" />
-          </svg>
-          <div class="circle-center-content">
-            <span id="countdown-mins" class="countdown-circle-num font-serif">{String(initialMinutes).padStart(2, "0")}</span>
+        <!-- MINUTES (Dusty Lilac) -->
+        <div class="countdown-circle-unit unit-mins">
+          <div class="circle-graphic-box">
+            <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+              <circle class="ring-bg" cx="50" cy="50" r="42" />
+              <circle class="ring-meter" id="ring-mins-meter" cx="50" cy="50" r="42" />
+            </svg>
+            <div class="circle-center-content">
+              <span id="countdown-mins" class="countdown-circle-num font-serif">{String(initialMinutes).padStart(2, "0")}</span>
+            </div>
           </div>
+          <span class="countdown-circle-label font-sans">MINUTES</span>
         </div>
-        <span class="countdown-circle-label font-sans">MINUTES</span>
-      </div>
 
-      <!-- SECONDS (Subtle Warm Champagne / Neutral) -->
-      <div class="countdown-circle-unit unit-secs">
-        <div class="circle-graphic-box">
-          <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
-            <circle class="ring-bg" cx="50" cy="50" r="42" />
-            <circle class="ring-meter" id="ring-secs-meter" cx="50" cy="50" r="42" />
-          </svg>
-          <div class="circle-center-content">
-            <span id="countdown-secs" class="countdown-circle-num font-serif">{String(initialSeconds).padStart(2, "0")}</span>
+        <!-- SECONDS (Champagne Gold) -->
+        <div class="countdown-circle-unit unit-secs">
+          <div class="circle-graphic-box">
+            <svg class="progress-ring-svg" viewBox="0 0 100 100" aria-hidden="true">
+              <circle class="ring-bg" cx="50" cy="50" r="42" />
+              <circle class="ring-meter" id="ring-secs-meter" cx="50" cy="50" r="42" />
+            </svg>
+            <div class="circle-center-content">
+              <span id="countdown-secs" class="countdown-circle-num font-serif">{String(initialSeconds).padStart(2, "0")}</span>
+            </div>
           </div>
+          <span class="countdown-circle-label font-sans">SECONDS</span>
         </div>
-        <span class="countdown-circle-label font-sans">SECONDS</span>
+      </div>
+    </div>
+
+    <!-- State 2: It's Our Special Day! (29 Dec 4:00 PM IST to Midnight IST) -->
+    <div class="countdown-state-panel countdown-state-special-day" id="countdown-state-special-day" style="display: none;" aria-live="polite">
+      <div class="special-day-card">
+        <div class="countdown-state-heart-wrap" aria-hidden="true">
+          <svg class="romantic-beating-heart-svg" viewBox="0 0 32 32" fill="none">
+            <path d="M16 28C16 28 3 20.5 3 11.5C3 7.5 6 4.5 10 4.5C12.5 4.5 14.7 5.8 16 7.8C17.3 5.8 19.5 4.5 22 4.5C26 4.5 29 7.5 29 11.5C29 20.5 16 28 16 28Z" fill="url(#specialHeartGrad)" />
+            <defs>
+              <linearGradient id="specialHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#C5A56D" />
+                <stop offset="50%" stop-color="#9B7CB8" />
+                <stop offset="100%" stop-color="#73558D" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <h2 class="special-day-title font-serif">It's Our Special Day!</h2>
+        <div class="countdown-message-divider" aria-hidden="true">
+          <span class="divider-line"></span>
+          <span class="divider-flourish">❦</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="special-day-subtitle font-serif-sub">Two hearts. One covenant. A lifetime of love.</p>
+      </div>
+    </div>
+
+    <!-- State 3: Oops! You're Too Late! We're Married! (30 Dec 12:00 AM IST onwards) -->
+    <div class="countdown-state-panel countdown-state-married" id="countdown-state-married" style="display: none;" aria-live="polite">
+      <div class="married-card">
+        <div class="countdown-state-heart-wrap" aria-hidden="true">
+          <svg class="romantic-beating-heart-svg" viewBox="0 0 32 32" fill="none">
+            <path d="M16 28C16 28 3 20.5 3 11.5C3 7.5 6 4.5 10 4.5C12.5 4.5 14.7 5.8 16 7.8C17.3 5.8 19.5 4.5 22 4.5C26 4.5 29 7.5 29 11.5C29 20.5 16 28 16 28Z" fill="url(#marriedHeartGrad)" />
+            <defs>
+              <linearGradient id="marriedHeartGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                <stop offset="0%" stop-color="#C5A56D" />
+                <stop offset="50%" stop-color="#835BA3" />
+                <stop offset="100%" stop-color="#552F7A" />
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+        <p class="married-badge font-serif">Oops! You're Too Late!</p>
+        <h2 class="married-title font-serif">We're Married!</h2>
+        <div class="countdown-message-divider" aria-hidden="true">
+          <span class="divider-line"></span>
+          <span class="divider-flourish">❦</span>
+          <span class="divider-line"></span>
+        </div>
+        <p class="married-subtitle font-serif-sub">Our forever has officially begun.</p>
       </div>
     </div>
   </div>
+
+  <!-- Dedicated Confetti Canvas for State 2 Celebratory Burst -->
+  <canvas id="countdown-confetti-canvas" class="countdown-confetti-canvas" aria-hidden="true"></canvas>
 </section>
